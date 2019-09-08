@@ -64,7 +64,7 @@ public class Fgt_Home extends BaseFragment {
     private RecyclerView recyclerView;
     private int[] images = {R.mipmap.img_home_tab1, R.mipmap.img_home_tab2,
             R.mipmap.img_home_tab3, R.mipmap.img_home_tab4, R.mipmap.img_home_tab5,R.mipmap.img_dangwu_tab5_item1};
-    private String[] lables = {"党建矩阵", "学习强局", "党建资讯", "专题专栏", "党费收缴", "林区风采"};
+    private String[] lables = {"党建矩阵", "学习强局", "党务资讯", "专题专栏", "党费收缴", "林区风采"};
 
     @Override
     protected int getLayoutId() {
@@ -122,7 +122,7 @@ public class Fgt_Home extends BaseFragment {
                         case 1://学习强局
                             startActivity(new Intent(getContext(), Act_Emulate.class));
                             break;
-                        case 2://党建资讯
+                        case 2://党务资讯
                             startActivity(new Intent(getActivity(), Act_Dept_dynamic.class));
                             break;
                         case 3://专题专栏

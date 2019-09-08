@@ -28,7 +28,8 @@ import butterknife.BindView;
  */
 public class Act_Forest_List extends BaseBindViewActivity {
 
-    private String[] mTitles = {"先进基层党组织", "优秀共产党员", "优秀党务工作者", "优秀党建联络员"};
+   // private String[] mTitles = {"先进基层党组织", "优秀共产党员","优秀党务工作者", "优秀党建联络员"};
+    private String[] mTitles = {"先进基层党组织", "优秀党务工作者","优秀共产党员", "优秀党建联络员"};
 
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 

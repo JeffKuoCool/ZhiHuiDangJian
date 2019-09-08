@@ -21,10 +21,6 @@ import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
 import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
 import com.lfc.zhihuidangjianapp.ui.activity.adapter.DividerItemDecoration;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Craftsman_Training;
-import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Weekend_Report;
-import com.lfc.zhihuidangjianapp.ui.activity.model.OrganizationalLife;
-import com.lfc.zhihuidangjianapp.ui.activity.model.OrganizationalLifeDetail;
-import com.lfc.zhihuidangjianapp.ui.activity.model.StudyCraftReportList;
 import com.lfc.zhihuidangjianapp.ui.activity.model.StudyCraftTrainingList;
 import com.lfc.zhihuidangjianapp.ui.activity.model.StudyStrongBureau;
 import com.lfc.zhihuidangjianapp.utlis.DispalyUtil;
@@ -37,13 +33,13 @@ import java.util.Map;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+
 /**
  * @date: 2019-08-10
  * @autror: guojian
- * @description:
+ * @description: 工匠培养
  */
-public class Fgt_Study_Report extends BaseFragment {
-
+public class Fgt_study_craft extends BaseFragment {
     private RecyclerView recyclerView;
 
     private int studyStrongBureauType;
@@ -60,19 +56,18 @@ public class Fgt_Study_Report extends BaseFragment {
 
     @Override
     protected void initData() {
-
-       Map<String, Object> map = new HashMap<>();
-        map.put("studyStrongBureauType", 2);
+        Map<String, Object> map = new HashMap<>();
+        map.put("studyStrongBureauType", 1);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
-                .queryStudyStrongBureauPageList(map, MyApplication.getLoginBean().getToken())
+                .queryStudyStrongBureauCraftsmanPageList( map,MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ResponseObserver<StudyCraftReportList>(getActivity()) {
+                .subscribe(new ResponseObserver<StudyCraftTrainingList>(getActivity()) {
 
                     @Override
-                    protected void onNext(StudyCraftReportList response) {
+                    protected void onNext(StudyCraftTrainingList response) {
                         Log.e("onNext= ", response.toString());
-                        if (response == null) return;
+                        if(response==null)return;
                         setRecyclerView(response);
                     }
 
@@ -84,30 +79,30 @@ public class Fgt_Study_Report extends BaseFragment {
                 }.actual());
     }
 
-    public void setRecyclerView(StudyCraftReportList response) {
-        if(response.getStudyStrongBureauList().getDatas().isEmpty())return;
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        recyclerView.setAdapter(new CommonAdapter<StudyStrongBureau>(getActivity(), R.layout.item_study_report, response.getStudyStrongBureauList().getDatas()) {
+    public void setRecyclerView(StudyCraftTrainingList response) {
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        recyclerView.setAdapter(new CommonAdapter<StudyStrongBureau>(getActivity(), R.layout.item_craftsman, response.getStudyStrongBureauCraftsmanList().getDatas()) {
             @Override
             protected void convert(ViewHolder holder, StudyStrongBureau data, int position) {
+                holder.setText(R.id.tv_title, data.getTitle());
                 ImageView image = holder.getConvertView().findViewById(R.id.image);
                 String url = ApiConstant.ROOT_URL+data.getThumbnailUrl();
                 Glide.with(getActivity()).load(url).into(image);
 
-//                holder.getConvertView().setOnClickListener(Act_Strong_Study_Experience->{
-//                    Intent intent = new Intent(getActivity(), com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Strong_Study_Experience.class);
-//                    intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId()+"");
-//                    startActivity(intent);
-//                });
+                holder.getConvertView().setOnClickListener(Act_Strong_Study_Experience->{
+                    Intent intent = new Intent(getActivity(), com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Strong_Study_Experience.class);
+                    intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId()+"");
+                    intent.putExtra("appTitle", "工匠培养");
+                    startActivity(intent);
+                });
             }
 
         });
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 DividerItemDecoration.VERTICAL_LIST,
-                ContextCompat.getColor(getActivity(), R.color.background),
-                DispalyUtil.dp2px(getActivity(), 12),
+                ContextCompat.getColor(getActivity(), R.color.divider_list),
+                DispalyUtil.dp2px(getActivity(), 5),
                 0, 0, false
         ));
     }
-
 }
