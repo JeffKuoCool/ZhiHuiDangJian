@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.lfc.zhihuidangjianapp.R;
 import com.lfc.zhihuidangjianapp.base.BaseActivity;
+import com.lfc.zhihuidangjianapp.ui.activity.chat.ChatActivity;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.AppConferenceActivity;
 import com.lfc.zhihuidangjianapp.ui.activity.model.Meeting;
 

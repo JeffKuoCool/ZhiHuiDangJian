@@ -1,1 +1,1 @@
-include ':app', ':easeui', ':immoudel', ':hmspush'
+include ':app', ':easeui', ':immoudel', ':hmspush', ':emoji'

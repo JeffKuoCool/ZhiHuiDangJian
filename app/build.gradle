@@ -64,6 +64,9 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -186,5 +189,13 @@ dependencies {
     //刷新列表 https://github.com/scwang90/SmartRefreshLayout
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14'
+
+    def items_ver = "0.8"
+    implementation "com.github.nekocode.Items:items:${items_ver}"
+    annotationProcessor "com.github.nekocode.Items:items-processor:${items_ver}"
+
+    //camera控件 https://github.com/LuckSiege/PictureSelector
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
+    implementation project(path: ':emoji')
 
 }

@@ -8,6 +8,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMOptions;
 import com.lfc.zhihuidangjianapp.base.BaseActivity;
@@ -15,6 +16,7 @@ import com.lfc.zhihuidangjianapp.ui.activity.model.User;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -153,5 +155,30 @@ public class EazyChatApi {
             }
         } : emCallBack);
     }
+
+    public static List<EMMessage> getMessageFromId(String userId, String msgId, int pagesize) {
+        EMConversation emConversation = EMClient.getInstance().chatManager().getConversation(userId);
+        return emConversation == null ? null : emConversation.loadMoreMsgFromDB(msgId, pagesize);
+    }
+
+    public static void clearHistory() {
+        Map<String, EMConversation> conversations = EMClient.getInstance().chatManager().getAllConversations();
+        for (Map.Entry<String, EMConversation> entry : conversations.entrySet()) {
+            EMClient.getInstance().chatManager().deleteConversation(entry.getKey(), true);
+        }
+    }
+
+    public static List<EMMessage> getMessageList(String userId, int pageSize) {
+        EMConversation emConversation = EMClient.getInstance().chatManager().getConversation(userId);
+        if (emConversation == null) {
+            return null;
+        }
+        List<EMMessage> messages = emConversation.getAllMessages();
+//        if (messages.size() < pageSize && messages.size() > 0) {
+//            messages.addAll(emConversation.loadMoreMsgFromDB(messages.get(messages.size() - 1).getMsgId(), pageSize - messages.size()));
+//        }
+        return messages;
+    }
+
 
 }

@@ -93,9 +93,18 @@
     </android.support.constraint.ConstraintLayout>
 
     <TextView
+        android:id="@+id/tvChat"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/adaptive_46dp"
+        android:layout_marginTop="@dimen/dp_10"
+        style="@style/btn_click_red"
+        android:text="私信"/>
+
+    <TextView
         android:id="@+id/tvCall"
         android:layout_width="match_parent"
         android:layout_height="@dimen/adaptive_46dp"
+        android:layout_marginTop="@dimen/dp_10"
         style="@style/btn_click_red"
         android:text="音视频通话"/>
 

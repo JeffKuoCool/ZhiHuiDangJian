@@ -92,7 +92,7 @@ class ConferenceInviteActivity : BaseActivity() {
 
         contactAdapter?.addAll(list ?: return)
         listView = findViewById<RecyclerView>(R.id.recyclerView)
-        listView?.layoutManager = GridLayoutManager(this, 3)
+        listView?.layoutManager = GridLayoutManager(this, 3) as RecyclerView.LayoutManager?
 //        listView?.addHeaderView(headerView)
         listView?.adapter = contactAdapter
         listView?.setOnTouchListener { _, _ ->

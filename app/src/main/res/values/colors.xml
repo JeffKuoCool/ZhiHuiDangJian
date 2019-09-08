@@ -43,5 +43,23 @@
     <color name="brown_grey">#a1a1a1</color>
     <color name="app_orange">#F08713</color>
     <color name="app_red">#E24B1D</color>
+    <color name="dark">#F8F7F7</color>
+    <color name="ugly_purple">#be3f8b</color>
+    <color name="uglyPurple">#be3f8b</color>
+    <color name="purpleishPink">#be3f8b</color>
+    <color name="charcoalGrey">#383c3f</color>
+    <color name="brownGrey">#a3a3a3</color>
+    <color name="purpleGrey">#7a767a</color>
+    <color name="veryLightPink">#f0f0f0</color>
+    <color name="darkGrey">#25282b</color>
+    <color name="charcoalGreyThree">#414345</color>
+    <color name="darkGreyTwo">#323436</color>
+    <color name="charcoalGreyFour">#494d50</color>
+    <color name="dark_grey_two">#323436</color>
+    <color name="charcoal_grey_two">#414345</color>
+    <color name="cool_grey_eight">#9eaab2</color>
+    <color name="battleship_grey_three">#757c86</color>
+    <color name="brown_grey_two">#a3a3a3</color>
+    <color name="aqua_marine">#50e3c2</color>
 
 </resources>

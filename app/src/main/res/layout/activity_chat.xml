@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#2A2C2E"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@color/red3">
+
+                <ImageView
+                    android:id="@+id/imgBack"
+                    android:layout_width="35dp"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="32dp"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_back" />
+
+                <TextView
+                    android:id="@+id/textTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="40dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_chat"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            </android.support.v7.widget.RecyclerView>
+
+
+            <com.lfc.zhihuidangjianapp.widget.CustomInputView
+                android:id="@+id/view_input_tip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.lfc.zhihuidangjianapp.widget.CustomInputView>
+
+        </LinearLayout>
+
+        <com.lfc.zhihuidangjianapp.widget.VoiceRecordView
+            android:id="@+id/voiceRecordView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center">
+
+        </com.lfc.zhihuidangjianapp.widget.VoiceRecordView>
+
+    </FrameLayout>
+
+
+</layout>

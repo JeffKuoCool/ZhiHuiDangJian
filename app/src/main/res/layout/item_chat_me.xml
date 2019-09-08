@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="@dimen/dip_3"
+            android:gravity="right">
+
+            <TextView
+                android:id="@+id/tv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chat_me"
+                android:paddingLeft="@dimen/dip_15"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingRight="@dimen/dip_15"
+                android:paddingBottom="@dimen/dp_10"
+                android:text=""
+                android:layout_gravity="right"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/iv_head"
+                app:layout_constraintTop_toTopOf="@+id/iv_head" />
+
+            <!-- 语音样式-->
+            <LinearLayout
+                android:id="@+id/view_voice"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_room_right_normal"
+                android:gravity="center_vertical"
+                android:layout_gravity="right"
+                android:paddingLeft="@dimen/dip_16"
+                android:paddingRight="@dimen/dip_16"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_head"
+                app:layout_constraintEnd_toStartOf="@+id/iv_head"
+                app:layout_constraintRight_toLeftOf="@+id/iv_head"
+                app:layout_constraintTop_toTopOf="@+id/iv_head">
+
+
+                <TextView
+                    android:id="@+id/tv_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="3.3sp"
+                    android:text="00”"
+                    android:textColor="@color/blue"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imageBg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dip_8"
+                    android:layout_marginRight="@dimen/dip_8"
+                    android:background="@mipmap/img_audio_track_black" />
+
+                <ImageView
+                    android:id="@+id/iv_play"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="@mipmap/button_voice_play" />
+
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/iv_picture"
+                android:visibility="gone"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="right"
+                app:roundBottomLeft="true"
+                app:roundBottomRight="true"
+                app:roundTopLeft="true"
+                app:roundTopRight="true"
+                app:roundedCornerRadius="@dimen/dip_6"/>
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/iv_head"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="@dimen/dip_6"
+            android:layout_marginRight="@dimen/dip_15"
+            app:roundAsCircle="true"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </LinearLayout>
+</layout>

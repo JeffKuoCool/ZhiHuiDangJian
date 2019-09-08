@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide;
 import com.lfc.zhihuidangjianapp.R;
 import com.lfc.zhihuidangjianapp.base.BaseActivity;
 import com.lfc.zhihuidangjianapp.net.http.ApiConstant;
+import com.lfc.zhihuidangjianapp.ui.activity.chat.ChatActivity;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.AppConferenceActivity;
 import com.lfc.zhihuidangjianapp.ui.activity.model.User;
 
@@ -62,6 +63,13 @@ public class MailDetailActivity extends BaseActivity {
             intent.putParcelableArrayListExtra("users", users);
             startActivity(intent);
         });
+        findViewById(R.id.tvChat).setOnClickListener(call->{
+            //TODO 私信
+            Intent intent = new Intent(getActivity(), ChatActivity.class);
+            intent.putExtra("user", user.getLoginName());
+            startActivity(intent);
+        });
+
     }
 
     @Override
