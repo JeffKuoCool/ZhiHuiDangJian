@@ -102,6 +102,9 @@
         <activity android:name=".ui.activity.fgt.home.act.Act_Emulate"
             android:label="@string/Emulate_name"
             />
+        <activity android:name=".ui.activity.fgt.dept.act.Act_Study_ju"
+            android:label="学习强局更多"
+            />
         <activity android:name=".ui.activity.fgt.home.act.Act_Demonstration_Leadership"
             android:label="@string/Demonstration_Leadership_name"
             />

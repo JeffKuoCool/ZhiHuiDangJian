@@ -60,7 +60,7 @@ public class Act_Dept_dynamic extends BaseBindViewActivity {
     protected void initView() {
         super.initView();
         tvAppTitle = findViewById(R.id.tv_apptitle);
-        tvAppTitle.setText("党建资讯");
+        tvAppTitle.setText("党务资讯");
 
         tabType = getIntent().getIntExtra("tabType", 0);
         if (tabType > TAB_DEPT_BUILD) {

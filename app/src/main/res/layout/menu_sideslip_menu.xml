@@ -37,15 +37,17 @@
                 android:textSize="24dp" />
 
             <TextView
+                android:layout_gravity="right"
                 android:id="@+id/text1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="31dp"
-                android:text="***党支部"
+                android:text="账号"
                 android:textColor="@color/white"
                 android:textSize="14dp" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/text2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,6 +57,7 @@
                 android:textSize="14dp" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/text3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -142,6 +145,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/relative3"
         android:layout_width="match_parent"
         android:layout_height="51dp">
@@ -180,6 +184,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/relative4"
         android:layout_width="match_parent"
         android:layout_height="51dp">

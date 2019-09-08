@@ -13,6 +13,7 @@
 /app/debug
 /app/build
 /easeui/build
+/emoji/build
 *.icloud
 /hmspush/build
 /immoudel/build

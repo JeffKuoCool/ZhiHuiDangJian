@@ -62,4 +62,6 @@
     <color name="brown_grey_two">#a3a3a3</color>
     <color name="aqua_marine">#50e3c2</color>
 
+    <!-- 全透明 -->
+    <color name="transparent">#00000000</color>
 </resources>

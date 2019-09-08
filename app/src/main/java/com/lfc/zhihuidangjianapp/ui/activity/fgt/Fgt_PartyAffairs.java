@@ -29,6 +29,7 @@ import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Party_Example;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Party_Member_Practice;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Party_Membership;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Study_Report;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Study_ju;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Weekend_Report;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.DevelopPartyActivity;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.Act_PartyBuildingMatrix;
@@ -197,7 +198,7 @@ public class Fgt_PartyAffairs extends BaseFragment {
      * @param position
      */
     private void partStrong(int position){
-        switch (position){
+       /* switch (position){
             case 0://林草公开课
                 startActivity(new Intent(getActivity(), Act_Forestry_Course.class));
                 break;
@@ -206,6 +207,21 @@ public class Fgt_PartyAffairs extends BaseFragment {
                 break;
             case 2://学习心得
                 startActivity(new Intent(getActivity(), Act_Study_Report.class));
+                break;
+        }*/
+        Intent intent = new Intent(getActivity(), Act_Study_ju.class);
+        switch (position){
+            case 0://林草公开课 TODO
+                intent.putExtra("tabType", 0);
+                startActivity(intent);
+                break;
+            case 1://工匠培养
+                intent.putExtra("tabType", 1);
+                startActivity(intent);
+                break;
+            case 2://学习心得
+                intent.putExtra("tabType", 2);
+                startActivity(intent);
                 break;
         }
     }

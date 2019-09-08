@@ -18,7 +18,10 @@ import com.lfc.zhihuidangjianapp.net.http.HttpService;
 import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
 import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Craftsman_Training;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Forestry_Course;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Strong_Study_Experience;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Study_Report;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Study_ju;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.fragment.HomeStudyFragment;
 import com.lfc.zhihuidangjianapp.ui.activity.model.AppConfigLists;
 import com.lfc.zhihuidangjianapp.ui.activity.model.DeptDetailUser;
@@ -40,7 +43,9 @@ public class Act_Emulate extends BaseActivity {
 
     private RecyclerView rvStudyStrong, rvStudyStrongVideo, rv_study_forest;
 
+    private TextView tvForest;
     private TextView tvCraft;
+    private TextView tvStudy;
 
     @Override
     protected int getLayoutId() {
@@ -56,13 +61,34 @@ public class Act_Emulate extends BaseActivity {
     protected void initView() {
         initImmersionBar(0);
         findViewById(R.id.imgBack).setOnClickListener(back->finish());
+        tvForest = findViewById(R.id.tv_forest);
         tvCraft = findViewById(R.id.tv_craft);
+        tvStudy = findViewById(R.id.tv_study);
         setEvent();
     }
 
     private void setEvent() {
+        //点击林草大课堂进行查看更多
+        tvForest.setOnClickListener(act_craft->{
+            //startActivity(new Intent(this, Act_Forestry_Course.class));
+            Intent intent = new Intent(getActivity(), Act_Study_ju.class);
+            intent.putExtra("tabType", 0);
+            startActivity(intent);
+
+        });
+        //点击工匠培养进行查看更多
         tvCraft.setOnClickListener(act_craft->{
-            startActivity(new Intent(this, Act_Craftsman_Training.class));
+           // startActivity(new Intent(this, Act_Craftsman_Training.class));
+            Intent intent = new Intent(getActivity(), Act_Study_ju.class);
+            intent.putExtra("tabType", 1);
+            startActivity(intent);
+        });
+        //点击学习心得进行查看更多
+        tvStudy.setOnClickListener(act_craft->{
+            //startActivity(new Intent(this, Act_Study_Report.class));
+            Intent intent = new Intent(getActivity(), Act_Study_ju.class);
+            intent.putExtra("tabType", 2);
+            startActivity(intent);
         });
     }
 

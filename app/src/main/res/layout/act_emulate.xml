@@ -64,7 +64,13 @@
                 android:layout_marginTop="@dimen/dip_10">
 
             </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="@dimen/dip_10">
 
+            </FrameLayout>
             <TextView
                 android:id="@+id/tv_craft"
                 android:layout_width="match_parent"
@@ -87,6 +93,7 @@
             </FrameLayout>
 
             <TextView
+                android:id="@+id/tv_study"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:paddingLeft="@dimen/dip_12"

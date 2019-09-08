@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -50,6 +51,10 @@ public class Fgt_Dept_detail extends BaseFragment {
     private View mRootView;
     private int position;
     private MapView mapView;
+    private TextView rv_zblb;
+    private LinearLayout rv_zblb_lin;
+    private ImageView rv_zblb_img;
+    boolean falg = true; //true  是开启 false 关闭
 
     @Override
     protected int getLayoutId() {
@@ -68,11 +73,31 @@ public class Fgt_Dept_detail extends BaseFragment {
         tvDeptTitle = rootView.findViewById(R.id.tv_dept_title);
         tvDirectorTitle = rootView.findViewById(R.id.tv_director_title);
         mapView = rootView.findViewById(R.id.mapView);
+        //支部成员列表id
+        rv_zblb = rootView.findViewById(R.id.rv_zblb);
+        rv_zblb_lin = rootView.findViewById(R.id.rv_zblb_lin);
+        rv_zblb_img = rootView.findViewById(R.id.rv_zblb_img);
         mapView.onCreate(((BaseActivity) getActivity()).savedInstanceState);
     }
 
     @Override
     protected void initData() {
+        //点击支部列表进行显示隐藏
+        rv_zblb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //优惠券
+                if (falg) {
+                    rv_zblb_img.setImageResource(R.mipmap.jt_top);
+                    falg = false;
+                    rv_zblb_lin.setVisibility(View.VISIBLE);
+                } else {
+                    rv_zblb_img.setImageResource(R.mipmap.jt_down);
+                    falg = true;
+                    rv_zblb_lin.setVisibility(View.GONE);
+                }
+            }
+        });
         deptNumber = getArguments().getString("deptNumber");
         position = getArguments().getInt("position");
         if (position == 0) {
@@ -154,6 +179,7 @@ public class Fgt_Dept_detail extends BaseFragment {
 
         LatLng latLng = new LatLng(39.906901, 116.397972);
 
+        Log.i("yy",dept.getLatitude() +"===" +dept.getLongitude());
         mapView.getMap().setPointToCenter((int) dept.getLatitude(), (int) dept.getLongitude());
     }
 

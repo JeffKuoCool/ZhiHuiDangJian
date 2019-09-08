@@ -21,6 +21,7 @@ import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
 import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
 import com.lfc.zhihuidangjianapp.ui.activity.adapter.DividerItemDecoration;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Craftsman_Training;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Weekend_Report;
 import com.lfc.zhihuidangjianapp.ui.activity.model.OrganizationalLife;
 import com.lfc.zhihuidangjianapp.ui.activity.model.OrganizationalLifeDetail;
 import com.lfc.zhihuidangjianapp.ui.activity.model.StudyCraftReportList;
@@ -59,9 +60,9 @@ public class Fgt_Study_Report extends BaseFragment {
 
     @Override
     protected void initData() {
-        studyStrongBureauType = getArguments().getInt("studyStrongBureauType");
-        Map<String, Object> map = new HashMap<>();
-        map.put("studyStrongBureauType", studyStrongBureauType);
+
+       Map<String, Object> map = new HashMap<>();
+        map.put("studyStrongBureauType", 2);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
                 .queryStudyStrongBureauPageList(map, MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
@@ -85,7 +86,7 @@ public class Fgt_Study_Report extends BaseFragment {
 
     public void setRecyclerView(StudyCraftReportList response) {
         if(response.getStudyStrongBureauList().getDatas().isEmpty())return;
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyclerView.setAdapter(new CommonAdapter<StudyStrongBureau>(getActivity(), R.layout.item_study_report, response.getStudyStrongBureauList().getDatas()) {
             @Override
             protected void convert(ViewHolder holder, StudyStrongBureau data, int position) {

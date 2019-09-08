@@ -18,6 +18,7 @@ import com.lfc.zhihuidangjianapp.net.http.HttpService;
 import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
 import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
 import com.lfc.zhihuidangjianapp.ui.activity.adapter.FragPagerAdapter;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.fragment.Fgt_Weekend_Query;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.fragment.Fgt_Weekend_Report;
 import com.lfc.zhihuidangjianapp.ui.activity.model.OrganizationalLife;
 import com.lfc.zhihuidangjianapp.ui.activity.model.OrganizationalLifeDetail;
@@ -68,10 +69,14 @@ public class Act_Weekend_Report extends BaseActivity {
         viewPager = findViewById(R.id.viewPager);
 
         fragments = new ArrayList<>();
-        for (int i = 0; i < mTitles.length; i++) {
+       /* for (int i = 0; i < mTitles.length; i++) {
             mTabEntities.add(new TabEntity(mTitles[i]));
             fragments.add(new Fgt_Weekend_Report());
-        }
+        }*/
+        mTabEntities.add(new TabEntity(mTitles[0]));
+        fragments.add(new Fgt_Weekend_Report());
+        mTabEntities.add(new TabEntity(mTitles[1]));
+        fragments.add(new Fgt_Weekend_Query());
         tab.setTabData(mTabEntities);
         tab.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
