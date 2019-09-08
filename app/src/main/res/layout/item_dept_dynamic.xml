@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/dip_12"
     android:paddingRight="@dimen/dip_12"
     android:paddingTop="@dimen/dip_5"
+
     android:paddingBottom="@dimen/dip_5">
 
     <ImageView
@@ -65,7 +66,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginBottom="@dimen/dip_3"/>
-
 
 
 </android.support.constraint.ConstraintLayout>

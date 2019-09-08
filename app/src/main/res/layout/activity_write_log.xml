@@ -91,6 +91,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tv_branch_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -126,7 +127,7 @@
             android:layout_height="40dp"
             android:layout_gravity="bottom"
             style="@style/btn_submit"
-            android:text="上传"/>
+            android:text="保存"/>
         
     </FrameLayout>
 

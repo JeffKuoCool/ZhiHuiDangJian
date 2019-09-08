@@ -43,5 +43,6 @@
     <color name="brown_grey">#a1a1a1</color>
     <color name="app_orange">#F08713</color>
     <color name="app_red">#E24B1D</color>
-
+    <!-- 全透明 -->
+    <color name="transparent">#00000000</color>
 </resources>
