@@ -37,6 +37,7 @@
 
     <include layout="@layout/menu_sideslip_menu"
         android:layout_width="312dp"
+        android:visibility="gone"
         android:layout_height="match_parent"
         android:layout_gravity="left"
         android:id="@+id/v4_listview" />

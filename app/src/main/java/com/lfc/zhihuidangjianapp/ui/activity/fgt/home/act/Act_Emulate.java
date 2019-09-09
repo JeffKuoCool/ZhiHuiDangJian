@@ -85,6 +85,7 @@ public class Act_Emulate extends BaseActivity {
         });
         //点击学习心得进行查看更多
         tvStudy.setOnClickListener(act_craft->{
+
             //startActivity(new Intent(this, Act_Study_Report.class));
             Intent intent = new Intent(getActivity(), Act_Study_ju.class);
             intent.putExtra("tabType", 2);

@@ -83,7 +83,6 @@ public class Fgt_PartyBuilDingMatrix extends BaseFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ResponseObserver<Depts>(getActivity()) {
-
                     @Override
                     protected void onNext(Depts response) {
                         mDepts = response;
