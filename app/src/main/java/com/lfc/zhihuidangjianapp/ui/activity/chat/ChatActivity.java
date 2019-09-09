@@ -243,6 +243,7 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
     private void initInputView() {
         mBinding.viewInputTip.setActivityContext(this);
         mBinding.viewInputTip.isSendFunction(false);
+        mBinding.viewInputTip.isSendEmoji(true);
         mChatAdapter = new ChatAdapter(mMessageList, this);
         mBinding.rvChat.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvChat.setAdapter(mChatAdapter);
