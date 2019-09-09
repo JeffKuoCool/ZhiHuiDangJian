@@ -67,8 +67,8 @@
 
                         <ImageView
                             android:id="@+id/iv_emotion"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
                             android:visibility="visible"
                             android:layout_marginRight="@dimen/dip_8"
                             android:background="@mipmap/ic_emoticon_input"
@@ -78,8 +78,8 @@
 
                         <ImageView
                             android:id="@+id/iv_add_input"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
                             android:layout_marginRight="@dimen/dip_8"
                             android:background="@mipmap/ic_send_talk"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -88,8 +88,8 @@
 
                         <ImageView
                             android:id="@+id/iv_add_function"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
                             android:visibility="gone"
                             app:layout_constraintLeft_toLeftOf="@+id/iv_add_input"
                             app:layout_constraintRight_toRightOf="@+id/iv_add_input"
