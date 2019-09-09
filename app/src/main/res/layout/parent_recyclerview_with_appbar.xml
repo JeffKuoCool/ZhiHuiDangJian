@@ -26,7 +26,6 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="36dp"
-            android:text="党建矩阵"
             android:textColor="@color/white"
             android:textSize="19dp"
             android:textStyle="bold" />

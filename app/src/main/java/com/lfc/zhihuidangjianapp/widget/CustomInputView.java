@@ -16,7 +16,9 @@ import android.widget.LinearLayout;
 import com.lfc.zhihuidangjianapp.R;
 import com.lfc.zhihuidangjianapp.base.BaseActivity;
 import com.lfc.zhihuidangjianapp.inter.InputEvent;
+import com.lfc.zhihuidangjianapp.ui.activity.chat.InputFunctionFragment;
 import com.lfc.zhihuidangjianapp.utlis.InputUtil;
+import com.tb.emoji.FaceFragment;
 
 /**
  * @date: 2019/4/1
@@ -283,10 +285,10 @@ public class CustomInputView extends LinearLayout implements View.OnClickListene
 
     public void setActivityContext(BaseActivity baseActivity) {
         this.baseActivity = baseActivity;
-//        FaceFragment faceFragment = FaceFragment.Instance();
-//        baseActivity.getSupportFragmentManager().beginTransaction().add(R.id.view_emoji, faceFragment).commit();
-//
-//        baseActivity.getSupportFragmentManager().beginTransaction().add(R.id.view_input_function, new InputFunctionFragment()).commit();
+        FaceFragment faceFragment = FaceFragment.Instance();
+        baseActivity.getSupportFragmentManager().beginTransaction().add(R.id.view_emoji, faceFragment).commit();
+
+        baseActivity.getSupportFragmentManager().beginTransaction().add(R.id.view_input_function, new InputFunctionFragment()).commit();
     }
 
 }

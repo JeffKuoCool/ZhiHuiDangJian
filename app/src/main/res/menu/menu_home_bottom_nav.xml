@@ -12,6 +12,11 @@
         android:title="党务工作"/>
 
     <item
+        android:id="@+id/message"
+        android:icon="@drawable/ic_selector_personal"
+        android:title="消息"/>
+
+    <item
         android:id="@+id/invitation"
         android:icon="@drawable/ic_selector_personal"
         android:title="个人中心"/>

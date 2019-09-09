@@ -37,6 +37,7 @@ import com.lfc.zhihuidangjianapp.chat.EazyChatApi;
 import com.lfc.zhihuidangjianapp.databinding.ActivityChatBinding;
 import com.lfc.zhihuidangjianapp.event.BusEvent;
 import com.lfc.zhihuidangjianapp.inter.InputEvent;
+import com.lfc.zhihuidangjianapp.net.http.ApiConstant;
 import com.lfc.zhihuidangjianapp.net.http.HttpService;
 import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
 import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
@@ -241,7 +242,8 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
 
     private void initInputView() {
         mBinding.viewInputTip.setActivityContext(this);
-
+        mBinding.viewInputTip.isSendFunction(false);
+        mBinding.viewInputTip.isSendEmoji(true);
         mChatAdapter = new ChatAdapter(mMessageList, this);
         mBinding.rvChat.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvChat.setAdapter(mChatAdapter);
@@ -374,7 +376,7 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
 
     private void send(EMMessage message) {
         //消息扩展
-        message.setAttribute("userHeadimgurlResource", MyApplication.getmUserInfo().getUser().getImgAddress());
+        message.setAttribute("userHeadimgurlResource", ApiConstant.ROOT_URL+MyApplication.getmUserInfo().getUser().getImgAddress());
         message.setAttribute("userNickname", MyApplication.getmUserInfo().getUser().getDisplayName());
         message.setAttribute("user", new Gson().toJson(MyApplication.getmUserInfo().getUser()));
         EMClient.getInstance().chatManager().sendMessage(message);
