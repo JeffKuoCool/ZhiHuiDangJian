@@ -98,12 +98,13 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
         // 不使用图标默认变色
         bvHomeNavigation.setItemIconTintList(null);
         bvHomeNavigation.setOnNavigationItemSelectedListener(this);
-//        sideSlideMenu();
+        //sideSlideMenu();
         loadPartyInfo();
         // 在Activity#onCreate()中添加监听
         EMClient.getInstance().chatManager().addMessageListener(emMessageListener);
         requstPermissions(this);
         checkPermission();
+
     }
 
     /**
@@ -206,7 +207,7 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
 
         // 限制页面数量
         vpHomePager.setOffscreenPageLimit(mPagerAdapter.getCount());
-//        drawerLayout.openDrawer(Gravity.LEFT);//侧滑打开  不设置则不会默认打开
+        drawerLayout.closeDrawer(Gravity.LEFT);//关闭左侧栏
 //        drawerLayout.setScrimColor(Color.TRANSPARENT);
 //        drawerLayout.setDrawerShadow();
         imgHead.setOnClickListener(new View.OnClickListener() {

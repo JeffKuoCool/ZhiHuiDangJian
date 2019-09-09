@@ -14,6 +14,8 @@ import com.lfc.zhihuidangjianapp.bean.TabEntity;
 import com.lfc.zhihuidangjianapp.ui.activity.BaseBindViewActivity;
 import com.lfc.zhihuidangjianapp.ui.activity.adapter.FragPagerAdapter;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.fragment.Fgt_Forest_List;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.fragment.Fgt_Weekend_Query;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.fragment.Fgt_Weekend_Report;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.fgt.Fgt_Dept_dynamic;
 
 import java.util.ArrayList;
@@ -89,13 +91,27 @@ public class Act_Forest_List extends BaseBindViewActivity {
 
     private List<Fragment> list() {
         fragments = new ArrayList<>();
-        for (int i = 0; i < mTitles.length; i++) {
-            Fgt_Forest_List Fgt_Forest_List = new Fgt_Forest_List();
-            Bundle bundle = new Bundle();
-            bundle.putInt("leadDemonstrationType", i);
-            Fgt_Forest_List.setArguments(bundle);
-            fragments.add(Fgt_Forest_List);
-        }
+        //0先进基层党组织 1优秀共产党员 2优秀党务工作者 3优秀党建联络员
+        Fgt_Forest_List orderListFragment0 = new Fgt_Forest_List();//0先进基层党组织
+        Fgt_Forest_List orderListFragment1 = new Fgt_Forest_List();//2优秀党务工作者
+        Fgt_Forest_List orderListFragment2 = new Fgt_Forest_List();//1优秀共产党员
+        Fgt_Forest_List orderListFragment3 = new Fgt_Forest_List();//3优秀党建联络员
+        Bundle bundle0 = new Bundle();
+        Bundle bundle1 = new Bundle();
+        Bundle bundle2 = new Bundle();
+        Bundle bundle3 = new Bundle();
+        bundle0.putInt("leadDemonstrationType", 0);
+        bundle1.putInt("leadDemonstrationType", 2);
+        bundle2.putInt("leadDemonstrationType", 1);
+        bundle3.putInt("leadDemonstrationType", 3);
+        orderListFragment0.setArguments(bundle0);
+        orderListFragment1.setArguments(bundle1);
+        orderListFragment2.setArguments(bundle2);
+        orderListFragment3.setArguments(bundle3);
+        fragments.add(orderListFragment0);
+        fragments.add(orderListFragment1);
+        fragments.add(orderListFragment2);
+        fragments.add(orderListFragment3);
         return fragments;
     }
 

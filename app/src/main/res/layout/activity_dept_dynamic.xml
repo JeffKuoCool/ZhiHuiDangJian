@@ -30,6 +30,15 @@
             android:textColor="@color/white"
             android:textSize="19dp"
             android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dip_12"
+            android:layout_alignTop="@+id/imgBack"
+            android:layout_alignBottom="@+id/imgBack"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/icon_left"/>
 
     </RelativeLayout>
 

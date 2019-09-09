@@ -30,6 +30,7 @@
        android:layout_height="match_parent"
        android:orientation="horizontal">
        <EditText
+           android:hint="请选择党委"
            android:focusable="false"
            android:focusableInTouchMode="false"
            android:cursorVisible="false"
@@ -75,6 +76,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
             <EditText
+                android:hint="请选择总之"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:cursorVisible="false"
@@ -121,6 +123,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
             <EditText
+                android:hint="请选择支部"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:cursorVisible="false"
@@ -166,6 +169,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
             <EditText
+                android:hint="请选择人员"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:cursorVisible="false"

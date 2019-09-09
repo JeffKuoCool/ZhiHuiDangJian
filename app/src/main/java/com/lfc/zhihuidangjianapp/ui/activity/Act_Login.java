@@ -67,6 +67,13 @@ public class Act_Login extends BaseActivity {
 //        }
         captcha();
         setEvent();
+        //Token为空就进登录页面 不为空直接进入主界面
+        if(TextUtils.isEmpty(MyApplication.getLoginBean().getToken())){
+           return;
+        }else{
+            startActivity(Act_Main.class);
+            finish();
+        }
     }
 
     private void setEvent() {

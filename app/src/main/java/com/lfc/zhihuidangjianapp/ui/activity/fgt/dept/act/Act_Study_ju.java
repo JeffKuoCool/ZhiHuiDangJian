@@ -45,16 +45,16 @@ public class Act_Study_ju extends BaseBindViewActivity {
     //0林草公开课 1工匠培养 2学习心得
     private int tabType;
 
- /*   public static final int TAB_DEPT_ACTIVE = 0;
-    public static final int TAB_DEPT_GROUP = 1;
-    public static final int TAB_DEPT_BUILD = 2;
-*/
+    /*   public static final int TAB_DEPT_ACTIVE = 0;
+       public static final int TAB_DEPT_GROUP = 1;
+       public static final int TAB_DEPT_BUILD = 2;
+   */
     @BindView(R.id.tab)
     CommonTabLayout tab;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
     TextView tvAppTitle;
-
+    private ImageView create;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_dept_dynamic;
@@ -69,12 +69,13 @@ public class Act_Study_ju extends BaseBindViewActivity {
     protected void initView() {
         super.initView();
         tvAppTitle = findViewById(R.id.tv_apptitle);
+        create = findViewById(R.id.create);
         tvAppTitle.setText("学习强局");
         tabType = getIntent().getIntExtra("tabType", 0);
         /*if (tabType > TAB_DEPT_BUILD) {
             tabType = TAB_DEPT_ACTIVE;
         }*/
-          FragPagerAdapter fpa = new FragPagerAdapter(getSupportFragmentManager());
+        FragPagerAdapter fpa = new FragPagerAdapter(getSupportFragmentManager());
         fpa.setFragmentList(list());
         viewPager.setOffscreenPageLimit(mTitles.length);
         viewPager.setAdapter(fpa);
@@ -117,6 +118,9 @@ public class Act_Study_ju extends BaseBindViewActivity {
 
     private void setEvent() {
         findViewById(R.id.imgBack).setOnClickListener(back -> finish());
+        create.setOnClickListener(ceate->{
+            startActivity(new Intent(this, Act_Write_Study_Report.class));
+        });
     }
 
     private List<Fragment> list() {
