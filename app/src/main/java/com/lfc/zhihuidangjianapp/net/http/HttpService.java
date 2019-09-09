@@ -1,5 +1,8 @@
 package com.lfc.zhihuidangjianapp.net.http;
 
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopBean;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopRyBean;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.queryUserListByFirstPinYinBean;
 import com.lfc.zhihuidangjianapp.ui.activity.model.AliPay;
 import com.lfc.zhihuidangjianapp.ui.activity.model.AppConfigLists;
 import com.lfc.zhihuidangjianapp.ui.activity.model.BaseResponse;
@@ -424,6 +427,26 @@ public interface HttpService {
      */
     @POST("login/updatePwd")
     Observable<BaseResponse<Object>> updatePwd(@QueryMap Map<String, Object> map,@Header("token") String token);
+
+    /**
+     * 支部一级一级查询
+     *
+     * @param map
+     * @param token
+     * @return
+     */
+    @POST(ApiConstant.API + "/queryDeptListByLevel")
+    Observable<BaseResponse<QueryPopBean>> getQuery(@QueryMap Map<String, Object> map, @Header("token") String token);
+//queryUserListByFirstPinYinBean
+    /**
+     * 支部一级一级人员查询
+     *
+     * @param map
+     * @param token
+     * @return
+     */
+    @POST(ApiConstant.API + "/queryDeptListByLevel")
+    Observable<BaseResponse<QueryPopRyBean>> getQueryRy(@QueryMap Map<String, Object> map, @Header("token") String token);
 
 
 }

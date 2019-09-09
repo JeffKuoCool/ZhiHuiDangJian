@@ -422,6 +422,7 @@
                 android:layout_marginRight="@dimen/dip_60"
                 android:orientation="vertical">
                 <TextView
+                    android:gravity="right"
                     android:id="@+id/min_naem1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -430,15 +431,18 @@
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/fond_22sp" />
                 <TextView
+                    android:id="@+id/min_code"
+                    android:gravity="right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/dip_10"
-                    android:text="***党支部"
+                    android:text="账号"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/fond_16sp" />
 
                 <TextView
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -448,6 +452,7 @@
                     android:textSize="@dimen/fond_16sp" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/min_Total1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -514,10 +519,12 @@
                 android:src="@mipmap/icon_mi_right" />
         </RelativeLayout>
         <View
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dip_1"
             android:background="#10000000" />
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/min_gongzuozhoubao"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/dip_10"
@@ -543,10 +550,12 @@
                 android:src="@mipmap/icon_mi_right" />
         </RelativeLayout>
         <View
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dip_1"
             android:background="#10000000" />
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/min_dangfei"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/dip_10"

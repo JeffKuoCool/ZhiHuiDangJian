@@ -50,6 +50,8 @@ public class Fgt_Personal extends BaseFragment implements View.OnClickListener {
     TextView minName;
     @BindView(R.id.min_naem1)
     TextView minName1;
+    @BindView(R.id.min_code)
+    TextView min_code;
     @BindView(R.id.min_sex)
     TextView minSex;
     @BindView(R.id.min_minzu)
@@ -136,6 +138,7 @@ public class Fgt_Personal extends BaseFragment implements View.OnClickListener {
                     Glide.with(getContext()).load(ApiConstant.ROOT_URL + entity.getData().getUser().getImgAddress()).apply(options).into(profile_image);
                     minName.setText(entity.getData().getUser().getDisplayName());
                     minName1.setText(entity.getData().getUser().getDisplayName());
+                    min_code.setText(entity.getData().getUser().getDeptNumber());
                     if (entity.getData().getUser().getSex() == 0) {
                         minSex.setText("女");
                     } else {

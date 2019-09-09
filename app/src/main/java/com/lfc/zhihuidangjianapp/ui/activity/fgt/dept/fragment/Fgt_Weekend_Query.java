@@ -1,8 +1,11 @@
 package com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,23 +14,41 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hjq.toast.ToastUtils;
 import com.lfc.zhihuidangjianapp.R;
+import com.lfc.zhihuidangjianapp.app.MyApplication;
 import com.lfc.zhihuidangjianapp.base.BaseFragment;
+import com.lfc.zhihuidangjianapp.net.http.ApiConstant;
+import com.lfc.zhihuidangjianapp.net.http.HttpService;
+import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
+import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
+import com.lfc.zhihuidangjianapp.ui.activity.adapter.DividerItemDecoration;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Organizational_Life_Detail;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.PopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopBean;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopRyBean;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.queryUserListByFirstPinYinBean;
+
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 
 
 /**
@@ -60,6 +81,10 @@ public class Fgt_Weekend_Query extends BaseFragment {
     private PopupWindows_pop popupWindows_pop;
     private  ListView listView;
     //  private RecyclerView recyclerView;
+    private String deptNumberdw="";//党委deptNumber
+    private String deptNumberzz="";//总支deptNumber
+    private String deptNumberzb="";//支部deptNumber
+    private String deptNumberry="";//人员deptNumber
 
     @Override
     protected int getLayoutId() {
@@ -73,26 +98,9 @@ public class Fgt_Weekend_Query extends BaseFragment {
 
     @Override
     protected void initData() {
-     /*   RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
-                .queryMyWeeklyWorkReportPageList(MyApplication.getLoginBean().getToken())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ResponseObserver<ResponseWorkReport>(getActivity()) {
 
-                    @Override
-                    protected void onNext(ResponseWorkReport response) {
-                        Log.e("onNext= ", response.toString());
-                        if (response == null) return;
-                        setRecyclerView(response.getWeeklyWorkReportList().getDatas());
-                    }
-
-                    @Override
-                    protected void onError(Throwable e) {
-                        super.onError(e);
-                        Log.e("Throwable= ", e.getMessage());
-                    }
-                }.actual());*/
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -141,7 +149,7 @@ public class Fgt_Weekend_Query extends BaseFragment {
                     ToastUtils.show("请选择人员");
                     return;
                 }
-                toast(tvDwEt.getText().toString()+"=="+tvZzEt.getText().toString()+"=="+tvZbEt.getText().toString() +"=="+tvRyEt.getText().toString());
+                toast(deptNumberry);
                 break;
         }
     }
@@ -183,6 +191,7 @@ public class Fgt_Weekend_Query extends BaseFragment {
                 m_pop_text.setText("选择人员");
             }
             listView = (ListView) view.findViewById(R.id.item_pop_list);
+
             getData(type);
             cView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -200,49 +209,108 @@ public class Fgt_Weekend_Query extends BaseFragment {
 
         }
     }
+    //设置数据
     private void getData(final int type) {
-        ArrayList<QueryPopBean> list1 = new ArrayList<>();
-        QueryPopBean phBean1 = new QueryPopBean(1, "选择党委1");
-        QueryPopBean phBean2 = new QueryPopBean(2, "选择党委2");
-        QueryPopBean phBean3 = new QueryPopBean(3, "选择党委3");
-        list1.add(phBean1);
-        list1.add(phBean2);
-        list1.add(phBean3);
-        ArrayList<QueryPopBean> list2 = new ArrayList<>();
-        QueryPopBean phBean4 = new QueryPopBean(4, "选择总支1");
-        QueryPopBean phBean41 = new QueryPopBean(4, "选择总支1");
-        QueryPopBean phBean42 = new QueryPopBean(4, "选择总支1");
-        QueryPopBean phBean43 = new QueryPopBean(4, "选择总支1");
-        list2.add(phBean4);
-        list2.add(phBean41);
-        list2.add(phBean42);
-        list2.add(phBean43);
-        ArrayList<QueryPopBean> list3 = new ArrayList<>();
-        QueryPopBean phBean5 = new QueryPopBean(5, "选择支部1");
-        QueryPopBean phBean6 = new QueryPopBean(6, "选择支部2");
-        QueryPopBean phBean7 = new QueryPopBean(7, "选择支部3");
-        list3.add(phBean5);
-        list3.add(phBean6);
-        list3.add(phBean7);
-        ArrayList<QueryPopBean> list4 = new ArrayList<>();
-        QueryPopBean phBean8 = new QueryPopBean(8, "选择人员1");
-        QueryPopBean phBean9 = new QueryPopBean(9, "选择人员2");
-        QueryPopBean phBean10 = new QueryPopBean(10, "选择人员3");
-        list4.add(phBean8);
-        list4.add(phBean9);
-        list4.add(phBean10);
-        if (type == 1) {
-            getSetBz(list1,type);
-        } else if (type == 2) {
-            getSetBz(list2,type);
-        } else if(type==3){
-            getSetBz(list3,type);
-        }else{
-            getSetBz(list4,type);
+        if(type==1){
+            ArrayList<PopBean> list1 = new ArrayList<>();
+            PopBean phBean1 = new PopBean("DT000001","中共山西省中条山国有林管理局委员会");
+            list1.add(phBean1);
+            getSetPop(list1,type);
+        }else if(type==2){
+            List<PopBean> list =new ArrayList<>();
+            Map<String, Object> map = new HashMap<>();
+            map.put("deptNumber", deptNumberdw);
+            RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
+                    .getQuery(map, MyApplication.getLoginBean().getToken())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new ResponseObserver<QueryPopBean>(getActivity()) {
+
+                        @Override
+                        protected void onNext(QueryPopBean response) {
+                            Log.e("onNext= ", response.toString());
+                            if(response==null)return;
+                            List<QueryPopBean.DeptListBean> deptList = response.getDeptList();
+                            if(deptList.size()!=0){
+                                for(int i =0;i<deptList.size();i++){
+                                    PopBean phBean1 = new PopBean(deptList.get(i).getDeptNumber(),deptList.get(i).getAbbreviation());
+                                    list.add(phBean1);
+                                }
+                                getSetPop(list,type);
+                            }
+                        }
+
+                        @Override
+                        protected void onError(Throwable e) {
+                            super.onError(e);
+                            Log.e("Throwable= ", e.getMessage());
+                        }
+                    }.actual());
+        }else if(type==3){
+            List<PopBean> list =new ArrayList<>();
+            Map<String, Object> map = new HashMap<>();
+            map.put("deptNumber", deptNumberzz);
+            RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
+                    .getQuery(map, MyApplication.getLoginBean().getToken())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new ResponseObserver<QueryPopBean>(getActivity()) {
+
+                        @Override
+                        protected void onNext(QueryPopBean response) {
+                            Log.e("onNext= ", response.toString());
+                            if(response==null)return;
+                            List<QueryPopBean.DeptListBean> deptList = response.getDeptList();
+                            if(deptList.size()!=0){
+                                for(int i =0;i<deptList.size();i++){
+                                    PopBean phBean1 = new PopBean(deptList.get(i).getDeptNumber(),deptList.get(i).getAbbreviation());
+                                    list.add(phBean1);
+                                }
+                                getSetPop(list,type);
+                            }
+                        }
+
+                        @Override
+                        protected void onError(Throwable e) {
+                            super.onError(e);
+                            Log.e("Throwable= ", e.getMessage());
+                        }
+                    }.actual());
+        }else if(type==4){
+            List<PopBean> list =new ArrayList<>();
+            Map<String, Object> map = new HashMap<>();
+            map.put("deptNumber", deptNumberzb);
+            RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
+                    .getQueryRy(map, MyApplication.getLoginBean().getToken())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new ResponseObserver<QueryPopRyBean>(getActivity()) {
+
+                        @Override
+                        protected void onNext(QueryPopRyBean response) {
+                            Log.e("onNext= ", response.toString() );
+                            if(response==null)return;
+                            List<QueryPopRyBean.UserlistBean> deptList = response.getUserlist();
+                            if(deptList.size()!=0){
+                                for(int i =0;i<deptList.size();i++){
+                                    PopBean phBean1 = new PopBean(deptList.get(i).getLoginName(),deptList.get(i).getSealName());
+                                    list.add(phBean1);
+                                }
+                                getSetPop(list,type);
+                            }
+                        }
+
+                        @Override
+                        protected void onError(Throwable e) {
+                            super.onError(e);
+                            Log.e("Throwable= ", e.getMessage());
+                        }
+                    }.actual());
         }
     }
 
-    private void getSetBz(final List<QueryPopBean> data,int type) {
+
+    private void getSetPop(final List<PopBean> data,int type) {
 
         final MyAdapter adapter = new MyAdapter(data);
 
@@ -250,17 +318,19 @@ public class Fgt_Weekend_Query extends BaseFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //cid =data.get(position).getCid()
                 String balance = data.get(position).getName()+"";
-                // hyType.setText("+" +balance+"");
                 if(type==1){
                     tvDwEt.setText(balance);
+                    deptNumberdw =data.get(position).getId();
                 }else  if(type==2){
                     tvZzEt.setText(balance);
+                    deptNumberzz =data.get(position).getId();
                 }else  if(type==3){
                     tvZbEt.setText(balance);
-                }else{
+                    deptNumberzb =data.get(position).getId();
+                }else if(type==4){
                     tvRyEt.setText(balance);
+                    deptNumberry =data.get(position).getId();
                 }
                 popupWindows_pop.dismiss();
 
@@ -269,23 +339,21 @@ public class Fgt_Weekend_Query extends BaseFragment {
 
     }
 
+
     public class MyAdapter extends BaseAdapter {
-
-        private List<QueryPopBean> stuList;
+        private List<PopBean> stuList;
         private LayoutInflater inflater;
-
-        public MyAdapter(List<QueryPopBean> stuList) {
+        public MyAdapter(List<PopBean> stuList) {
             this.stuList = stuList;
             this.inflater = LayoutInflater.from(getActivity());
         }
-
         @Override
         public int getCount() {
             return stuList == null ? 0 : stuList.size();
         }
 
         @Override
-        public QueryPopBean getItem(int position) {
+        public PopBean getItem(int position) {
             return stuList.get(position);
         }
 
@@ -299,28 +367,11 @@ public class Fgt_Weekend_Query extends BaseFragment {
             //加载布局为一个视图
             View view = inflater.inflate(R.layout.item_pop_text, null);
             TextView tv_name = (TextView) view.findViewById(R.id.text_mm);
-            /*   tv_name.setText(stuList.get(position).getBalance() + "  " + stuList.get(position).getShort_name());*/
-            tv_name.setText(stuList.get(position).getName()+"");
-
-            // Log.i("yy--address1", stuList.get(position).getToday_num() + "===" + stuList.get(position).getUsername());
+            tv_name.setText(stuList.get(position).getName());
             return view;
         }
 
 
     }
-     /* private void setRecyclerView(List<WorkReport> workReportList) {
-        if (workReportList == null || workReportList.isEmpty()) {
-            for (int i = 0; i < 15; i++) {
-                workReportList.add(new WorkReport());
-            }
-        }
-        recyclerView.setLayoutManager(new LinearLayoutManager(MyApplication.getAppContext()));
-        recyclerView.setAdapter(new CommonAdapter<WorkReport>(MyApplication.getAppContext(), R.layout.item_mine_work_report, workReportList) {
-            @Override
-            protected void convert(ViewHolder holder, WorkReport data, int position) {
 
-            }
-
-        });
-    }*/
 }
