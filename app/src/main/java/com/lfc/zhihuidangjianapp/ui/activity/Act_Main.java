@@ -36,6 +36,7 @@ import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.Fgt_Home;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.Fgt_PartyAffairs;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.Fgt_Personal;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.MessageFragment;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.Act_SetUpc;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.Act_WeeklyReport;
 import com.lfc.zhihuidangjianapp.ui.activity.model.UserInfo;
@@ -199,6 +200,7 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
         BaseFragmentAdapter<Fragment> mPagerAdapter = new BaseFragmentAdapter<>(this);
         mPagerAdapter.addFragment(new Fgt_Home());
         mPagerAdapter.addFragment(new Fgt_PartyAffairs());
+        mPagerAdapter.addFragment(new MessageFragment());
         mPagerAdapter.addFragment(new Fgt_Personal());
         vpHomePager.setAdapter(mPagerAdapter);
 
@@ -238,10 +240,14 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
                 //mViewPager.setCurrentItem(1, false);
                 vpHomePager.setCurrentItem(1, vpHomePager.getCurrentItem() == 0 || vpHomePager.getCurrentItem() == 2);
                 return true;
+
+            case R.id.message:
+                vpHomePager.setCurrentItem(2, vpHomePager.getCurrentItem() == 0 || vpHomePager.getCurrentItem() == 2);
+                return true;
             case R.id.invitation:
                 //mViewPager.setCurrentItem(2);
                 //mViewPager.setCurrentItem(2, false);
-                vpHomePager.setCurrentItem(2, vpHomePager.getCurrentItem() == 1);
+                vpHomePager.setCurrentItem(3, vpHomePager.getCurrentItem() == 1);
                 return true;
         }
         return false;
@@ -263,6 +269,9 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
                 bvHomeNavigation.setSelectedItemId(R.id.home_supplement_sheet);
                 break;
             case 2:
+                bvHomeNavigation.setSelectedItemId(R.id.message);
+                break;
+            case 3:
                 bvHomeNavigation.setSelectedItemId(R.id.invitation);
                 break;
         }
