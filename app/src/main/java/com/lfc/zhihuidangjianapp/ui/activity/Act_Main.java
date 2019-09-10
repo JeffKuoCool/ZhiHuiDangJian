@@ -105,6 +105,7 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
         requstPermissions(this);
         checkPermission();
 
+
     }
 
     /**
@@ -207,7 +208,7 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
 
         // 限制页面数量
         vpHomePager.setOffscreenPageLimit(mPagerAdapter.getCount());
-        drawerLayout.closeDrawer(Gravity.LEFT);//关闭左侧栏
+       // drawerLayout.closeDrawer(Gravity.LEFT);
 //        drawerLayout.setScrimColor(Color.TRANSPARENT);
 //        drawerLayout.setDrawerShadow();
         imgHead.setOnClickListener(new View.OnClickListener() {

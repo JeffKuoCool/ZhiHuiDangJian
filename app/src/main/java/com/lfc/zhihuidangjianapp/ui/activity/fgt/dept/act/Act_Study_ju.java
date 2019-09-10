@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -71,6 +72,7 @@ public class Act_Study_ju extends BaseBindViewActivity {
         tvAppTitle = findViewById(R.id.tv_apptitle);
         create = findViewById(R.id.create);
         tvAppTitle.setText("学习强局");
+        create.setVisibility(View.VISIBLE);
         tabType = getIntent().getIntExtra("tabType", 0);
         /*if (tabType > TAB_DEPT_BUILD) {
             tabType = TAB_DEPT_ACTIVE;

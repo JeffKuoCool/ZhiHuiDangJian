@@ -948,6 +948,24 @@ public class UserDataBean {
             private Object userType;
             private Object uuId;
             private Object workPost;
+            private Object abbreviation;
+            private Object partyPromise;
+
+            public Object getPartyPromise() {
+                return partyPromise;
+            }
+
+            public void setPartyPromise(Object partyPromise) {
+                this.partyPromise = partyPromise;
+            }
+
+            public Object getAbbreviation() {
+                return abbreviation;
+            }
+
+            public void setAbbreviation(Object abbreviation) {
+                this.abbreviation = abbreviation;
+            }
 
             public Object getAddr() {
                 if (addr == null) {
