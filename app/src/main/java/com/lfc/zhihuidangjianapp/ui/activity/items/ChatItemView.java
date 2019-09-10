@@ -23,6 +23,7 @@ import com.hyphenate.chat.EMTextMessageBody;
 import com.hyphenate.chat.EMVoiceMessageBody;
 import com.hyphenate.exceptions.HyphenateException;
 import com.lfc.zhihuidangjianapp.R;
+import com.lfc.zhihuidangjianapp.app.Constants;
 import com.lfc.zhihuidangjianapp.app.MyApplication;
 import com.lfc.zhihuidangjianapp.base.BaseActivity;
 import com.lfc.zhihuidangjianapp.databinding.ItemChatBinding;
@@ -238,8 +239,8 @@ public class ChatItemView extends RecyclerViewItemView<Chat> {
             map.put("body", voiceMessageBody);
             map.put("imageBg", imageBg);
             //TODO 播放语音
-//            BusEvent rxBusEvent = new BusEvent(Constants.BUS_PLAY_VOICE, map);
-//            RxBus.get().post(rxBusEvent);
+            BusEvent rxBusEvent = new BusEvent(Constants.BUS_PLAY_VOICE, map);
+            RxBus.get().post(rxBusEvent);
         });
     }
 
