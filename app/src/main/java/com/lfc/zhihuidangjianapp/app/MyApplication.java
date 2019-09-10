@@ -55,6 +55,7 @@ public class MyApplication extends DemoApplication {
         ARouter.init(this);
         //bugly
         CrashReport.initCrashReport(getApplicationContext(), "4040802878", false);
+
     }
 
     public static String getDeptNumber() {

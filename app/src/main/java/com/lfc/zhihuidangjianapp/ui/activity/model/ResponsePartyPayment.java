@@ -11,6 +11,16 @@ public class ResponsePartyPayment {
     private String userName;
     private PartyPaymentHisList partyPaymentHisList;
 
+    private int partyPaymentHisId;
+
+    public int getPartyPaymentHisId() {
+        return partyPaymentHisId;
+    }
+
+    public void setPartyPaymentHisId(int partyPaymentHisId) {
+        this.partyPaymentHisId = partyPaymentHisId;
+    }
+
     public String getMoney() {
         return money;
     }

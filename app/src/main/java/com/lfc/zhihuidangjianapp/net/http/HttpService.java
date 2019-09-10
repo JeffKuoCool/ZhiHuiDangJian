@@ -2,6 +2,7 @@ package com.lfc.zhihuidangjianapp.net.http;
 
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopRyBean;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.WeekendDetailsBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.queryUserListByFirstPinYinBean;
 import com.lfc.zhihuidangjianapp.ui.activity.model.AliPay;
 import com.lfc.zhihuidangjianapp.ui.activity.model.AppConfigLists;
@@ -159,7 +160,7 @@ public interface HttpService {
      * @return
      */
     @POST(ApiConstant.ROOT_URL + "weiXin2Pay/wxPayToApp")
-    Observable<BaseResponse<WechatPay>> wxPayToApp(@Header("token") String token);
+    Observable<BaseResponse<WechatPay>> wxPayToApp(@QueryMap Map<String, Object> map,@Header("token") String token);
 
     /**
      * 支付宝订单
@@ -290,7 +291,14 @@ public interface HttpService {
      * @return
      */
     @POST(ApiConstant.API + "/queryMyWeeklyWorkReportPageList")
-    Observable<BaseResponse<ResponseWorkReport>> queryMyWeeklyWorkReportPageList(@Header("token") String token);
+    Observable<BaseResponse<ResponseWorkReport>> queryMyWeeklyWorkReportPageList(@QueryMap Map<String, Object> map,@Header("token") String token);
+    /**
+     * 分页查询周报信息
+     * @param token
+     * @return
+     */
+    @POST(ApiConstant.API + "/queryWeeklyWorkReportPageList")
+    Observable<BaseResponse<ResponseWorkReport>> queryWeeklyWorkReportPageList(@QueryMap Map<String, Object> map,@Header("token") String token);
 
     /**
      * 分页查询学习强局信息 -- 学习心得传studyStrongBureauType=2
@@ -447,6 +455,19 @@ public interface HttpService {
      */
     @POST(ApiConstant.API + "/queryDeptListByLevel")
     Observable<BaseResponse<QueryPopRyBean>> getQueryRy(@QueryMap Map<String, Object> map, @Header("token") String token);
-
+    /**
+     * 查看周报详情信息
+     * @param token
+     * @return
+     */
+    @POST(ApiConstant.API + "/queryWeeklyWorkReportDetail")
+    Observable<BaseResponse<WeekendDetailsBean>> queryWeeklyWorkReportDetail(@QueryMap Map<String, Object> map, @Header("token") String token);
+    /**
+     * 退出登录
+     * @param token
+     * @return
+     */
+    @POST("/login/logout")
+    Observable<BaseResponse<Object>> logout(@Header("token") String token);
 
 }

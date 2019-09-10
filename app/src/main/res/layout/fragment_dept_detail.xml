@@ -99,13 +99,15 @@
 
 
                 <LinearLayout
+                    android:id="@+id/rv_zblb"
                     style="@style/dept_detail_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/rv_zblb"
+                        android:layout_marginLeft="50dp"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -116,6 +118,7 @@
                         android:textColor="@color/white" />
 
                     <ImageView
+
                         android:id="@+id/rv_zblb_img"
                         android:layout_marginRight="10dp"
                         android:layout_width="wrap_content"

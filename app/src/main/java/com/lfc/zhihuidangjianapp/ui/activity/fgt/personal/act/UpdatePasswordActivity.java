@@ -25,7 +25,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class UpdatePasswordActivity extends BaseActivity {
 
-    private EditText etOldPwd, etNetPwd, etConfirmPwd;
+    private EditText etOldPwd, etNetPwd, etConfirmPwd,etOldCode;
 
     @Override
     protected int getLayoutId() {
@@ -44,6 +44,8 @@ public class UpdatePasswordActivity extends BaseActivity {
         etOldPwd = findViewById(R.id.etOldPwd);
         etNetPwd = findViewById(R.id.etNetPwd);
         etConfirmPwd = findViewById(R.id.etConfirmPwd);
+        etOldCode= findViewById(R.id.etOldCode);
+        etOldCode.setText(MyApplication.getLoginBean().getLoginName());
         setEvent();
     }
 
@@ -72,29 +74,34 @@ public class UpdatePasswordActivity extends BaseActivity {
             toast("请确认两次新密码相同");
             return;
         }
-        Map<String, Object> map = new HashMap<>();
-        map.put("oldPwd", etOldPwd.getText().toString().trim());
-        map.put("newPwd", etNetPwd.getText().toString().trim());
-        RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
-                .updatePwd(map, MyApplication.getLoginBean().getToken())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ResponseObserver<Object>(getActivity()) {
+        if(etOldPwd.getText().toString().trim().length()>=6&&etNetPwd.getText().toString().trim().length()>=6&&etConfirmPwd.getText().toString().trim().length()>=6){
+            Map<String, Object> map = new HashMap<>();
+            map.put("oldPwd", etOldPwd.getText().toString().trim());
+            map.put("newPwd", etNetPwd.getText().toString().trim());
+            RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
+                    .updatePwd(map, MyApplication.getLoginBean().getToken())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new ResponseObserver<Object>(getActivity()) {
 
-                    @Override
-                    protected void onNext(Object response) {
-                        Log.e("onNext= ", response.toString());
-                        if (response == null) return;
-                        toast("修改成功");
-                        finish();
-                    }
+                        @Override
+                        protected void onNext(Object response) {
+                            Log.e("onNext= ", response.toString());
+                            if (response == null) return;
+                            toast("修改成功");
+                            finish();
+                        }
 
-                    @Override
-                    protected void onError(Throwable e) {
-                        super.onError(e);
-                        Log.e("Throwable= ", e.getMessage());
-                    }
-                }.actual());
+                        @Override
+                        protected void onError(Throwable e) {
+                            super.onError(e);
+                            Log.e("Throwable= ", e.getMessage());
+                        }
+                    }.actual());
+        }else{
+            toast("密码至少由6位字符组成，而且同时包含字母和数字");
+        }
+
     }
 
     @Override

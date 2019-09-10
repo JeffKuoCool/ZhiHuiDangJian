@@ -18,7 +18,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 public class WechatApi {
 
-    public static String mAppid  = "wxd45e27b967077453";
+    public static String mAppid  = "wxb51c590cd7ae8242";
 
 //    public static String mAppSecret = "b9486baa17aca0e6fb6c220d78a0dd9f";
 

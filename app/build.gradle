@@ -6,6 +6,12 @@ android {
     compileSdkVersion 28
     signingConfigs {
         release {
+            //在这里添加：
+            lintOptions {
+                checkReleaseBuilds false
+                abortOnError false
+            }
+
             keyAlias 'zhihuidangjian'
             keyPassword 'Juketai'
             storeFile rootProject.file("app_keystore")

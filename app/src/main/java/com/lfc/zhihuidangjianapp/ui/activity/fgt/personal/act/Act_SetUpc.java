@@ -9,6 +9,7 @@ import com.lfc.zhihuidangjianapp.base.BaseDialog;
 import com.lfc.zhihuidangjianapp.base.BaseDialogFragment;
 import com.lfc.zhihuidangjianapp.helper.CacheDataManager;
 import com.lfc.zhihuidangjianapp.image.ImageLoader;
+import com.lfc.zhihuidangjianapp.utlis.DialogUtils;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -44,7 +45,7 @@ public class Act_SetUpc extends BaseActivity {
 
     @OnClick(R.id.relative1)
     public void onRelative1Clicked() {
-        new BaseDialogFragment.Builder(this)
+    /*    new BaseDialogFragment.Builder(this)
                 .setContentView(R.layout.dialog_cache)
                 .setAnimStyle(BaseDialog.AnimStyle.SCALE)
                 //.setText(id, "我是预设置的文本")
@@ -84,12 +85,25 @@ public class Act_SetUpc extends BaseActivity {
                     }
                 })
                 .show();
+*/
+        new DialogUtils(getActivity(), "确定清除缓存吗?", "您的使用记录将全部清除", "取消", "确定") {
+            @Override
+            public void doClickLeft() {
+                //Toast.makeText(getPageContext(), "取消", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void doClickRight() {
+                ImageLoader.clear(Act_SetUpc.this);
+                CacheDataManager.clearAllCache(Act_SetUpc.this);
+                ToastUtils.show("缓存已清理");
+            }
 
+        };
     }
 
     @OnClick(R.id.relative2)
     public void onRelative2Clicked() {
-        new BaseDialogFragment.Builder(this)
+      /*  new BaseDialogFragment.Builder(this)
                 .setContentView(R.layout.dialog_upgrade)
                 .setAnimStyle(BaseDialog.AnimStyle.SCALE)
                 //.setText(id, "我是预设置的文本")
@@ -126,6 +140,20 @@ public class Act_SetUpc extends BaseActivity {
 //                        toast("Dialog 销毁了");
                     }
                 })
-                .show();
+                .show();*/
+
+        new DialogUtils(getActivity(), "升级提示", "发现新版本V1.2，是否升级？", "取消", "确定") {
+            @Override
+            public void doClickLeft() {
+                //Toast.makeText(getPageContext(), "取消", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void doClickRight() {
+                ImageLoader.clear(Act_SetUpc.this);
+                CacheDataManager.clearAllCache(Act_SetUpc.this);
+                ToastUtils.show("升级成功");
+            }
+
+        };
     }
 }
