@@ -71,6 +71,7 @@ public class Act_Party_Membership extends BaseActivity {
             if(responsePartyPayment==null)return;
             Intent intent = new Intent(this, Act_Party_Pay.class);
             intent.putExtra("pay", responsePartyPayment.getMoney());
+            intent.putExtra("partyPaymentHisId", responsePartyPayment.getPartyPaymentHisId()+"");
             startActivity(intent);
         });
         //我的组织

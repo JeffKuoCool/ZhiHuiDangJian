@@ -54,7 +54,7 @@ public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEvent
 
     @Override
     public void onResp(BaseResp resp) {
-        Log.e("onResp=", resp.toString());
+        Log.e("onResp=", resp.toString()+"=="+resp.errCode);
         if (resp.getType() == ConstantsAPI.COMMAND_SENDMESSAGE_TO_WX) {
             // 分享
         } else if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {

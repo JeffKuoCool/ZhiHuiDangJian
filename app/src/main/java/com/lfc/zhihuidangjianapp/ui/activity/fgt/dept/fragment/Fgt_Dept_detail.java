@@ -1,5 +1,6 @@
 package com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.fragment;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.baidu.mapapi.model.inner.GeoPoint;
@@ -62,12 +64,10 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
     private AMap aMap;
     private LocationSource.OnLocationChangedListener mListener = null;//定位监听器
     private LocationUtil locationUtil;
-    private TextView rv_zblb;
+    private LinearLayout rv_zblb;
     private LinearLayout rv_zblb_lin;
     private ImageView rv_zblb_img;
     boolean falg = true; //true  是开启 false 关闭
-    private double lat;
-    private double lgt;
 
     @Override
     protected int getLayoutId() {
@@ -95,7 +95,6 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
 
     @Override
     protected void initData() {
-
         init();
         //点击支部列表进行显示隐藏
         rv_zblb.setOnClickListener(new View.OnClickListener() {
@@ -191,17 +190,13 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
             mRootView.findViewById(R.id.tv_director_title).setVisibility(View.GONE);
         }
 
-
-        Log.i("yy",dept.getLatitude() +"===" +dept.getLongitude());
-       /* LatLng latLng = new LatLng(39.906901, 116.397972);
-        Log.i("yy",dept.getLatitude() +"===" +dept.getLongitude());
-        mapView.getMap().setPointToCenter((int) dept.getLatitude(), (int) dept.getLongitude());
-        */
-       //根据经纬度进行定位
+       //根据经纬度进行定位.draggable(true)
         aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(dept.getLatitude(),dept.getLongitude())));
-        //mListener.onLocationChanged(aMapLocation);
         //添加定位图标
-        aMap.addMarker(locationUtil.getMarkerOption("",dept.getLatitude(),dept.getLongitude()));
+        aMap.addMarker(locationUtil.getMarkerOption("当前位置："+dept.getDeptAddress(),dept.getLatitude(),dept.getLongitude())).showInfoWindow();
+
+
+
     }
 
     private void init() {
@@ -221,7 +216,8 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
 
     private void setLocationCallBack(){
 
-         locationUtil = new LocationUtil();
+        locationUtil = new LocationUtil();
+
          //获取当前定位
         /* locationUtil.setLocationCallBack(new LocationUtil.ILocationCallBack() {
             @Override

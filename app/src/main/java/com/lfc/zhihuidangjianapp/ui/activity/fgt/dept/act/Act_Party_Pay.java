@@ -17,6 +17,7 @@ import com.lfc.zhihuidangjianapp.ui.activity.model.User;
 import com.lfc.zhihuidangjianapp.ui.activity.model.WechatPay;
 import com.lfc.zhihuidangjianapp.utlis.DateUtils;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,6 +40,7 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
     private int event = 0;
 
     private String pay;
+    private String partyPaymentHisId;
 
     @Override
     protected int getLayoutId() {
@@ -66,6 +68,7 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
     private void setEvent() {
         tvPay.setOnClickListener(pay -> {
             if (payType == 0) {
+
                 getWechatOrderInfo();
             } else {
                 getAliPayOrderInfo();
@@ -84,6 +87,8 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
     @Override
     protected void initData() {
         pay = getIntent().getStringExtra("pay");
+        partyPaymentHisId = getIntent().getStringExtra("partyPaymentHisId");
+        
         tvPayDetail.setText(pay+"元");
         tvPayTime.setText(DateUtils.timeStampToStr(System.currentTimeMillis(), "yyyy-MM-dd"));
     }
@@ -130,8 +135,16 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
 
     // 微信支付
     private void getWechatOrderInfo() {
+        User user = MyApplication.getmUserInfo().getUser();
+        Map<String, Object> map = new HashMap<>();
+        map.put("total_fee", pay);
+        map.put("body", user.getDisplayName()+"缴纳"+tvPayTime.getText().toString().trim()+"党费"+pay+"元");
+        map.put("memberid", user.getLoginName());
+        map.put("ifSubstitute", 1);
+        map.put("attach","payPartyPayment@"+user.getLoginName()+"@1");
+        map.put("partyPaymentIds",partyPaymentHisId);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
-                .wxPayToApp(MyApplication.getLoginBean().getToken())
+                .wxPayToApp(map,MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ResponseObserver<WechatPay>(this) {
@@ -139,16 +152,18 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
                     protected void onNext(WechatPay response) {
                         Log.e("onNext=", response.toString());
                         if (response != null) {
+                            Log.i("yy--Sing",response.getSign());
                             WechatApi.WXPayBuilder builder = new WechatApi.WXPayBuilder();
                             WechatApi wechatApi = builder.setPrepayId(response.getPrepayid())
                                     .setAppId(response.getAppId())
                                     .setNonceStr(response.getNonceStr())
-                                    .setTimeStamp(response.getTimestamp())
+                                    .setTimeStamp(response.getTimestamp()+"")
                                     .setPackageValue(response.getPackageName())
                                     .setSign(response.getSign())
                                     .setPartnerId(response.getPartnerId())
                                     .build();
                             wechatApi.toWXPayNotSign(Act_Party_Pay.this);
+
                         }
                     }
 

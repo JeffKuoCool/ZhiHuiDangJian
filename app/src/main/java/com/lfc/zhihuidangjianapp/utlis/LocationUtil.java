@@ -72,9 +72,8 @@ public class LocationUtil implements AMapLocationListener {
         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.icon_location));
         markerOptions.position(new LatLng(lat,lgt));
         markerOptions.title(str);
-        markerOptions.snippet("纬度:" + lat + "  经度:" + lgt);
+      //  markerOptions.snippet("纬度:" + lat + "  经度:" + lgt);
         markerOptions.period(100);
-
         return markerOptions;
     }
 

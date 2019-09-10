@@ -103,6 +103,9 @@
             android:name=".ui.activity.fgt.personal.act.Act_WeeklyReport"
             android:label="@string/WeeklyReport_name" />
         <activity
+            android:name=".ui.activity.fgt.dept.act.Fgt_Weekend_Details"
+            android:label="周报详情" />
+        <activity
             android:name=".ui.activity.fgt.dept.act.Act_Meeting"
             android:label="@string/Meeting_name" />
         <activity
@@ -178,7 +181,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="wxd45e27b967077453" />
+                <data android:scheme="wxb51c590cd7ae8242" />
             </intent-filter>
 
         </activity>

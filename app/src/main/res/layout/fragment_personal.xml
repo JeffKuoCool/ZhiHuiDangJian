@@ -8,8 +8,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-     >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,7 +17,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="330dp"
+                android:layout_height="310dp"
                 android:background="@drawable/shape_perback"
                 android:orientation="vertical">
 
@@ -31,8 +30,8 @@
                         android:id="@+id/min_left"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dip_15"
                         android:layout_marginTop="@dimen/dip_25"
+                        android:padding="@dimen/dip_15"
                         android:src="@mipmap/icon_left" />
 
                     <TextView
@@ -47,12 +46,19 @@
                 </RelativeLayout>
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/min_hader"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="17dp"
-                    android:src="@mipmap/iocn_moren" />
+                    android:src="@mipmap/iocn_moren"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/min_hader"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -66,6 +72,7 @@
                         android:layout_centerHorizontal="true" />
 
                     <LinearLayout
+                        android:id="@+id/min_Total_lin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="38dp"
@@ -90,6 +97,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/min_starPartyMember_lin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="38dp"
@@ -117,7 +125,7 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="360dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="-30dp"
                 android:layout_marginRight="15dp"
@@ -126,98 +134,221 @@
                 app:contentPadding="0dp">
 
                 <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="2dp"
                     android:orientation="vertical">
+                    <TextView
+                        android:layout_marginTop="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="个人信息"
+                        android:textColor="@color/grey_color1"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp">
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="姓名："
+                                android:textColor="@color/grey_color1"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+
+                                android:id="@+id/min_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/grey_color1"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="性别："
+                                android:textColor="@color/grey_color1"
+                                android:textSize="14dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/min_sex"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/grey_color1"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="民族："
+                                android:textColor="@color/grey_color1"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/min_minzu"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/grey_color1"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="学历："
+                                android:textColor="@color/grey_color1"
+                                android:textSize="14dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/min_xueli"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/grey_color1"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="姓名"
-                            android:textColor="@color/grey_color3"
-                            android:textSize="14dp" />
-
-                        <TextView
-                            android:id="@+id/min_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="158dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="0dp"
+                            android:text="出生年月:"
                             android:textColor="@color/grey_color1"
-                            android:textSize="14dp" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="性别"
-                            android:textColor="@color/grey_color3"
-                            android:textSize="14dp" />
-
-                        <TextView
-                            android:id="@+id/min_sex"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="158dp"
-                            android:textColor="@color/grey_color1"
-                            android:textSize="14dp" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="民族"
-                            android:textColor="@color/grey_color3"
-                            android:textSize="14dp" />
-
-                        <TextView
-                            android:id="@+id/min_minzu"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="158dp"
-                            android:textColor="@color/grey_color1"
-                            android:textSize="14dp" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="出生年月"
-                            android:textColor="@color/grey_color3"
-                            android:textSize="14dp" />
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/min_shenri"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="158dp"
+                            android:layout_marginLeft="10dp"
+                            android:text="出生年月"
                             android:textColor="@color/grey_color1"
                             android:textSize="14dp" />
-                    </RelativeLayout>
+                    </LinearLayout>
 
-                    <RelativeLayout
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="毕业院校："
+                            android:textColor="@color/grey_color1"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/min_yuanxiao"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="毕业院校"
+                            android:textColor="@color/grey_color1"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="所学专业："
+                            android:textColor="@color/grey_color1"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/min_zhuanye"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="所学专业"
+                            android:textColor="@color/grey_color1"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="所属支部："
+                            android:textColor="@color/grey_color1"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/min_zhibu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="所属支部"
+                            android:textColor="@color/grey_color1"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp">
@@ -225,83 +356,21 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="学历"
-                            android:textColor="@color/grey_color3"
-                            android:textSize="14dp" />
-
-                        <TextView
-                            android:id="@+id/min_xueli"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="158dp"
+                            android:text="党内职务："
                             android:textColor="@color/grey_color1"
-                            android:textSize="14dp" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="籍贯"
-                            android:textColor="@color/grey_color3"
-                            android:textSize="14dp" />
-
-                        <TextView
-                            android:id="@+id/min_guanji"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="158dp"
-                            android:textColor="@color/grey_color1"
-                            android:textSize="14dp" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="工作岗位"
-                            android:textColor="@color/grey_color3"
-                            android:textSize="14dp" />
-
-                        <TextView
-                            android:id="@+id/min_gangwei"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="158dp"
-                            android:textColor="@color/grey_color1"
-                            android:textSize="14dp" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="单位/职务或职业"
-                            android:textColor="@color/grey_color3"
-                            android:textSize="14dp" />
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/min_zhiwu"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="158dp"
+                            android:text="党内职务"
                             android:textColor="@color/grey_color1"
                             android:textSize="14dp" />
-                    </RelativeLayout>
+                    </LinearLayout>
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp">
@@ -309,101 +378,159 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="家庭住址"
-                            android:textColor="@color/grey_color3"
-                            android:textSize="14dp" />
+                            android:text="参加工作时间："
+                            android:textColor="@color/grey_color1"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/min_addr"
+                            android:id="@+id/min_canjai"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="158dp"
+                            android:text="参加工作时间"
                             android:textColor="@color/grey_color1"
                             android:textSize="14dp" />
-                    </RelativeLayout>
+                    </LinearLayout>
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="联系电话"
-                            android:textColor="@color/grey_color3"
-                            android:textSize="14dp" />
+                            android:text="加入党组织时间："
+                            android:textColor="@color/grey_color1"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/min_phone"
+                            android:id="@+id/min_jiaru"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="158dp"
+                            android:text="加入党组织时间"
                             android:textColor="@color/grey_color1"
                             android:textSize="14dp" />
-                    </RelativeLayout>
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/min_Development"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_gravity="right"
-                        android:layout_marginTop="2dp"
-                        android:text="编辑"
-                        android:textColor="@color/red3"
-                        android:textSize="16dp" />
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="成为正式党员时间："
+                            android:textColor="@color/grey_color1"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/min_chengwei"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="成为正式党员时间"
+                            android:textColor="@color/grey_color1"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="25dp"
-                android:text="党员发展进度"
-                android:textColor="@color/black3"
-                android:textSize="14dp" />
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="26dp"
-                android:max="100"
-                android:progress="50" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="25dp"
-                android:text="发展纪实"
-                android:textColor="@color/black3"
-                android:textSize="14dp" />
-
-            <ListView
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"></ListView>
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="3dp"
+                app:cardCornerRadius="10dp"
+                app:contentPadding="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="党员承诺"
+                        android:textColor="@color/grey_color1"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+
+                        android:id="@+id/min_chengnuo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="党员承诺党员承诺党员承诺党员承诺党员承诺党员承诺党员承诺党员承诺党员承诺党员承诺党员承诺党员承诺党员承诺党员承诺党员承诺党员承诺党员承诺"
+                        android:textColor="@color/grey_color1"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="3dp"
+                app:cardCornerRadius="10dp"
+                app:contentPadding="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="党员示范岗"
+                        android:textColor="@color/grey_color1"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+
+                        android:id="@+id/min_shifangang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=""
+                        android:textColor="@color/grey_color1"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
         </LinearLayout>
     </ScrollView>
 
     <LinearLayout
         android:id="@+id/lefit"
         android:layout_width="@dimen/dip_300"
-        android:layout_gravity="left"
         android:layout_height="match_parent"
+        android:layout_gravity="left"
         android:background="@mipmap/icon_zehua"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:paddingTop="@dimen/dip_40"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dip_40">
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/profile_image"
@@ -419,40 +546,41 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/dip_45"
-                android:layout_marginRight="@dimen/dip_60"
+                android:layout_marginRight="@dimen/dip_40"
                 android:orientation="vertical">
+
                 <TextView
-                    android:gravity="right"
                     android:id="@+id/min_naem1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="center|right"
+                    android:gravity="right"
                     android:text="哈哈"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/fond_22sp" />
+
                 <TextView
                     android:id="@+id/min_code"
-                    android:gravity="right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="center|right"
                     android:layout_marginTop="@dimen/dip_10"
+                    android:gravity="right"
                     android:text="账号"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/fond_16sp" />
 
                 <TextView
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingTop="@dimen/dip_5"
                     android:text="***党总支"
                     android:textColor="#FFFFFF"
-                    android:textSize="@dimen/fond_16sp" />
+                    android:textSize="@dimen/fond_16sp"
+                    android:visibility="gone" />
 
                 <TextView
-                    android:visibility="gone"
                     android:id="@+id/min_Total1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -460,21 +588,23 @@
                     android:paddingTop="@dimen/dip_5"
                     android:text="30积分"
                     android:textColor="#FFFFFF"
-                    android:textSize="@dimen/fond_16sp" />
+                    android:textSize="@dimen/fond_16sp"
+                    android:visibility="gone" />
             </LinearLayout>
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/min_shezhi"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/dip_30"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dip_30"
             android:paddingRight="@dimen/dip_30">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/dip_10"
                 android:drawableLeft="@mipmap/icon_seeting"
+                android:drawablePadding="@dimen/dip_10"
                 android:paddingLeft="@dimen/dip_10"
                 android:paddingTop="@dimen/dip_10"
                 android:paddingBottom="@dimen/dip_10"
@@ -489,21 +619,24 @@
                 android:layout_centerVertical="true"
                 android:src="@mipmap/icon_mi_right" />
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dip_1"
             android:background="#10000000" />
+
         <RelativeLayout
             android:id="@+id/min_zhanghuanquan"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/dip_10"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dip_10"
             android:paddingRight="@dimen/dip_30">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/dip_10"
                 android:drawableLeft="@mipmap/icon_anquan"
+                android:drawablePadding="@dimen/dip_10"
                 android:paddingLeft="@dimen/dip_10"
                 android:paddingTop="@dimen/dip_10"
                 android:paddingBottom="@dimen/dip_10"
@@ -518,27 +651,30 @@
                 android:layout_centerVertical="true"
                 android:src="@mipmap/icon_mi_right" />
         </RelativeLayout>
+
         <View
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dip_1"
-            android:background="#10000000" />
+            android:background="#10000000"
+             />
+
         <RelativeLayout
-            android:visibility="gone"
             android:id="@+id/min_gongzuozhoubao"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/dip_10"
             android:layout_height="wrap_content"
-            android:paddingRight="@dimen/dip_30">
+            android:layout_marginTop="@dimen/dip_10"
+            android:paddingRight="@dimen/dip_30"
+           >
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/icon_tuichu"
                 android:drawablePadding="@dimen/dip_10"
-                android:drawableLeft="@mipmap/icon_zhoubao"
                 android:paddingLeft="@dimen/dip_10"
                 android:paddingTop="@dimen/dip_10"
                 android:paddingBottom="@dimen/dip_10"
-                android:text="工作周报"
+                android:text="退出登录"
                 android:textSize="@dimen/fond_16sp"
                 android:textStyle="bold" />
 
@@ -549,23 +685,26 @@
                 android:layout_centerVertical="true"
                 android:src="@mipmap/icon_mi_right" />
         </RelativeLayout>
+
         <View
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dip_1"
-            android:background="#10000000" />
+            android:background="#10000000"
+            android:visibility="gone" />
+
         <RelativeLayout
-            android:visibility="gone"
             android:id="@+id/min_dangfei"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/dip_10"
             android:layout_height="wrap_content"
-            android:paddingRight="@dimen/dip_30">
+            android:layout_marginTop="@dimen/dip_10"
+            android:paddingRight="@dimen/dip_30"
+            android:visibility="gone">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/dip_10"
                 android:drawableLeft="@mipmap/icon_jiaofei"
+                android:drawablePadding="@dimen/dip_10"
                 android:paddingLeft="@dimen/dip_10"
                 android:paddingTop="@dimen/dip_10"
                 android:paddingBottom="@dimen/dip_10"
@@ -580,6 +719,7 @@
                 android:layout_centerVertical="true"
                 android:src="@mipmap/icon_mi_right" />
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dip_1"
