@@ -20,7 +20,17 @@ public class Dynamic {
         private String release_date;
         private String thumbnailUrl;
         private String title;
-        public void setAuthor(String author) {
+        private String abstracts;
+
+    public String getAbstracts() {
+        return abstracts;
+    }
+
+    public void setAbstracts(String abstracts) {
+        this.abstracts = abstracts;
+    }
+
+    public void setAuthor(String author) {
             this.author = author;
         }
         public String getAuthor() {

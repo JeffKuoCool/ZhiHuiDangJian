@@ -57,6 +57,7 @@ public class Fgt_Dept_dynamic extends BaseBindViewFragment {
     @Override
     protected void initData() {
         partyDynamicType = getArguments().getInt("partyDynamicType", 0);
+        Log.i("yy--partyDynamicType",partyDynamicType+"");
         Map<String, Object> map = new HashMap<>();
         map.put("partyDynamicType", partyDynamicType);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
@@ -130,7 +131,9 @@ public class Fgt_Dept_dynamic extends BaseBindViewFragment {
             protected void convert(ViewHolder holder, Dynamic data, int position) {
                 holder.setText(R.id.tv_title, data.getTitle());
                 TextView tvContent = holder.getConvertView().findViewById(R.id.tv_content);
-                tvContent.setText(Html.fromHtml(data.getComment()));
+                tvContent.setText(data.getAbstracts());
+                //tvContent.setText(Html.fromHtml(data.getComment()));
+
 //                tvContent.setHtml(data.getComment(),
 //                        new HtmlAssetsImageGetter(tvContent));
                 ImageView image = holder.getConvertView().findViewById(R.id.image);
