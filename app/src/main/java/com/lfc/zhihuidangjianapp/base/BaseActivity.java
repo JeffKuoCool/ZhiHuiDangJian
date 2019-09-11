@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.hjq.toast.ToastUtils;
+import com.hwangjr.rxbus.RxBus;
 import com.lfc.zhihuidangjianapp.app.MyApplication;
 import com.lfc.zhihuidangjianapp.service.LoginOutBroadcastReceiver;
 import com.wuxiaolong.androidutils.library.ActivityManagerUtil;
@@ -52,6 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ViewTree
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RxBus.get().register(this);
         this.savedInstanceState = savedInstanceState;
         loding = new ZLoadingDialog(this);
         loding.setLoadingBuilder(Z_TYPE.ROTATE_CIRCLE)//设置类型
@@ -204,6 +206,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ViewTree
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        RxBus.get().unregister(this);
         //结束Activity&从栈中移除该Activity
         activityManagerUtil.popOneActivity(this);
     }
