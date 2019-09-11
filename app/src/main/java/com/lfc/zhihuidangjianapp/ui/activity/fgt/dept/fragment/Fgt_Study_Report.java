@@ -90,15 +90,18 @@ public class Fgt_Study_Report extends BaseFragment {
         recyclerView.setAdapter(new CommonAdapter<StudyStrongBureau>(getActivity(), R.layout.item_study_report, response.getStudyStrongBureauList().getDatas()) {
             @Override
             protected void convert(ViewHolder holder, StudyStrongBureau data, int position) {
-                ImageView image = holder.getConvertView().findViewById(R.id.image);
-                String url = ApiConstant.ROOT_URL+data.getThumbnailUrl();
-                Glide.with(getActivity()).load(url).into(image);
-
-//                holder.getConvertView().setOnClickListener(Act_Strong_Study_Experience->{
-//                    Intent intent = new Intent(getActivity(), com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Strong_Study_Experience.class);
-//                    intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId()+"");
-//                    startActivity(intent);
-//                });
+                TextView xinde_author = holder.getConvertView().findViewById(R.id.xinde_author);
+                TextView xinde_dept = holder.getConvertView().findViewById(R.id.xinde_dept);
+                TextView xinde_title = holder.getConvertView().findViewById(R.id.xinde_title);
+                xinde_title.setText(response.getStudyStrongBureauList().getDatas().get(position).getTitle());
+                xinde_dept.setText(response.getStudyStrongBureauList().getDatas().get(position).getDept());
+                xinde_author.setText(response.getStudyStrongBureauList().getDatas().get(position).getAuthor());
+                holder.getConvertView().setOnClickListener(Act_Strong_Study_Experience->{
+                    Intent intent = new Intent(getActivity(), com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Strong_Study_Experience.class);
+                    intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId()+"");
+                    intent.putExtra("appTitle","学习心得");
+                    startActivity(intent);
+                });
             }
 
         });

@@ -129,6 +129,12 @@
         <activity
             android:name=".ui.activity.fgt.home.act.Act_TitleDetails"
             android:label="@string/TitleDetails_name" />
+        <activity
+            android:name=".ui.activity.fgt.personal.act.Act_Integral"
+            android:label="积分界面" />
+        <activity
+            android:name=".ui.activity.fgt.personal.act.Act_Integral_mingxi"
+            android:label="积分明细" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Dept_Detail" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Dept_dynamic" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Dept_Dynamic_Detail" />

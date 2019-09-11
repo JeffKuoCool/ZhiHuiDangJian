@@ -82,7 +82,7 @@ public class Fgt_Study_Report_new extends BaseFragment {
         mTabEntities.add(new TabEntity(mTitles[0]));
         fragments.add(new Fgt_Study_Report());
         mTabEntities.add(new TabEntity(mTitles[1]));
-        fragments.add(new Fgt_Weekend_Query());
+        fragments.add(new Fgt_Study_Report_Query());
         tab.setTabData(mTabEntities);
         tab.setOnTabSelectListener(new OnTabSelectListener() {
             @Override

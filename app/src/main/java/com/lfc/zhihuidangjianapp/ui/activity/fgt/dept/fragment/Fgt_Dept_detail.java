@@ -193,7 +193,7 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
        //根据经纬度进行定位.draggable(true)
         aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(dept.getLatitude(),dept.getLongitude())));
         //添加定位图标
-        aMap.addMarker(locationUtil.getMarkerOption("当前位置："+dept.getDeptAddress(),dept.getLatitude(),dept.getLongitude())).showInfoWindow();
+        aMap.addMarker(locationUtil.getMarkerOption(dept.getDeptAddress(),dept.getLatitude(),dept.getLongitude())).showInfoWindow();
 
 
 

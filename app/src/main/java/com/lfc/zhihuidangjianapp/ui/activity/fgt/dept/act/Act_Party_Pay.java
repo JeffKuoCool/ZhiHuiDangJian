@@ -154,7 +154,7 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
                         if (response != null) {
                             Log.i("yy--Sing",response.getSign());
                             WechatApi.WXPayBuilder builder = new WechatApi.WXPayBuilder();
-                            WechatApi wechatApi = builder.setPrepayId(response.getPrepayid())
+                           WechatApi wechatApi = builder.setPrepayId(response.getPrepayid())
                                     .setAppId(response.getAppId())
                                     .setNonceStr(response.getNonceStr())
                                     .setTimeStamp(response.getTimestamp()+"")

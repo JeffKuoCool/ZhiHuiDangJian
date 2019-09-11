@@ -24,7 +24,7 @@ public class WechatApi {
 
     private static IWXAPI iwxapi; //微信支付api
 
-    private WXPayBuilder builder;
+        private WXPayBuilder builder;
 
     private WechatApi(WXPayBuilder builder) {
         this.builder = builder;
