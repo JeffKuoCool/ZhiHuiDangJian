@@ -161,7 +161,7 @@ public interface HttpService {
      * @param token
      * @return
      */
-    @POST(ApiConstant.ROOT_URL + "weiXin2Pay/wxPayToApp")
+    @POST("weiXin2Pay/wxPayToApp")
     Observable<BaseResponse<WechatPay>> wxPayToApp(@QueryMap Map<String, Object> map,@Header("token") String token);
 
     /**
@@ -170,7 +170,7 @@ public interface HttpService {
      * @param token
      * @return
      */
-    @POST(ApiConstant.ROOT_URL + "alipay/alipayToApp")
+    @POST("alipay/alipayToApp")
     Observable<BaseResponse<AliPay>> alipayToApp(@QueryMap Map<String, Object> map,@Header("token") String token);
 
     /**
