@@ -29,6 +29,7 @@ import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
 import com.lfc.zhihuidangjianapp.ui.activity.Act_Login;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Party_Membership;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Weekend_Report;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.Act_Integral;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.Act_SetUpc;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.CodeSafeActivity;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.bean.UserDataBean;
@@ -233,8 +234,8 @@ public class Fgt_Personal extends BaseFragment {
             case R.id.min_left:
                 openLeftLayout();
                 break;
-            case R.id.min_Total_lin:
-                toast("积分");
+            case R.id.min_Total_lin://积分页面
+                startActivity(new Intent(getActivity(), Act_Integral.class));
 
                 break;
             case R.id.min_starPartyMember_lin:

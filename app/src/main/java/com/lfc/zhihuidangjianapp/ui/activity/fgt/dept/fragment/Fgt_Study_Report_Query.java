@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -30,18 +29,16 @@ import com.lfc.zhihuidangjianapp.net.http.ApiConstant;
 import com.lfc.zhihuidangjianapp.net.http.HttpService;
 import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
 import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
-import com.lfc.zhihuidangjianapp.ui.activity.adapter.DividerItemDecoration;
-import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Organizational_Life_Detail;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Fgt_Weekend_Details;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.ForestDetailActivity;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.PopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopRyBean;
-import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.queryUserListByFirstPinYinBean;
+import com.lfc.zhihuidangjianapp.ui.activity.model.Forest;
 import com.lfc.zhihuidangjianapp.ui.activity.model.ResponseWorkReport;
 import com.lfc.zhihuidangjianapp.ui.activity.model.WorkReport;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,9 +56,9 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * @date: 2019-08-10
  * @autror: guojian
- * @description: 周报查询
+ * @description: 心得查询
  */
-public class Fgt_Weekend_Query extends BaseFragment {
+public class Fgt_Study_Report_Query extends BaseFragment {
     @BindView(R.id.tv_dw_et)
     EditText tvDwEt;
     @BindView(R.id.tv_dw_lin)
@@ -92,7 +89,7 @@ public class Fgt_Weekend_Query extends BaseFragment {
     private String deptNumberzz = "";//总支deptNumber
     private String deptNumberzb = "";//支部deptNumber
     private String deptNumberry = "";//人员deptNumber
-    private RecyclerView recyclerView;
+    private  RecyclerView recyclerView;
     private PopupWindows_pop_sx popupWindows_pops_sx;
 
     @Override
@@ -198,7 +195,7 @@ public class Fgt_Weekend_Query extends BaseFragment {
                     .findViewById(R.id.item_pop_quxiao);
             TextView m_pop_text = (TextView) view
                     .findViewById(R.id.m_pop_text);
-            m_pop_text.setText("查询结果");
+                m_pop_text.setText("查询结果");
 
             recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
             //查询周报信息
@@ -263,7 +260,7 @@ public class Fgt_Weekend_Query extends BaseFragment {
                 tv_name.setText(datas.get(position).getReleaseDate());
                 tv_content.setText(datas.get(position).getAuthor());
                 holder.getConvertView().setOnClickListener(detail->{
-                    toast(datas.get(position).getAuthor());
+                  toast(datas.get(position).getAuthor());
                 });
             }
 
@@ -274,7 +271,7 @@ public class Fgt_Weekend_Query extends BaseFragment {
 
     //弹出底部窗口
     private void getPoP(int type) {
-        popupWindows_pop = new PopupWindows_pop(getActivity(), type);
+         popupWindows_pop = new PopupWindows_pop(getActivity(), type);
     }
 
     /**
@@ -492,4 +489,5 @@ public class Fgt_Weekend_Query extends BaseFragment {
             return view;
         }
     }
+
 }

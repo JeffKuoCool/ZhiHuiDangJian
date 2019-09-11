@@ -4,6 +4,8 @@ import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopRyBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.WeekendDetailsBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.queryUserListByFirstPinYinBean;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.bean.MyInteagalBeabMingXI;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.bean.MyIntegalBean;
 import com.lfc.zhihuidangjianapp.ui.activity.model.AliPay;
 import com.lfc.zhihuidangjianapp.ui.activity.model.AppConfigLists;
 import com.lfc.zhihuidangjianapp.ui.activity.model.BaseResponse;
@@ -469,5 +471,28 @@ public interface HttpService {
      */
     @POST("/login/logout")
     Observable<BaseResponse<Object>> logout(@Header("token") String token);
+   /**
+     * 分页查询我的积分
+     * @param token
+     * @return
+     */
+    @POST( "/integralManagement/queryMyTotal")
+    Observable<BaseResponse<MyIntegalBean>> queryMyTotal( @Header("token") String token);
+    /**
+     * 分页查询我的积分明细
+     * @param token
+     * @return
+     */
+    @POST("/integralManagement/queryMyIntegralDetailPageList")
+    Observable<BaseResponse<MyInteagalBeabMingXI>> queryMyIntegralDetailPageList(@QueryMap Map<String, Object> map, @Header("token") String token);
+
+    /**
+     * 分页查询心得信息
+     * @param token
+     * @return
+     */
+    /*@POST(ApiConstant.API + "/queryWeeklyWorkReportPageList")
+    Observable<BaseResponse<ResponseWorkReport>> queryWeeklyWorkReportPageList(@QueryMap Map<String, Object> map,@Header("token") String token);
+*/
 
 }
