@@ -169,7 +169,7 @@ dependencies {
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:5.1.0'
 
     //rxbus
-    implementation 'com.hwangjr.rxbus:rxbus:1.0.6'
+    implementation 'com.hwangjr.rxbus:rxbus:2.0.1'
 
     //bugly
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'

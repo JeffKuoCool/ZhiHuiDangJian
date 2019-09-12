@@ -9,6 +9,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
@@ -51,6 +52,8 @@ import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.luck.picture.lib.tools.PictureFileUtils;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tb.emoji.Emoji;
 import com.tb.emoji.EmojiUtil;
 import com.tb.emoji.FaceFragment;
@@ -76,7 +79,7 @@ import io.reactivex.schedulers.Schedulers;
  * @autror: guojian
  * @description: 聊天页
  */
-public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiClickListener {
+public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiClickListener, OnRefreshListener {
 
     private ActivityChatBinding mBinding;
 
@@ -143,7 +146,7 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
     protected void initView() {
         initImmersionBar(0);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_chat);
-        mBinding.imgBack.setOnClickListener(back->finish());
+        mBinding.imgBack.setOnClickListener(back -> finish());
         getPermissions();
         chatUserId = getIntent().getStringExtra("user");
         ft = getSupportFragmentManager().beginTransaction();
@@ -154,6 +157,8 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
         requstUserInfo(chatUserId);
         conn = new PlayServiceConnection();
         bindRecordService();
+        mBinding.refreshLayout.setEnableLoadMore(false);
+        mBinding.refreshLayout.setOnRefreshListener(this);
     }
 
     @Override
@@ -183,7 +188,7 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
         Map<String, Object> map = new HashMap<>();
         map.put("userId", chatUserId);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
-                .queryUserByUserId( map, MyApplication.getLoginBean().getToken())
+                .queryUserByUserId(map, MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ResponseObserver<UserInfo>(getActivity()) {
@@ -196,8 +201,8 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
                             imgUrl = response.getUser().getImgAddress();
                             initToolBar();
                             registEvent();
-                            initChatList();
                         }
+                        initChatList();
                     }
 
                     @Override
@@ -282,6 +287,7 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
 
             @Override
             public void sendMessage(String message) {
+                RxBus.get().post(new BusEvent(-1));
                 sendTextMessage(message);
             }
 
@@ -292,7 +298,6 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
 
         });
 
-//        mBinding.rvChat.setRefreshListener(this);
     }
 
     /**
@@ -316,9 +321,12 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
                 mRecordVoiceService.play(voiceMessageBody.getLocalUrl());
             }
         }
+        if (rxBusEvent.getEvent() == -1) {
+            toast("event");
+        }
     }
 
-    public void hideAllViews(){
+    public void hideAllViews() {
         mBinding.viewInputTip.hideAllViews();
     }
 
@@ -329,12 +337,13 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
         //标记当前回话为已读
         try {
             EMClient.getInstance().chatManager().getConversation(chatUserId).markAllMessagesAsRead();
-        }catch (Exception e){
+        } catch (Exception e) {
         }
     }
 
     /**
      * 发送语音消息
+     *
      * @param filePath
      * @param length
      * @param chatUserId
@@ -358,25 +367,27 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
 
     /**
      * 发送文件
+     *
      * @param filePath
      */
-    private void sendFileMessage(String filePath){
+    private void sendFileMessage(String filePath) {
         EMMessage message = EMMessage.createFileSendMessage(filePath, chatUserId);
         send(message);
     }
 
     /**
      * 发送图片
+     *
      * @param imagePath
      */
-    private void sendImageMessage(String imagePath){
+    private void sendImageMessage(String imagePath) {
         EMMessage message = EMMessage.createImageSendMessage(imagePath, true, chatUserId);
         send(message);
     }
 
     private void send(EMMessage message) {
         //消息扩展
-        message.setAttribute("userHeadimgurlResource", ApiConstant.ROOT_URL+MyApplication.getmUserInfo().getUser().getImgAddress());
+        message.setAttribute("userHeadimgurlResource", ApiConstant.ROOT_URL + MyApplication.getmUserInfo().getUser().getImgAddress());
         message.setAttribute("userNickname", MyApplication.getmUserInfo().getUser().getDisplayName());
         message.setAttribute("user", new Gson().toJson(MyApplication.getmUserInfo().getUser()));
         EMClient.getInstance().chatManager().sendMessage(message);
@@ -392,7 +403,8 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
                             if (message.getMsgTime() - mChatAdapter.getLastMessage().getMsgTime() > differenceTime) {
                                 chat.setShowMessageTime(true);
                             }
-                        }catch (Exception e){}
+                        } catch (Exception e) {
+                        }
                         mChatAdapter.addItem(chat);
                         mBinding.rvChat.scrollToPosition(mChatAdapter.getItemCount() - 1);
                         timer = new Timer();
@@ -413,10 +425,10 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
     }
 
     @Subscribe
-    public void onReceiveMessage(BusEvent rxBusEvent){
+    public void onReceiveMessage(BusEvent rxBusEvent) {
         //破冰语
-        if(rxBusEvent.getEvent() == RECEIVE_SEND_MESSAGE){
-            String msg = (String)rxBusEvent.getEventObj();
+        if (rxBusEvent.getEvent() == RECEIVE_SEND_MESSAGE) {
+            String msg = (String) rxBusEvent.getEventObj();
             sendTextMessage(msg);
         }
     }
@@ -429,16 +441,14 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
         }
     }
 
-        //TODO 下拉刷新
-//    @Override
-//    public void onRefresh() {
-//        if (mChatAdapter.getMsgId() != null) {
-//            List<EMMessage> newlist = EazyChatApi.getMessageFromId(chatUserId, mChatAdapter.getMsgId(), 10);
-//            mChatAdapter.notify(getChatList(newlist, chatUserId));
-////            mBinding.rvChat.setRefreshing(false);
-//        }
-//
-//    }
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        if (mChatAdapter.getMsgId() != null) {
+            List<EMMessage> newlist = EazyChatApi.getMessageFromId(chatUserId, mChatAdapter.getMsgId(), 10);
+            mChatAdapter.notify(getChatList(newlist, chatUserId));
+            mBinding.refreshLayout.finishRefresh();
+        }
+    }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -448,7 +458,7 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
                 //TODO 点击输入法外
                 closeInput();
                 mBinding.viewInputTip.hideAllViews();
-            }else{
+            } else {
                 // 弹出输入法
 
             }
@@ -467,7 +477,7 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
             v.getLocationOnScreen(location);
             int left = location[0];
             int top = location[1];
-            if ((event.getX() < left && event.getY() < top + v.getHeight()) || event.getY() < top ) {
+            if ((event.getX() < left && event.getY() < top + v.getHeight()) || event.getY() < top) {
                 return true;
             } else {
                 return false;
@@ -490,7 +500,7 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
     protected void onDestroy() {
         super.onDestroy();
         RxBus.get().post(new EMMessage(null));
-        if(timer!=null){
+        if (timer != null) {
             timer.cancel();
         }
         unbindService(conn);
@@ -505,6 +515,7 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
 
     /**
      * 点击表情
+     *
      * @param emoji
      */
     @Override
@@ -552,7 +563,7 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
                 case PictureConfig.CHOOSE_REQUEST:
                     // 图片、视频、音频选择结果回调
                     List<LocalMedia> localMediaList = PictureSelector.obtainMultipleResult(data);
-                    for (LocalMedia localMedia: localMediaList) {
+                    for (LocalMedia localMedia : localMediaList) {
                         sendImageMessage(localMedia.getPath());
                     }
                     break;
@@ -622,7 +633,7 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
                 public void run() {
                     if (list != null && list.size() != 0) {
                         EMMessage message = list.get(0);
-                        if(!message.getFrom().equals(chatUserId)){
+                        if (!message.getFrom().equals(chatUserId)) {
                             return;
                         }
                         if (message.getChatType() == EMMessage.ChatType.Chat) {
