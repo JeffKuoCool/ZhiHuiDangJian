@@ -8,7 +8,7 @@ public class ApiConstant {
     //测试环境
     public static final String ROOT_DEBUG = "http://58.87.96.160:8081/";
 
-    public static final String ROOT_URL = 
+    public static final String ROOT_URL =
             BuildConfig.DEBUG ?
             ROOT_DEBUG :
                     ROOT_RELEASE;
