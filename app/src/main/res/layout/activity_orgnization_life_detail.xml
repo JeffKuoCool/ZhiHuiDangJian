@@ -143,7 +143,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/dip_10"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dip_10"
@@ -158,7 +158,7 @@
                     style="@style/dept_detail_title"
                     android:text="集中学习研究的专题和内容"/>
 
-                <TextView
+                <WebView
                     android:id="@+id/tv_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

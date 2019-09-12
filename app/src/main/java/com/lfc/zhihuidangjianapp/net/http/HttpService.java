@@ -1,5 +1,6 @@
 package com.lfc.zhihuidangjianapp.net.http;
 
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.ChaXunBean_new;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.MianDeptBeanD;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopRyBean;
@@ -313,6 +314,14 @@ public interface HttpService {
      */
     @POST(ApiConstant.API + "/queryWeeklyWorkReportPageList")
     Observable<BaseResponse<ResponseWorkReport>> queryWeeklyWorkReportPageList(@QueryMap Map<String, Object> map,@Header("token") String token);
+
+    /**
+     * 分页查询周报信息
+     * @param token
+     * @return
+     */
+    @POST(ApiConstant.API + "/queryWeeklyWorkReportPageList")
+    Observable<BaseResponse<ChaXunBean_new>> queryWeeklyWorkReportPageList_new(@QueryMap Map<String, Object> map, @Header("token") String token);
 
     /**
      * 分页查询学习强局信息 -- 学习心得传studyStrongBureauType=2

@@ -952,7 +952,7 @@ public class UserDataBean {
             private Object partyPromise;
 
             public Object getPartyPromise() {
-                return partyPromise;
+                return partyPromise ==null?"暂无":partyPromise;
             }
 
             public void setPartyPromise(Object partyPromise) {

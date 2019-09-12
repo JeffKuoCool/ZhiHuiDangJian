@@ -33,6 +33,7 @@ import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
 import com.lfc.zhihuidangjianapp.ui.activity.adapter.DividerItemDecoration;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Organizational_Life_Detail;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Fgt_Weekend_Details;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.ChaXunBean_new;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.PopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopRyBean;
@@ -222,18 +223,19 @@ public class Fgt_Weekend_Query extends BaseFragment {
 
     //查询心得信息
     private void getWeekQuery(String deptNumberzb, String deptNumberry) {
+        Log.i("yy--deptNumber",deptNumberry+"=="+deptNumberzb);
         Map<String, Object> map = new HashMap<>();
         map.put("createCode", deptNumberry);
         map.put("deptNumber", deptNumberzb);
         map.put("pageSize", size);
         map.put("pageNum", num);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
-                .queryWeeklyWorkReportPageList(map, MyApplication.getLoginBean().getToken())
+                .queryWeeklyWorkReportPageList_new(map, MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ResponseObserver<ResponseWorkReport>(getActivity()) {
+                .subscribe(new ResponseObserver<ChaXunBean_new>(getActivity()) {
                     @Override
-                    protected void onNext(ResponseWorkReport response) {
+                    protected void onNext(ChaXunBean_new response) {
                         Log.e("onNext= ", response.toString());
                         if (response == null) return;
                         if (response.getWeeklyWorkReportList().getDatas().size() == 0) {
@@ -253,11 +255,11 @@ public class Fgt_Weekend_Query extends BaseFragment {
                 }.actual());
     }
 
-    private void setRecyclerView_shaux(List<WorkReport> datas) {
+    private void setRecyclerView_shaux(List<ChaXunBean_new.WeeklyWorkReportListBean.DatasBean> datas) {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new CommonAdapter<WorkReport>(getActivity(), R.layout.item_mine_work_report,datas) {
+        recyclerView.setAdapter(new CommonAdapter<ChaXunBean_new.WeeklyWorkReportListBean.DatasBean>(getActivity(), R.layout.item_mine_work_report,datas) {
             @Override
-            protected void convert(ViewHolder holder, WorkReport data, int position) {
+            protected void convert(ViewHolder holder, ChaXunBean_new.WeeklyWorkReportListBean.DatasBean data, int position) {
                 TextView tv_name = (TextView) holder.getConvertView().findViewById(R.id.tv_time);
                 TextView tv_content = (TextView) holder.getConvertView().findViewById(R.id.tv_content);
                 tv_name.setText(datas.get(position).getReleaseDate());

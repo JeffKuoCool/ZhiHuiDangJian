@@ -14,7 +14,7 @@ public class WebViewUtils {
         } else {
             ss = connet;
         }
-        String str = "<head lang=\"zh\"><style type=\"text/css\">.p{font-size:50pt;}div{width: 100%}img{width: 100%}</style></head><div style=\"font-size: 40px\">" + ss + "</div>";
+        String str = "<head lang=\"zh\"><style type=\"text/css\">.p{font-size:50pt;}div{width: 100%}img{width: 100%}</style></head><div style=\"font-size: 40px\";text-indent: 2em;>" + ss + "</div>";
         final AlphaAnimation animation = new AlphaAnimation(0.0f, 1.0f);
         animation.setDuration(800);
         animation.setFillAfter(true);
