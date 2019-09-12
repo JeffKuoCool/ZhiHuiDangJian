@@ -2,6 +2,7 @@ package com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act;
 
 import android.text.Html;
 import android.util.Log;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
 import com.lfc.zhihuidangjianapp.ui.activity.model.Forest;
 import com.lfc.zhihuidangjianapp.ui.activity.model.ForestDetail;
 import com.lfc.zhihuidangjianapp.ui.activity.model.ResponseForestDetail;
+import com.lfc.zhihuidangjianapp.utlis.WebViewUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +35,7 @@ public class ForestDetailActivity extends BaseActivity {
     private Forest forest;
 
     private TextView tv_title, tv_content;
+    private WebView webView;
 
     private ImageView image;
 
@@ -54,6 +57,7 @@ public class ForestDetailActivity extends BaseActivity {
         tv_title = findViewById(R.id.tv_title);
         tv_content = findViewById(R.id.tv_content);
         image = findViewById(R.id.image);
+        webView=findViewById(R.id.webView);
     }
 
     @Override
@@ -75,8 +79,9 @@ public class ForestDetailActivity extends BaseActivity {
                         if(response==null)return;
                         ForestDetail detail = response.getForestDistrict();
                         tv_title.setText(detail.getRemark());
-                        tv_content.setText(Html.fromHtml(detail.getComment()));
+                        WebViewUtils.setWebView(detail.getComment(),webView);
                         String url = ApiConstant.ROOT_URL+detail.getAuthor();
+
                         Glide.with(getActivity()).load(url).into(image);
                     }
 

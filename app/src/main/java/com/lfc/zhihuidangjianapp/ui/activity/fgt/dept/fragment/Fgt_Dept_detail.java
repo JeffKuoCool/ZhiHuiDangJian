@@ -2,6 +2,7 @@ package com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.fragment;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -42,6 +43,7 @@ import java.util.Map;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.alipay.sdk.widget.j.r;
 import static com.superrtc.ContextUtils.getApplicationContext;
 
 /**
@@ -86,6 +88,7 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
         tvDeptTitle = rootView.findViewById(R.id.tv_dept_title);
         tvDirectorTitle = rootView.findViewById(R.id.tv_director_title);
         mapView = rootView.findViewById(R.id.mapView);
+        //TODO 党建矩阵详情折线图 id
         //支部成员列表id
         rv_zblb = rootView.findViewById(R.id.rv_zblb);
         rv_zblb_lin = rootView.findViewById(R.id.rv_zblb_lin);
@@ -178,7 +181,8 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
         }
         List<String> members = response.getDirectorNameList();
         if (members != null && !members.isEmpty()) {
-            rvMember.setLayoutManager(new LinearLayoutManager(getActivity()));
+            rvMember.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+           // rvMember.setLayoutManager(new LinearLayoutManager(getActivity()));
             rvMember.setAdapter(new CommonAdapter<String>(getActivity(), R.layout.item_director_member, members) {
                 @Override
                 protected void convert(ViewHolder holder, String data, int position) {
@@ -195,6 +199,11 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
         //添加定位图标
         aMap.addMarker(locationUtil.getMarkerOption(dept.getDeptAddress(),dept.getLatitude(),dept.getLongitude())).showInfoWindow();
 
+        //TODO 党建矩阵详情折线图
+        //month 月份 articalCount数量
+        String month = response.getoLisfForEacherList().get(0).getMonth();
+        String articalCount = response.getoLisfForEacherList().get(0).getArticalCount();
+        //month 月份 articalCount数量
 
 
     }

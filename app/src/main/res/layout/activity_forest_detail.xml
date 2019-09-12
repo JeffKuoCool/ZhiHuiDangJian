@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical">
         <RelativeLayout
@@ -23,22 +24,17 @@
                 android:padding="10dp"
                 android:scaleType="fitXY"
                 android:src="@mipmap/img_back" />
-
             <TextView
                 android:id="@+id/textTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginRight="40dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:singleLine="true"
+                android:layout_marginTop="36dp"
                 android:text="林区风采"
                 android:textColor="@color/white"
-                android:textSize="15dp"
-                />
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
 
         </RelativeLayout>
 
@@ -68,22 +64,38 @@
             android:ellipsize="end"
             />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/adaptive_46dp"
-            style="@style/btn_click_red"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginBottom="@dimen/dp_10"
-            android:text="先进事迹"/>
+      <android.support.v4.widget.NestedScrollView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+              <TextView
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/adaptive_46dp"
+                  style="@style/btn_click_red"
+                  android:layout_marginTop="@dimen/dp_10"
+                  android:layout_marginBottom="@dimen/dp_10"
+                  android:text="先进事迹"/>
 
-        <TextView
-            android:id="@+id/tv_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/dip_20"
-            style="@style/text_14"/>
+              <TextView
+                  android:visibility="gone"
+                  android:id="@+id/tv_content"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:padding="@dimen/dip_20"
+                  style="@style/text_14"/>
+              <WebView
+                  android:layout_marginLeft="20dp"
+                  android:layout_marginRight="20dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/webView"></WebView>
+          </LinearLayout>
+      </android.support.v4.widget.NestedScrollView>
     </LinearLayout>
 
 
 
-</android.support.v4.widget.NestedScrollView>
+</LinearLayout>

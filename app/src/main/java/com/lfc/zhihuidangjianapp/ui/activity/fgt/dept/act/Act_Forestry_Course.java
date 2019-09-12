@@ -92,8 +92,8 @@ public class Act_Forestry_Course extends BaseActivity {
             @Override
             protected void convert(ViewHolder holder, StudyStrongBureau data, int position) {
                 TextView title = holder.getConvertView().findViewById(R.id.tv_title);
-                title.setText(Html.fromHtml(data.getComment()));
-                holder.setText(R.id.tv_bottom, data.getTitle());
+                title.setText(data.getTitle());
+                holder.setText(R.id.tv_bottom, data.getDept());
                 TextView tvContent = holder.getConvertView().findViewById(R.id.tv_content);
                 tvContent.setText(data.getReleaseDate());
                 ImageView image = holder.getConvertView().findViewById(R.id.image);

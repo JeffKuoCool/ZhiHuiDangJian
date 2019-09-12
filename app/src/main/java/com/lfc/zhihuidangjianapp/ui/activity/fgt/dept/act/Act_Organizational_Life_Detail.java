@@ -2,6 +2,7 @@ package com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act;
 
 import android.text.Html;
 import android.util.Log;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.lfc.zhihuidangjianapp.R;
@@ -14,6 +15,7 @@ import com.lfc.zhihuidangjianapp.ui.activity.model.Dynamic;
 import com.lfc.zhihuidangjianapp.ui.activity.model.DynamicDetail;
 import com.lfc.zhihuidangjianapp.ui.activity.model.OrganizationalLife;
 import com.lfc.zhihuidangjianapp.ui.activity.model.OrganizationalLifeDetail;
+import com.lfc.zhihuidangjianapp.utlis.WebViewUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +26,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * @date: 2019-08-04
  * @autror: guojian
- * @description: 党建动态详情
+ * @description: 组织生活详情
  */
 public class Act_Organizational_Life_Detail extends BaseActivity {
 
@@ -32,7 +34,8 @@ public class Act_Organizational_Life_Detail extends BaseActivity {
 
     private TextView tvTitle, tvAuthor, tvCreateTime, tv_time, tv_day,
 
-    tv_place, tv_total_count, tv_count, tv_join_member, tv_content, tv_type;
+    tv_place, tv_total_count, tv_count, tv_join_member, tv_type;
+    private WebView tv_content;
 
     @Override
     protected int getLayoutId() {
@@ -86,7 +89,8 @@ public class Act_Organizational_Life_Detail extends BaseActivity {
                         tv_total_count.setText("应到人数："+dynamic.getArtyMembersCount()+"");
                         tv_count.setText("实到人数："+dynamic.getPartyMembershipCount()+"");
                         tv_join_member.setText(dynamic.getParticipants());
-                        tv_content.setText(Html.fromHtml(dynamic.getComment()));
+                     //   tv_content.setText(Html.fromHtml(dynamic.getComment()));
+                        WebViewUtils.setWebView(dynamic.getComment(),tv_content);
                         tv_type.setText(dynamic.getStudyForm());
                     }
 

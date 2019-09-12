@@ -45,13 +45,23 @@
             android:orientation="vertical">
 
             <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/text_14"
+                style="@style/text_16"
                 android:padding="@dimen/dip_10"/>
+            <TextView
+                android:gravity="center"
+                android:id="@+id/tv_author"
+                style="@style/text_14_grey"
+                android:layout_marginTop="@dimen/dip_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <WebView
+                android:layout_marginTop="10dp"
                 android:id="@+id/titleDetaile_context"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

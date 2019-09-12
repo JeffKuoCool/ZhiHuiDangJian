@@ -127,7 +127,7 @@
     <TextView
         android:id="@+id/tv_pay"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:background="#F08713"
         style="@style/text_16_white"
         android:gravity="center"

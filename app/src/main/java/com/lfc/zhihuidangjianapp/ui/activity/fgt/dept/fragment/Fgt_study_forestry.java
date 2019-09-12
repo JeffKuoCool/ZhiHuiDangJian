@@ -100,11 +100,11 @@ public class Fgt_study_forestry extends BaseFragment {
     }
 
     public void setRecyclerView(StudyCraftTrainingList response) {
-        toast(response.getStudyStrongBureauCraftsmanList().getTotal());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(new CommonAdapter<StudyStrongBureau>(MyApplication.getAppContext(), R.layout.item_dept_dynamic, response.getStudyStrongBureauCraftsmanList().getDatas()) {
             @Override
             protected void convert(ViewHolder holder, StudyStrongBureau data, int position) {
+
                 TextView title = holder.getConvertView().findViewById(R.id.tv_title);
                 title.setText(data.getTitle());
                 holder.setText(R.id.tv_bottom, data.getDept());

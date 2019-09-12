@@ -60,7 +60,7 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
     BottomNavigationView bvHomeNavigation;
     @BindView(R.id.v4_drawerlayout)
     DrawerLayout drawerLayout;
-    @BindView(R.id.imgHead)
+  /*  @BindView(R.id.imgHead)
     ImageView imgHead;
     @BindView(R.id.textName)
     TextView textName;
@@ -69,7 +69,7 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
     @BindView(R.id.text2)
     TextView text2;
     @BindView(R.id.text3)
-    TextView text3;
+    TextView text3;*/
 
     //申请权限
     private static final int GET_RECODE_AUDIO = 1;
@@ -170,32 +170,7 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
                 }.actual());
     }
 
-    private void sideSlideMenu() {
-        SpringMenu menu = new SpringMenu(this, R.layout.menu_sideslip_menu);
 
-        /**
-         * 设置弹性和摩擦
-         * Tension弹性，20即可
-         * Friction摩擦 数值越大打开关闭速度越慢0-100  3就好看
-         * friction : 2f -4f 是合适值的范围,太小速度很快,弹性时间长,太大速度会很慢
-         * friction的值一定不能为0,否则会无限反弹,根据rebound api的定义
-         *
-         */
-
-        //menu.setMenuSpringConfig(SpringConfig.fromOrigamiTensionAndFriction(20, 3));
-        //menu.setChildSpringConfig(SpringConfig.fromOrigamiTensionAndFriction(20, 5));
-
-        //添加menu监听
-        menu.setMenuListener(this);
-        menu.setChildSpringConfig(SpringConfig.fromOrigamiTensionAndFriction(20, 3));
-        // 内容页变暗的效果
-        menu.setFadeEnable(true);
-        //面板在左边
-        menu.setDirection(SpringMenu.DIRECTION_LEFT);
-        // 允许菜单开始拖动的距离
-        menu.setDragOffset(0.1f);
-
-    }
 
     @Override
     protected void initData() {
@@ -208,15 +183,18 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
 
         // 限制页面数量
         vpHomePager.setOffscreenPageLimit(mPagerAdapter.getCount());
-       // drawerLayout.closeDrawer(Gravity.LEFT);
+
 //        drawerLayout.setScrimColor(Color.TRANSPARENT);
 //        drawerLayout.setDrawerShadow();
-        imgHead.setOnClickListener(new View.OnClickListener() {
+
+       /* imgHead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ToastUtils.show("哈哈哈");
             }
-        });
+        });*/
+        //关闭抽屉菜单
+        drawerLayout.closeDrawers();
     }
 
     private void showDrawerLayout() {
@@ -252,6 +230,7 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
                 vpHomePager.setCurrentItem(3, vpHomePager.getCurrentItem() == 1);
                 return true;
         }
+
         return false;
     }
 
@@ -354,7 +333,7 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
 
     }
 
-    @OnClick(R.id.relative1)
+   /* @OnClick(R.id.relative1)
     public void onRelative1Clicked() {
         startActivity(Act_SetUpc.class);
     }
@@ -371,5 +350,5 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
 
     @OnClick(R.id.relative4)
     public void onRelative4Clicked() {
-    }
+    }*/
 }

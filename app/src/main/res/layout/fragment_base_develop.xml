@@ -16,9 +16,12 @@
     <TextView
         android:id="@+id/tvSave"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/adaptive_46dp"
-        android:visibility="gone"
-        style="@style/btn_click_red"
+        android:layout_height="60dp"
+        android:background="@drawable/btn_click_red"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="14sp"
         android:text="保存"/>
 
 </LinearLayout>
