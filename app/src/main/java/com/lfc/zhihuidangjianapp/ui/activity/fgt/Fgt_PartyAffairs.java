@@ -78,7 +78,7 @@ public class Fgt_PartyAffairs extends BaseFragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 DividerItemDecoration.VERTICAL_LIST,
                 ContextCompat.getColor(getActivity(), R.color.background),
-                DispalyUtil.dp2px(getActivity(), 1),
+                DispalyUtil.dp2px(getActivity(), 3),
                 0, 0, false
         ));
     }
@@ -199,7 +199,7 @@ public class Fgt_PartyAffairs extends BaseFragment {
      */
     private void partStrong(int position){
        /* switch (position){
-            case 0://林草公开课
+            case 0://林草大讲堂
                 startActivity(new Intent(getActivity(), Act_Forestry_Course.class));
                 break;
             case 1://工匠培养
@@ -211,7 +211,7 @@ public class Fgt_PartyAffairs extends BaseFragment {
         }*/
         Intent intent = new Intent(getActivity(), Act_Study_ju.class);
         switch (position){
-            case 0://林草公开课 TODO
+            case 0://林草大讲堂 TODO
                 intent.putExtra("tabType", 0);
                 startActivity(intent);
                 break;

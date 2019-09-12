@@ -54,7 +54,7 @@
                 android:background="@color/white"
                 android:drawableRight="@mipmap/icon_right"
                 style="@style/text_18"
-                android:text="林草大课堂"/>
+                android:text="林草大讲堂"/>
 
             <FrameLayout
                 android:id="@+id/rv_study_forest"

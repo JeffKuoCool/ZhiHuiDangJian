@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="36dp"
-                android:text="林草公开课"
+                android:text="林草大讲堂"
                 android:textColor="@color/white"
                 android:textSize="19dp"
                 android:textStyle="bold" />

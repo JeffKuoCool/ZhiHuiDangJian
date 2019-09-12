@@ -146,7 +146,7 @@ public class Act_AnnouncementList extends BaseActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 DividerItemDecoration.VERTICAL_LIST,
                 ContextCompat.getColor(getActivity(), R.color.background),
-                DispalyUtil.dp2px(getActivity(), 1),
+                DispalyUtil.dp2px(getActivity(), 3),
                 0, 0, false
         ));
     }

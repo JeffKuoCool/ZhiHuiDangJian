@@ -24,6 +24,7 @@ import com.lfc.zhihuidangjianapp.ui.activity.item.BannerViewHolder;
 import com.lfc.zhihuidangjianapp.ui.activity.model.AppConfigLists;
 import com.lfc.zhihuidangjianapp.ui.activity.model.Dynamic;
 import com.lfc.zhihuidangjianapp.ui.activity.model.ResponsePartyDynamicList;
+import com.lfc.zhihuidangjianapp.utlis.DateUtils;
 import com.lfc.zhihuidangjianapp.utlis.DispalyUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
@@ -57,6 +58,7 @@ public class Fgt_Dept_dynamic extends BaseBindViewFragment {
     @Override
     protected void initData() {
         partyDynamicType = getArguments().getInt("partyDynamicType", 0);
+        Log.i("yy--partyDynamicType",partyDynamicType+"");
         Map<String, Object> map = new HashMap<>();
         map.put("partyDynamicType", partyDynamicType);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
@@ -125,20 +127,19 @@ public class Fgt_Dept_dynamic extends BaseBindViewFragment {
 
     private void setRecyclerView(ResponsePartyDynamicList response){
         recyclerView.setLayoutManager(new LinearLayoutManager(MyApplication.getAppContext()));
-        recyclerView.setAdapter(new CommonAdapter<Dynamic>(MyApplication.getAppContext(), R.layout.item_dept_dynamic, response.getPartyDynamicList().getDatas()) {
+        recyclerView.setAdapter(new CommonAdapter<Dynamic>(MyApplication.getAppContext(), R.layout.item_home_head, response.getPartyDynamicList().getDatas()) {
             @Override
             protected void convert(ViewHolder holder, Dynamic data, int position) {
                 holder.setText(R.id.tv_title, data.getTitle());
-                TextView tvContent = holder.getConvertView().findViewById(R.id.tv_content);
-                tvContent.setText(Html.fromHtml(data.getComment()));
-//                tvContent.setHtml(data.getComment(),
-//                        new HtmlAssetsImageGetter(tvContent));
+                holder.setText(R.id.tv_content,data.getReleaseDate());
                 ImageView image = holder.getConvertView().findViewById(R.id.image);
-                String url = ApiConstant.ROOT_URL+data.getThumbnail_url();
-                Glide.with(MyApplication.getAppContext()).load(url).into(image);
+                Glide.with(image.getContext()).load(ApiConstant.ROOT_URL+data.getThumbnail_url()).into(image);
+                //点击列表进入党建动态详情
                 holder.getConvertView().setOnClickListener(item->{
                     Intent intent = new Intent(MyApplication.getAppContext(), Act_Dept_Dynamic_Detail.class);
                     intent.putExtra("partyDynamicId", data.getParty_dynamic_id()+"");
+                    intent.putExtra("examineId", "");
+                    intent.putExtra("type","");
                     startActivity(intent);
                 });
             }
@@ -146,8 +147,8 @@ public class Fgt_Dept_dynamic extends BaseBindViewFragment {
         });
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 DividerItemDecoration.VERTICAL_LIST,
-                ContextCompat.getColor(MyApplication.getAppContext(), R.color.divider_list),
-                DispalyUtil.dp2px(MyApplication.getAppContext(), 5),
+                ContextCompat.getColor(MyApplication.getAppContext(), R.color.background),
+                DispalyUtil.dp2px(MyApplication.getAppContext(), 3),
                 0, 0, false
         ));
     }

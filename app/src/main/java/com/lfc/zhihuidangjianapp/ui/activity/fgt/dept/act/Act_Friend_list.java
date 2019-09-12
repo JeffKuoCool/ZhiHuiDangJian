@@ -154,7 +154,7 @@ public class Act_Friend_list extends BaseActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 DividerItemDecoration.VERTICAL_LIST,
                 ContextCompat.getColor(getActivity(), R.color.background),
-                DispalyUtil.dp2px(getActivity(), 1),
+                DispalyUtil.dp2px(getActivity(), 3),
                 0, 0, false
         ));
         setEvent();

@@ -36,6 +36,8 @@ import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopRyBean;
 import com.lfc.zhihuidangjianapp.ui.activity.model.Forest;
 import com.lfc.zhihuidangjianapp.ui.activity.model.ResponseWorkReport;
+import com.lfc.zhihuidangjianapp.ui.activity.model.StudyCraftReportList;
+import com.lfc.zhihuidangjianapp.ui.activity.model.StudyStrongBureau;
 import com.lfc.zhihuidangjianapp.ui.activity.model.WorkReport;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -224,20 +226,21 @@ public class Fgt_Study_Report_Query extends BaseFragment {
         map.put("deptNumber", deptNumberzb);
         map.put("pageSize", size);
         map.put("pageNum", num);
+        map.put("studyStrongBureauType",2);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
-                .queryWeeklyWorkReportPageList(map, MyApplication.getLoginBean().getToken())
+                .queryStudyStrongBureauPageList(map, MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ResponseObserver<ResponseWorkReport>(getActivity()) {
+                .subscribe(new ResponseObserver<StudyCraftReportList>(getActivity()) {
                     @Override
-                    protected void onNext(ResponseWorkReport response) {
+                    protected void onNext(StudyCraftReportList response) {
                         Log.e("onNext= ", response.toString());
                         if (response == null) return;
-                        if (response.getWeeklyWorkReportList().getDatas().size() == 0) {
+                        if (response.getStudyStrongBureauList().getDatas().size() == 0) {
                             toast("暂无数据");
                             popupWindows_pops_sx.dismiss();
                         } else {
-                            setRecyclerView_shaux(response.getWeeklyWorkReportList().getDatas());
+                            setRecyclerView_shaux(response.getStudyStrongBureauList().getDatas());
                         }
 
                     }
@@ -250,17 +253,21 @@ public class Fgt_Study_Report_Query extends BaseFragment {
                 }.actual());
     }
 
-    private void setRecyclerView_shaux(List<WorkReport> datas) {
+    private void setRecyclerView_shaux(List<StudyStrongBureau> datas) {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new CommonAdapter<WorkReport>(getActivity(), R.layout.item_mine_work_report,datas) {
+        recyclerView.setAdapter(new CommonAdapter<StudyStrongBureau>(getActivity(), R.layout.item_mine_work_report,datas) {
             @Override
-            protected void convert(ViewHolder holder, WorkReport data, int position) {
+            protected void convert(ViewHolder holder, StudyStrongBureau data, int position) {
                 TextView tv_name = (TextView) holder.getConvertView().findViewById(R.id.tv_time);
                 TextView tv_content = (TextView) holder.getConvertView().findViewById(R.id.tv_content);
                 tv_name.setText(datas.get(position).getReleaseDate());
                 tv_content.setText(datas.get(position).getAuthor());
                 holder.getConvertView().setOnClickListener(detail->{
                   toast(datas.get(position).getAuthor());
+                    Intent intent = new Intent(getActivity(), com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Strong_Study_Experience.class);
+                    intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId()+"");
+                    intent.putExtra("appTitle","学习心得");
+                    startActivity(intent);
                 });
             }
 

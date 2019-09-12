@@ -100,8 +100,8 @@ public class Fgt_study_craft extends BaseFragment {
         });
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 DividerItemDecoration.VERTICAL_LIST,
-                ContextCompat.getColor(getActivity(), R.color.divider_list),
-                DispalyUtil.dp2px(getActivity(), 5),
+                ContextCompat.getColor(getActivity(), R.color.background),
+                DispalyUtil.dp2px(getActivity(), 3),
                 0, 0, false
         ));
     }
