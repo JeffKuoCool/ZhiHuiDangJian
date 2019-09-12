@@ -117,7 +117,8 @@ public class Fgt_Demonstration_Leadership extends BaseFragment implements View.O
      */
     public void queryLeadDemonstrationPageList() {
         int pageNum = 1;
-        HttpHelper.queryLeadDemonstrationPageList(leadDemonstrationType, pageNum + "", new HttpHelper.HttpUtilsCallBack<String>() {
+        int pageSize=10;
+        HttpHelper.queryLeadDemonstrationPageList(leadDemonstrationType, pageNum ,pageSize, new HttpHelper.HttpUtilsCallBack<String>() {
             @Override
             public void onFailure(String failure) {
             }
@@ -161,6 +162,7 @@ public class Fgt_Demonstration_Leadership extends BaseFragment implements View.O
                 Intent intent = new Intent();
                 intent.putExtra("title", datas.get(0).getTitle());
                 intent.putExtra("context", datas.get(0).getComment());
+                intent.putExtra("author", datas.get(0).getAuthor());
                 intent.setClass(getContext(), Act_TitleDetails.class);
                 startActivity(intent);
                 break;

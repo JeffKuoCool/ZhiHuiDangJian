@@ -251,11 +251,11 @@ public class HttpHelper {
      * 专题专栏
      * 引领示范类型(0:不忘初心 牢记使命1:改革创新 奋发有为)
      */
-    public static void queryLeadDemonstrationPageList(String leadDemonstrationType, String pageNum, final HttpUtilsCallBack<String> callBack) {
+    public static void queryLeadDemonstrationPageList(String leadDemonstrationType, int pageNum,int pageSize,final HttpUtilsCallBack<String> callBack) {
         Map<String, String> map = new HashMap<>();
         map.put("leadDemonstrationType", leadDemonstrationType);
-        map.put("pageNum", pageNum);
-        map.put("pageSize", "10");
+        map.put("pageNum", pageNum+"");
+        map.put("pageSize", pageSize+"");
         HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
         httpService.queryLeadDemonstrationPageList(map, MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())

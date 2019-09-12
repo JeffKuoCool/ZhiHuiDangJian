@@ -263,7 +263,9 @@ public class Fgt_Weekend_Query extends BaseFragment {
                 tv_name.setText(datas.get(position).getReleaseDate());
                 tv_content.setText(datas.get(position).getAuthor());
                 holder.getConvertView().setOnClickListener(detail->{
-                    toast(datas.get(position).getAuthor());
+                    Intent intent = new Intent(getActivity(), Fgt_Weekend_Details.class );
+                    intent.putExtra("weeklyWorkReportId", data.getWeeklyWorkReportId()+"");
+                    startActivity(intent);
                 });
             }
 

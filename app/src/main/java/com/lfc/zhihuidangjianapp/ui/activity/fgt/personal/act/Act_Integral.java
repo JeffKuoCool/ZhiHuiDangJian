@@ -16,6 +16,7 @@ import com.lfc.zhihuidangjianapp.base.BaseActivity;
 import com.lfc.zhihuidangjianapp.net.http.HttpService;
 import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
 import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
+import com.lfc.zhihuidangjianapp.ui.activity.Act_Login;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Party_Membership;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Write_Study_Report;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Write_Weekend_Log;
@@ -146,6 +147,7 @@ public class Act_Integral extends BaseActivity {
             case R.id.tvRight:
                 Intent intent =new Intent(this,Act_Integral_mingxi.class);
                 startActivity(intent);
+
                 break;
             case R.id.intergral_text3:
 

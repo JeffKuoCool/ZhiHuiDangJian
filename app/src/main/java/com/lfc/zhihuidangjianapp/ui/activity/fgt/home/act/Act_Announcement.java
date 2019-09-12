@@ -14,6 +14,7 @@ import com.lfc.zhihuidangjianapp.bean.NoticeAnnouncementsBean;
 import com.lfc.zhihuidangjianapp.bean.QueryHomeNoticeAnnouncementPageListBean;
 import com.lfc.zhihuidangjianapp.net.http.HttpHelper;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.bean.queryNoticeAnnouncementDetailBean;
+import com.lfc.zhihuidangjianapp.utlis.WebViewUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,10 +31,14 @@ public class Act_Announcement extends BaseActivity {
     ImageView imgBack;
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.tv_titles)
+    TextView tv_titles;
     @BindView(R.id.tv_author)
     TextView tvAuthor;
     @BindView(R.id.tv_content)
     TextView tvContent;
+    @BindView(R.id.good_d_web)
+    WebView good_d_web;
 
     String noticeAnnouncementId = "";
 
@@ -59,6 +64,7 @@ public class Act_Announcement extends BaseActivity {
     protected void initData() {
         noticeAnnouncementId = getIntent().getStringExtra("id");
         queryNoticeAnnouncementDetail();
+        tv_titles.setText("公告公示");
     }
     /**
      * 查看公告详情信息
@@ -81,7 +87,8 @@ public class Act_Announcement extends BaseActivity {
 //                    webView.loadDataWithBaseURL(null, entity.getData().getNoticeAnnouncement().getAnnouncementComtent(), "text/html", "UTF-8", null);
                     tvTitle.setText(entity.getData().getNoticeAnnouncement().getAnnouncementTitle());
                     tvAuthor.setText(entity.getData().getNoticeAnnouncement().getAuthor());
-                    tvContent.setText(Html.fromHtml(entity.getData().getNoticeAnnouncement().getAnnouncementComtent()));
+                    //tvContent.setText(Html.fromHtml(entity.getData().getNoticeAnnouncement().getAnnouncementComtent()));
+                    WebViewUtils.setWebView(entity.getData().getNoticeAnnouncement().getAnnouncementComtent(),good_d_web);
                 }
             }
 
