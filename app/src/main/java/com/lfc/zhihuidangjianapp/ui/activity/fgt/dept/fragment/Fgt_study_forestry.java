@@ -57,7 +57,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * @date: 2019-08-10
  * @autror: guojian
- * @description: 林草公开课
+ * @description: 林草大讲堂
  */
 public class Fgt_study_forestry extends BaseFragment {
     private RecyclerView recyclerView;
@@ -106,8 +106,8 @@ public class Fgt_study_forestry extends BaseFragment {
             @Override
             protected void convert(ViewHolder holder, StudyStrongBureau data, int position) {
                 TextView title = holder.getConvertView().findViewById(R.id.tv_title);
-                title.setText(Html.fromHtml(data.getComment()));
-                holder.setText(R.id.tv_bottom, data.getTitle());
+                title.setText(data.getTitle());
+                holder.setText(R.id.tv_bottom, data.getDept());
                 TextView tvContent = holder.getConvertView().findViewById(R.id.tv_content);
                 tvContent.setText(data.getReleaseDate());
                 ImageView image = holder.getConvertView().findViewById(R.id.image);
@@ -116,7 +116,7 @@ public class Fgt_study_forestry extends BaseFragment {
                 holder.getConvertView().setOnClickListener(Act_Strong_Study_Experience->{
                     Intent intent = new Intent(getActivity(), com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Strong_Study_Experience.class);
                     intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId()+"");
-                    intent.putExtra("appTitle", "林草公开课");
+                    intent.putExtra("appTitle", "林草大讲堂");
                     startActivity(intent);
                 });
             }
@@ -124,8 +124,8 @@ public class Fgt_study_forestry extends BaseFragment {
         });
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 DividerItemDecoration.VERTICAL_LIST,
-                ContextCompat.getColor(getActivity(), R.color.white),
-                DispalyUtil.dp2px(getActivity(), 8),
+                ContextCompat.getColor(getActivity(), R.color.background),
+                DispalyUtil.dp2px(getActivity(), 3),
                 0, 0, false
         ));
     }

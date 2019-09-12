@@ -83,6 +83,7 @@ public class Fgt_Home extends BaseFragment {
             startActivity(intent);
         });
         ImmersionBar.with(this).statusBarDarkFont(true).init();
+
         getFragmentManager().beginTransaction().add( R.id.homeHead,new HomeHeadLinesFragment()).commit();
     }
 

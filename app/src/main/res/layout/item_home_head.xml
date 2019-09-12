@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
+    android:id="@+id/demonstration_item"
     android:paddingLeft="@dimen/dip_12"
     android:paddingRight="@dimen/dip_12"
     android:paddingTop="@dimen/dip_5"

@@ -35,12 +35,14 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
         android:layout_weight="1">
 
         <LinearLayout
+            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:padding="@dimen/dip_12"
             android:orientation="vertical">
 
@@ -61,6 +63,10 @@
                 android:id="@+id/tv_content"
                 style="@style/text_14_normal"
                 android:layout_marginTop="@dimen/dip_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <WebView
+                android:id="@+id/titleDetaile_context"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

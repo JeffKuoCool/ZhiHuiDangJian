@@ -114,6 +114,12 @@ public class Fgt_Forest_List extends BaseBindViewFragment {
                 }
 
             });
+            recyclerView.addItemDecoration(new DividerItemDecoration(
+                    DividerItemDecoration.VERTICAL_LIST,
+                    ContextCompat.getColor(getActivity(), R.color.background),
+                    DispalyUtil.dp2px(getActivity(), 3),
+                    0, 0, false
+            ));
         } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(new CommonAdapter<Forest>(getActivity(), layoutId, response.getForestDistrictList().getDatas()) {
@@ -140,7 +146,7 @@ public class Fgt_Forest_List extends BaseBindViewFragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 DividerItemDecoration.VERTICAL_LIST,
                 ContextCompat.getColor(getActivity(), R.color.background),
-                DispalyUtil.dp2px(getActivity(), 1),
+                DispalyUtil.dp2px(getActivity(), 3),
                 0, 0, false
         ));
     }

@@ -1,6 +1,7 @@
 package com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.demonstration_leadership.fgt;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -18,10 +19,12 @@ import com.lfc.zhihuidangjianapp.app.MyApplication;
 import com.lfc.zhihuidangjianapp.base.BaseFragment;
 import com.lfc.zhihuidangjianapp.net.http.ApiConstant;
 import com.lfc.zhihuidangjianapp.net.http.HttpHelper;
+import com.lfc.zhihuidangjianapp.ui.activity.adapter.DividerItemDecoration;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.Act_TitleDetails;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.Act_WebView;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.demonstration_leadership.adapter.Demonstration_LeadershipAdapter;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.demonstration_leadership.bean.QueryLeadDemonstrationPageListBean;
+import com.lfc.zhihuidangjianapp.utlis.DispalyUtil;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -87,6 +90,12 @@ public class Fgt_Demonstration_Leadership extends BaseFragment implements View.O
         adapter = new Demonstration_LeadershipAdapter(getContext(), datas);
         adapter.setOnItemChildClickListener(this);
         my_RecyclerView.setAdapter(adapter);
+        my_RecyclerView.addItemDecoration(new DividerItemDecoration(
+                DividerItemDecoration.VERTICAL_LIST,
+                ContextCompat.getColor(MyApplication.getAppContext(), R.color.divider_list),
+                DispalyUtil.dp2px(MyApplication.getAppContext(), 5),
+                0, 0, false
+        ));
     }
 
     @Override
@@ -126,6 +135,7 @@ public class Fgt_Demonstration_Leadership extends BaseFragment implements View.O
                     if (entity.getData().getLeadDemonstrationList().getDatas().size() > 0) {
                         Glide.with(getContext()).load(ApiConstant.ROOT_URL + entity.getData().getLeadDemonstrationList().getDatas().get(0).getThumbnailUrl()).into(item_hader);
                         item_title.setText(Html.fromHtml(entity.getData().getLeadDemonstrationList().getDatas().get(0).getComment()));
+                      //  item_title.setText(entity.getData().getLeadDemonstrationList().get);
                     }
                 } else {
                     ToastUtils.show(entity.getMsg());

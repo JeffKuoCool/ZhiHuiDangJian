@@ -2,6 +2,7 @@ package com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,8 +20,10 @@ import com.lfc.zhihuidangjianapp.net.http.ApiConstant;
 import com.lfc.zhihuidangjianapp.net.http.HttpService;
 import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
 import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
+import com.lfc.zhihuidangjianapp.ui.activity.adapter.DividerItemDecoration;
 import com.lfc.zhihuidangjianapp.ui.activity.model.StudyCraftReportList;
 import com.lfc.zhihuidangjianapp.ui.activity.model.StudyStrongBureau;
+import com.lfc.zhihuidangjianapp.utlis.DispalyUtil;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -40,7 +43,7 @@ public class HomeStudyFragment extends BaseFragment {
 
     private RecyclerView recyclerView;
 
-    //学习强局类型(0:林草大讲堂1:工匠培养2:学习心得)
+    //学习强局类型(0:林草大讲堂:工匠培养2:学习心得)
     private int studyStrongBureauType;
 
     private int layoutId;
@@ -99,7 +102,7 @@ public class HomeStudyFragment extends BaseFragment {
     public void setRecyclerView(StudyCraftReportList response) {
         //  林草大讲堂、工匠培养、学习心得三个内容，每个版块展示4条新闻，如需查看所有，点击更多
         if(studyStrongBureauType==0){
-            //林草大课堂
+            //林草大讲堂
             if (response.getStudyStrongBureauList().getDatas().size() >= 4) {
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(linearLayoutManager);
@@ -108,8 +111,8 @@ public class HomeStudyFragment extends BaseFragment {
                     @Override
                     protected void convert(ViewHolder holder, StudyStrongBureau data, int position) {
                         TextView title = holder.getConvertView().findViewById(R.id.tv_title);
-                        title.setText(Html.fromHtml(data.getComment()));
-                        holder.setText(R.id.tv_bottom, data.getTitle());
+                        title.setText(data.getTitle());
+                        holder.setText(R.id.tv_bottom, data.getDept());
                         TextView tvContent = holder.getConvertView().findViewById(R.id.tv_content);
                         tvContent.setText(data.getReleaseDate());
                         ImageView image = holder.getConvertView().findViewById(R.id.image);
@@ -118,11 +121,17 @@ public class HomeStudyFragment extends BaseFragment {
                         holder.getConvertView().setOnClickListener(Act_Strong_Study_Experience->{
                             Intent intent = new Intent(getActivity(), com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Strong_Study_Experience.class);
                             intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId()+"");
-                            intent.putExtra("appTitle","林草大课堂");
+                            intent.putExtra("appTitle","林草大讲堂");
                             startActivity(intent);
                         });
                     }
                 });
+                recyclerView.addItemDecoration(new DividerItemDecoration(
+                        DividerItemDecoration.VERTICAL_LIST,
+                        ContextCompat.getColor(getActivity(), R.color.background),
+                        DispalyUtil.dp2px(getActivity(), 3),
+                        0, 0, false
+                ));
             }else{
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(linearLayoutManager);
@@ -131,8 +140,8 @@ public class HomeStudyFragment extends BaseFragment {
                     @Override
                     protected void convert(ViewHolder holder, StudyStrongBureau data, int position) {
                         TextView title = holder.getConvertView().findViewById(R.id.tv_title);
-                        title.setText(Html.fromHtml(data.getComment()));
-                        holder.setText(R.id.tv_bottom, data.getTitle());
+                        title.setText(data.getTitle());
+                        holder.setText(R.id.tv_bottom, data.getDept());
                         TextView tvContent = holder.getConvertView().findViewById(R.id.tv_content);
                         tvContent.setText(data.getReleaseDate());
                         ImageView image = holder.getConvertView().findViewById(R.id.image);
@@ -141,13 +150,19 @@ public class HomeStudyFragment extends BaseFragment {
                         holder.getConvertView().setOnClickListener(Act_Strong_Study_Experience->{
                             Intent intent = new Intent(getActivity(), com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Strong_Study_Experience.class);
                             intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId()+"");
-                            intent.putExtra("appTitle","林草大课堂");
+                            intent.putExtra("appTitle","林草大讲堂");
                             startActivity(intent);
                         });
                     }
 
                 });
             }
+            recyclerView.addItemDecoration(new DividerItemDecoration(
+                    DividerItemDecoration.VERTICAL_LIST,
+                    ContextCompat.getColor(getActivity(), R.color.background),
+                    DispalyUtil.dp2px(getActivity(), 3),
+                    0, 0, false
+            ));
 
         }else if(studyStrongBureauType==1){
             //工匠培养

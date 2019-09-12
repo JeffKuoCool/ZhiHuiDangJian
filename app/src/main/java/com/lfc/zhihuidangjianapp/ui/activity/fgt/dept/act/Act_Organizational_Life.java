@@ -28,7 +28,7 @@ import butterknife.BindView;
 public class Act_Organizational_Life extends BaseBindViewActivity {
 
     //private String[] mTitles = {"民主生活会", "组织生活会", "党课","主题党日","民主评议党员","其他"};
-    private String[] mTitles = {"党课", "主题党日", "民主评议党员","支部查询","其他","民主生活会"};
+    private String[] mTitles = {"党课", "主题党日", "民主评议党员","组织生活会","其他","民主生活会"};
 
     private List<Fragment> fragments;
 

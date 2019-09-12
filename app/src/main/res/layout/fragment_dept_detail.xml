@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/background"
+    android:layout_marginTop="1dp"
     android:orientation="vertical">
 
     <android.support.v4.widget.NestedScrollView
@@ -43,7 +44,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@color/background"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -53,6 +54,8 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
                         android:id="@+id/tv_dept_title"
                         style="@style/dept_detail_title"
                         android:layout_width="match_parent"
@@ -73,6 +76,8 @@
 
 
                 <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:id="@+id/tv_director_title"
                     style="@style/dept_detail_title"
                     android:layout_width="match_parent"
@@ -99,6 +104,8 @@
 
 
                 <LinearLayout
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:id="@+id/rv_zblb"
                     style="@style/dept_detail_title"
                     android:layout_width="match_parent"
@@ -113,7 +120,6 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:padding="10dp"
                         android:text="支部成员列表"
                         android:textColor="@color/white" />
 
@@ -158,6 +164,8 @@
 
 
                 <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     style="@style/dept_detail_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

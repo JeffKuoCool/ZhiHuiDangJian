@@ -156,7 +156,7 @@ public class Act_Party_Change extends BaseActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 DividerItemDecoration.VERTICAL_LIST,
                 ContextCompat.getColor(getActivity(), R.color.background),
-                DispalyUtil.dp2px(getActivity(), 4),
+                DispalyUtil.dp2px(getActivity(), 3),
                 0, 0, false
         ));
 

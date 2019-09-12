@@ -152,7 +152,11 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
                     protected void onNext(WechatPay response) {
                         Log.e("onNext=", response.toString());
                         if (response != null) {
-                            Log.i("yy--Sing",response.getSign());
+                            Log.i("yy--Sing==",response.getSign()
+                            +"==Prepayid=="+response.getPrepayid()+"===AppId=="+response.getAppId() +"==NonceStr=="+
+                                    response.getNonceStr()+"==Timestamp==="+response.getTimestamp()+"=="
+                            +"===PackageName==="+response.getPackageName()
+                            +"==PartnerId=="+response.getPartnerId());
                             WechatApi.WXPayBuilder builder = new WechatApi.WXPayBuilder();
                            WechatApi wechatApi = builder.setPrepayId(response.getPrepayid())
                                     .setAppId(response.getAppId())
