@@ -41,6 +41,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.HashMap;
 
+import cn.nekocode.items.view.ItemEvent;
 import cn.nekocode.items.view.RecyclerViewItemView;
 
 
@@ -151,7 +152,7 @@ public class ChatItemView extends RecyclerViewItemView<Chat> {
             mBinding.viewOther.ivHead.setOnClickListener(head -> {
                 if (chat.getContext() != null && user != null) {
                     //TODO 个人中心
-//                    chat.getContext().getActivityRouter().gotoPersonalHomePage(chat.getContext(), user.getUserId());
+
                 }
             });
         } catch (HyphenateException e) {
@@ -240,6 +241,7 @@ public class ChatItemView extends RecyclerViewItemView<Chat> {
             map.put("imageBg", imageBg);
             //TODO 播放语音
             BusEvent rxBusEvent = new BusEvent(Constants.BUS_PLAY_VOICE, map);
+            getEventHandler().sendEvent(new ItemEvent(Constants.BUS_PLAY_VOICE, map));
             RxBus.get().post(rxBusEvent);
         });
     }

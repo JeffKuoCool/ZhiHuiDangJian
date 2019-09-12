@@ -199,13 +199,13 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
         //添加定位图标
         aMap.addMarker(locationUtil.getMarkerOption(dept.getDeptAddress(),dept.getLatitude(),dept.getLongitude())).showInfoWindow();
 
-        //TODO 党建矩阵详情折线图
-        //month 月份 articalCount数量
+       /* //TODO 党建矩阵详情折线图
+
         String month = response.getoLisfForEacherList().get(0).getMonth();
         String articalCount = response.getoLisfForEacherList().get(0).getArticalCount();
         //month 月份 articalCount数量
 
-
+*/
     }
 
     private void init() {
