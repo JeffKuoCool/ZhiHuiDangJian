@@ -37,13 +37,13 @@ import butterknife.BindView;
  */
 public class Act_Study_ju extends BaseBindViewActivity {
 
-    private String[] mTitles = {"林草公开课", "工匠培养", "学习心得"};
+    private String[] mTitles = {"林草大讲堂", "工匠培养", "学习心得"};
 
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 
     private List<Fragment> fragments;
 
-    //0林草公开课 1工匠培养 2学习心得
+    //0林草大讲堂 1工匠培养 2学习心得
     private int tabType;
 
     /*   public static final int TAB_DEPT_ACTIVE = 0;

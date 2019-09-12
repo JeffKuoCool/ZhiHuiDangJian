@@ -107,7 +107,7 @@ public class Fgt_Organizational_Life extends BaseBindViewFragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 DividerItemDecoration.VERTICAL_LIST,
                 ContextCompat.getColor(MyApplication.getAppContext(), R.color.background),
-                DispalyUtil.dp2px(MyApplication.getAppContext(), 1),
+                DispalyUtil.dp2px(MyApplication.getAppContext(), 3),
                 0, 0, false
         ));
     }

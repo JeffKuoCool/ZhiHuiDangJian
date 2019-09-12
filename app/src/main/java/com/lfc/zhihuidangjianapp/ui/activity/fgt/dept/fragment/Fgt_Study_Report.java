@@ -60,11 +60,10 @@ public class Fgt_Study_Report extends BaseFragment {
 
     @Override
     protected void initData() {
-
        Map<String, Object> map = new HashMap<>();
         map.put("studyStrongBureauType", 2);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
-                .queryStudyStrongBureauPageList(map, MyApplication.getLoginBean().getToken())
+                .queryMyStudyStrongBureauPageList(map, MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ResponseObserver<StudyCraftReportList>(getActivity()) {
@@ -108,7 +107,7 @@ public class Fgt_Study_Report extends BaseFragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 DividerItemDecoration.VERTICAL_LIST,
                 ContextCompat.getColor(getActivity(), R.color.background),
-                DispalyUtil.dp2px(getActivity(), 12),
+                DispalyUtil.dp2px(getActivity(), 0),
                 0, 0, false
         ));
     }

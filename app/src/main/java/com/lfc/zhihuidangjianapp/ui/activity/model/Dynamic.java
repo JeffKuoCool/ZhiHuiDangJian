@@ -17,10 +17,18 @@ public class Dynamic {
         private int if_top;
         private int partyDynamicId;
         private int partyDynamicType;
-        private String release_date;
         private String thumbnailUrl;
         private String title;
         private String abstracts;
+        private String releaseDate;
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
 
     public String getAbstracts() {
         return abstracts;
@@ -100,12 +108,7 @@ public class Dynamic {
             return partyDynamicType;
         }
 
-        public void setRelease_date(String release_date) {
-            this.release_date = release_date;
-        }
-        public String getRelease_date() {
-            return release_date;
-        }
+
 
         public void setThumbnail_url(String thumbnail_url) {
             this.thumbnailUrl = thumbnail_url;

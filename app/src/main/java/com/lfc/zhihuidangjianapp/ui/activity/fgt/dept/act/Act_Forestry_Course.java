@@ -32,7 +32,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 林草公开课
+ * 林草大讲堂
  * @date: 2019-08-06
  * @autror: guojian
  * @description:
@@ -57,7 +57,7 @@ public class Act_Forestry_Course extends BaseActivity {
         initImmersionBar(0);
         recyclerView = findViewById(R.id.recyclerView);
         tvTitle = findViewById(R.id.tv_title);
-        tvTitle.setText("林草公开课");
+        tvTitle.setText("林草大讲堂");
         findViewById(R.id.imgBack).setOnClickListener(back->finish());
     }
 
@@ -102,7 +102,7 @@ public class Act_Forestry_Course extends BaseActivity {
                 holder.getConvertView().setOnClickListener(Act_Strong_Study_Experience->{
                     Intent intent = new Intent(getActivity(), com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Strong_Study_Experience.class);
                     intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId()+"");
-                    intent.putExtra("appTitle", "林草公开课");
+                    intent.putExtra("appTitle", "林草大讲堂");
                     startActivity(intent);
                 });
             }

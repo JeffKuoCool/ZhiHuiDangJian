@@ -68,7 +68,7 @@ public class Act_Emulate extends BaseActivity {
     }
 
     private void setEvent() {
-        //点击林草大课堂进行查看更多
+        //点击林草大讲堂进行查看更多
         tvForest.setOnClickListener(act_craft->{
             //startActivity(new Intent(this, Act_Forestry_Course.class));
             Intent intent = new Intent(getActivity(), Act_Study_ju.class);

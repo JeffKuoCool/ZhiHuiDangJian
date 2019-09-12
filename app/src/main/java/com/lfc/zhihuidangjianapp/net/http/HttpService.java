@@ -1,5 +1,6 @@
 package com.lfc.zhihuidangjianapp.net.http;
 
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.MianDeptBeanD;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopRyBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.WeekendDetailsBean;
@@ -117,6 +118,15 @@ public interface HttpService {
      */
     @POST(ApiConstant.API + "/queryPartyDynamicDetail")
     Observable<BaseResponse<DynamicDetail>> queryPartyDynamicDetail(@QueryMap Map<String, Object> map, @Header("token") String token);
+    /**
+     * 首页进来党建动态详情
+     *
+     * @param map
+     * @param token
+     * @return
+     */
+    @POST(ApiConstant.API + "/queryExamineDetail")
+    Observable<BaseResponse<MianDeptBeanD>> queryExamineDetail(@QueryMap Map<String, Object> map, @Header("token") String token);
 
     /**
      * 学习强局首页
@@ -311,6 +321,13 @@ public interface HttpService {
      */
     @POST(ApiConstant.API + "/queryStudyStrongBureauPageList")
     Observable<BaseResponse<StudyCraftReportList>> queryStudyStrongBureauPageList(@QueryMap Map<String, Object> map, @Header("token") String token);
+    /**
+     * 分页查询学习强局信息 -- 我的学习心得传studyStrongBureauType=2
+     * @param token
+     * @return
+     */
+    @POST(ApiConstant.API + "/queryMyStudyStrongBureauPageList")
+    Observable<BaseResponse<StudyCraftReportList>> queryMyStudyStrongBureauPageList(@QueryMap Map<String, Object> map, @Header("token") String token);
 
     /**
      * 新增学习强局信息
@@ -488,13 +505,5 @@ public interface HttpService {
     @POST("/integralManagement/queryMyIntegralDetailPageList")
     Observable<BaseResponse<MyInteagalBeabMingXI>> queryMyIntegralDetailPageList(@QueryMap Map<String, Object> map, @Header("token") String token);
 
-    /**
-     * 分页查询心得信息
-     * @param token
-     * @return
-     */
-    /*@POST(ApiConstant.API + "/queryWeeklyWorkReportPageList")
-    Observable<BaseResponse<ResponseWorkReport>> queryWeeklyWorkReportPageList(@QueryMap Map<String, Object> map,@Header("token") String token);
-*/
 
 }

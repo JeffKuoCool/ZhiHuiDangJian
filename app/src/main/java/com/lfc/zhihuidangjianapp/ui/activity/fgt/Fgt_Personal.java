@@ -182,7 +182,7 @@ public class Fgt_Personal extends BaseFragment {
                     minShenri.setText(stampToDate(entity.getData().getUser().getBirthday()));
                     minYuanxiao.setText(entity.getData().getUser().getGraduateSchool() + "");
                     minZhuanye.setText(entity.getData().getUser().getMajorStudied() + "");
-                    minZhibu.setText(entity.getData().getUser().getAbbreviation() + "");
+                    minZhibu.setText(entity.getData().getUser().getDeptName() + "");
                     minZhiwu.setText(entity.getData().getUser().getPartyPosts() + "");
                     minCanjai.setText(entity.getData().getUser().getJoinWorkTime() + "");
                     minJiaru.setText(DateUtils.timeStampToStr(entity.getData().getUser().getJoinPartyTime(), "yyyy-MM-dd"));
