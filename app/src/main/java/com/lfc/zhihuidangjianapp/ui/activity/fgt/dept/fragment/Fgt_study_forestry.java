@@ -61,7 +61,6 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class Fgt_study_forestry extends BaseFragment {
     private RecyclerView recyclerView;
-
     private int studyStrongBureauType;
 
     @Override

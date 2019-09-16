@@ -70,15 +70,17 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
             if (payType == 0) {
 
                 getWechatOrderInfo();
+
             } else {
                 getAliPayOrderInfo();
             }
+
         });
-        tvWechat.setOnClickListener(wechat->{
+        tvWechat.setOnClickListener(wechat -> {
             payType = 0;
             initPayView();
         });
-        tvAlipay.setOnClickListener(wechat->{
+        tvAlipay.setOnClickListener(wechat -> {
             payType = 1;
             initPayView();
         });
@@ -88,16 +90,16 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
     protected void initData() {
         pay = getIntent().getStringExtra("pay");
         partyPaymentHisId = getIntent().getStringExtra("partyPaymentHisId");
-        
-        tvPayDetail.setText(pay+"元");
+
+        tvPayDetail.setText(pay + "元");
         tvPayTime.setText(DateUtils.timeStampToStr(System.currentTimeMillis(), "yyyy-MM-dd"));
     }
 
-    private void initPayView(){
-        if(payType==0){
+    private void initPayView() {
+        if (payType == 0) {
             tvWechat.setSelected(true);
             tvAlipay.setSelected(false);
-        }else{
+        } else {
             tvWechat.setSelected(false);
             tvAlipay.setSelected(true);
         }
@@ -108,11 +110,11 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
         User user = MyApplication.getmUserInfo().getUser();
         Map<String, Object> map = new HashMap<>();
         map.put("total_fee", pay);
-        map.put("body", user.getDisplayName()+"缴纳"+tvPayTime.getText().toString().trim()+"党费"+pay+"元");
+        map.put("body", user.getDisplayName() + "缴纳" + tvPayTime.getText().toString().trim() + "党费" + pay + "元");
         map.put("memberid", user.getUserId());
         map.put("ifSubstitute", 1);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
-                .alipayToApp(map,MyApplication.getLoginBean().getToken())
+                .alipayToApp(map, MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ResponseObserver<AliPay>(this) {
@@ -138,13 +140,13 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
         User user = MyApplication.getmUserInfo().getUser();
         Map<String, Object> map = new HashMap<>();
         map.put("total_fee", pay);
-        map.put("body", user.getDisplayName()+"缴纳"+tvPayTime.getText().toString().trim()+"党费"+pay+"元");
+        map.put("body", user.getDisplayName() + "缴纳" + tvPayTime.getText().toString().trim() + "党费" + pay + "元");
         map.put("memberid", user.getLoginName());
         map.put("ifSubstitute", 1);
-        map.put("attach","payPartyPayment@"+user.getLoginName()+"@1");
-        map.put("partyPaymentIds",partyPaymentHisId);
+        map.put("attach", "payPartyPayment@" + user.getLoginName() + "@1");
+        map.put("partyPaymentIds", partyPaymentHisId);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
-                .wxPayToApp(map,MyApplication.getLoginBean().getToken())
+                .wxPayToApp(map, MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ResponseObserver<WechatPay>(this) {
@@ -152,16 +154,16 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
                     protected void onNext(WechatPay response) {
                         Log.e("onNext=", response.toString());
                         if (response != null) {
-                            Log.i("yy--Sing==",response.getSign()
-                            +"==Prepayid=="+response.getPrepayid()+"===AppId=="+response.getAppId() +"==NonceStr=="+
-                                    response.getNonceStr()+"==Timestamp==="+response.getTimestamp()+"=="
-                            +"===PackageName==="+response.getPackageName()
-                            +"==PartnerId=="+response.getPartnerId());
+                            Log.i("yy--Sing==", response.getSign()
+                                    + "==Prepayid==" + response.getPrepayid() + "===AppId==" + response.getAppId() + "==NonceStr==" +
+                                    response.getNonceStr() + "==Timestamp===" + response.getTimestamp() + "=="
+                                    + "===PackageName===" + response.getPackageName()
+                                    + "==PartnerId==" + response.getPartnerId());
                             WechatApi.WXPayBuilder builder = new WechatApi.WXPayBuilder();
-                           WechatApi wechatApi = builder.setPrepayId(response.getPrepayid())
+                            WechatApi wechatApi = builder.setPrepayId(response.getPrepayid())
                                     .setAppId(response.getAppId())
                                     .setNonceStr(response.getNonceStr())
-                                    .setTimeStamp(response.getTimestamp()+"")
+                                    .setTimeStamp(response.getTimestamp() + "")
                                     .setPackageValue(response.getPackageName())
                                     .setSign(response.getSign())
                                     .setPartnerId(response.getPartnerId())

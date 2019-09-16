@@ -73,6 +73,7 @@ public class Act_Party_Membership extends BaseActivity {
             intent.putExtra("pay", responsePartyPayment.getMoney());
             intent.putExtra("partyPaymentHisId", responsePartyPayment.getPartyPaymentHisId()+"");
             startActivity(intent);
+
         });
         //我的组织
         findViewById(R.id.tvRight).setOnClickListener(myOrgnize->{
@@ -94,6 +95,31 @@ public class Act_Party_Membership extends BaseActivity {
 
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
+                .queryMyPartyPaymentHisPageList( MyApplication.getLoginBean().getToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResponseObserver<ResponsePartyPayment>(getActivity()) {
+
+                    @Override
+                    protected void onNext(ResponsePartyPayment response) {
+                        if (response == null) return;
+                        Log.e("onNext= ", response.toString());
+                        responsePartyPayment = response;
+                        initPayView(response);
+                    }
+
+                    @Override
+                    protected void onError(Throwable e) {
+                        super.onError(e);
+                        Log.e("Throwable= ", e.getMessage());
+                    }
+                }.actual());
     }
 
     @Override
