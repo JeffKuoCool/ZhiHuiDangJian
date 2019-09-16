@@ -212,9 +212,7 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
         if(aMap == null){
             aMap = mapView.getMap();
         }
-
         setLocationCallBack();
-
         //设置定位监听
         aMap.setLocationSource(this);
         //设置缩放级别

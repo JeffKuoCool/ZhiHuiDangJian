@@ -104,7 +104,7 @@ public class Fgt_Forest_List extends BaseBindViewFragment {
                     TextView tvContent = holder.getConvertView().findViewById(R.id.tv_content);
                     tvContent.setText(data.getDeptName());
                     ImageView image = holder.getConvertView().findViewById(R.id.image);
-                    String url = ApiConstant.ROOT_URL + data.getThumbnailUrl();
+                    String url = ApiConstant.ROOT_URL + data.getLogo();
                     Glide.with(getActivity()).load(url).into(image);
                     holder.getConvertView().setOnClickListener(detail->{
                         Intent intent = new Intent(holder.getConvertView().getContext(), ForestDetailActivity.class);
