@@ -8,18 +8,20 @@ import java.util.List;
  * @description:
  */
 public class DeptDetail {
-
     private Dept dept;
     private List<DeptDetailUser> userlist;
     private List<String> directorNameList;
-    private List<OLisfForEacherList> oLisfForEacherList;
+    //组织生活
+    private List<OLisfForEacherList> oListForEacherList;
+    //周报
+    private List<OLisfForEacherList> weekEacherList;
 
     public List<OLisfForEacherList> getoLisfForEacherList() {
-        return oLisfForEacherList;
+        return oListForEacherList;
     }
 
     public void setoLisfForEacherList(List<OLisfForEacherList> oLisfForEacherList) {
-        this.oLisfForEacherList = oLisfForEacherList;
+        this.oListForEacherList = oLisfForEacherList;
     }
 
     public Dept getDept() {
@@ -45,23 +47,31 @@ public class DeptDetail {
     public void setDirectorNameList(List<String> directorNameList) {
         this.directorNameList = directorNameList;
     }
-    public  class  OLisfForEacherList{
-        private String articalCount;
-        private String month;
+    public static class  OLisfForEacherList{
+        private int articalCount;
+        private int month;
 
-        public String getArticalCount() {
+        public OLisfForEacherList(int articalCount, int month) {
+            this.articalCount = articalCount;
+            this.month = month;
+        }
+
+        public OLisfForEacherList() {
+        }
+
+        public int getArticalCount() {
             return articalCount;
         }
 
-        public void setArticalCount(String articalCount) {
+        public void setArticalCount(int articalCount) {
             this.articalCount = articalCount;
         }
 
-        public String getMonth() {
+        public int getMonth() {
             return month;
         }
 
-        public void setMonth(String month) {
+        public void setMonth(int month) {
             this.month = month;
         }
     }

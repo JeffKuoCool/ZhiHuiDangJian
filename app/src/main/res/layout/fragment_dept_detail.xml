@@ -97,6 +97,55 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/viewOrganize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    style="@style/dept_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:padding="10dp"
+                    android:text="组织生活开展数" />
+
+                <com.lfc.zhihuidangjianapp.widget.BezierView
+                    android:id="@+id/bezierOrganize"
+                    android:layout_margin="@dimen/dip_12"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/viewReport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    style="@style/dept_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:padding="10dp"
+                    android:text="工作周报汇报数" />
+
+                <com.lfc.zhihuidangjianapp.widget.BezierView
+                    android:id="@+id/bezierReport"
+                    android:layout_margin="@dimen/dip_12"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp" />
+
+            </LinearLayout>
+            
+
+            <LinearLayout
                 android:id="@+id/view_member"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

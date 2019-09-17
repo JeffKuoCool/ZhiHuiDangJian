@@ -33,12 +33,15 @@ import com.lfc.zhihuidangjianapp.ui.activity.model.Dept;
 import com.lfc.zhihuidangjianapp.ui.activity.model.DeptDetail;
 import com.lfc.zhihuidangjianapp.ui.activity.model.DeptDetailUser;
 import com.lfc.zhihuidangjianapp.utlis.LocationUtil;
+import com.lfc.zhihuidangjianapp.widget.BezierView;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -57,7 +60,8 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
     TextView tvBriefIntrodection;
     TextView tvAddress;
     RecyclerView recyclerView, rvMember;
-    private LinearLayout viewMember;
+    private BezierView bezierOrganize, bezierReport;
+    private LinearLayout viewMember, viewOrganize, viewReport;
     private TextView tvDeptTitle, tvDirectorTitle;
     private String deptNumber;
     private View mRootView;
@@ -88,11 +92,15 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
         tvDeptTitle = rootView.findViewById(R.id.tv_dept_title);
         tvDirectorTitle = rootView.findViewById(R.id.tv_director_title);
         mapView = rootView.findViewById(R.id.mapView);
-        //TODO 党建矩阵详情折线图 id
         //支部成员列表id
         rv_zblb = rootView.findViewById(R.id.rv_zblb);
         rv_zblb_lin = rootView.findViewById(R.id.rv_zblb_lin);
         rv_zblb_img = rootView.findViewById(R.id.rv_zblb_img);
+        bezierOrganize = rootView.findViewById(R.id.bezierOrganize);
+        bezierReport = rootView.findViewById(R.id.bezierReport);
+        viewOrganize = rootView.findViewById(R.id.viewOrganize);
+        viewReport = rootView.findViewById(R.id.viewReport);
+
         mapView.onCreate(((BaseActivity) getActivity()).savedInstanceState);
     }
 
@@ -182,7 +190,7 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
         List<String> members = response.getDirectorNameList();
         if (members != null && !members.isEmpty()) {
             rvMember.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-           // rvMember.setLayoutManager(new LinearLayoutManager(getActivity()));
+            // rvMember.setLayoutManager(new LinearLayoutManager(getActivity()));
             rvMember.setAdapter(new CommonAdapter<String>(getActivity(), R.layout.item_director_member, members) {
                 @Override
                 protected void convert(ViewHolder holder, String data, int position) {
@@ -194,22 +202,34 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
             mRootView.findViewById(R.id.tv_director_title).setVisibility(View.GONE);
         }
 
-       //根据经纬度进行定位.draggable(true)
-        aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(dept.getLatitude(),dept.getLongitude())));
+        //根据经纬度进行定位.draggable(true)
+        aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(dept.getLatitude(), dept.getLongitude())));
         //添加定位图标
-        aMap.addMarker(locationUtil.getMarkerOption(dept.getDeptAddress(),dept.getLatitude(),dept.getLongitude())).showInfoWindow();
+        aMap.addMarker(locationUtil.getMarkerOption(dept.getDeptAddress(), dept.getLatitude(), dept.getLongitude())).showInfoWindow();
 
-        //TODO 党建矩阵详情折线图
-        //month 月份 articalCount数量
-        String month = response.getoLisfForEacherList().get(0).getMonth();
-        String articalCount = response.getoLisfForEacherList().get(0).getArticalCount();
-        //month 月份 articalCount数量
+        //TODO mock数据
+//        List<DeptDetail.OLisfForEacherList> mock = new ArrayList<>();
+//        for (int i = 0; i < 12; i++) {
+//            mock.add(new DeptDetail.OLisfForEacherList(new Random().nextInt(10) + 1, i + 1));
+//        }
 
+        if(response.getoLisfForEacherList()==null||response.getoLisfForEacherList().isEmpty()){
+            viewOrganize.setVisibility(View.GONE);
+        }else{
+            viewOrganize.setVisibility(View.VISIBLE);
+            bezierOrganize.setData(response.getoLisfForEacherList());
+        }
 
+        if(response.getoLisfForEacherList()==null||response.getoLisfForEacherList().isEmpty()){
+            viewReport.setVisibility(View.GONE);
+        }else{
+            viewReport.setVisibility(View.VISIBLE);
+            bezierReport.setData(response.getoLisfForEacherList());
+        }
     }
 
     private void init() {
-        if(aMap == null){
+        if (aMap == null) {
             aMap = mapView.getMap();
         }
 
@@ -223,11 +243,11 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
         aMap.setMyLocationEnabled(true);
     }
 
-    private void setLocationCallBack(){
+    private void setLocationCallBack() {
 
         locationUtil = new LocationUtil();
 
-         //获取当前定位
+        //获取当前定位
         /* locationUtil.setLocationCallBack(new LocationUtil.ILocationCallBack() {
             @Override
             public void callBack(String str, double lats, double lgts, AMapLocation aMapLocation) {
