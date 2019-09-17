@@ -60,7 +60,7 @@ public class Fgt_Study_Report extends BaseFragment {
 
     @Override
     protected void initData() {
-       Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         map.put("studyStrongBureauType", 2);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
                 .queryMyStudyStrongBureauPageList(map, MyApplication.getLoginBean().getToken())
@@ -84,7 +84,7 @@ public class Fgt_Study_Report extends BaseFragment {
     }
 
     public void setRecyclerView(StudyCraftReportList response) {
-        if(response.getStudyStrongBureauList().getDatas().isEmpty())return;
+        if (response.getStudyStrongBureauList().getDatas().isEmpty()) return;
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyclerView.setAdapter(new CommonAdapter<StudyStrongBureau>(getActivity(), R.layout.item_study_report, response.getStudyStrongBureauList().getDatas()) {
             @Override
@@ -92,13 +92,22 @@ public class Fgt_Study_Report extends BaseFragment {
                 TextView xinde_author = holder.getConvertView().findViewById(R.id.xinde_author);
                 TextView xinde_dept = holder.getConvertView().findViewById(R.id.xinde_dept);
                 TextView xinde_title = holder.getConvertView().findViewById(R.id.xinde_title);
+                //我得心得是否通过(0:是1:否)
+                ImageView xinde_status =holder.getView(R.id.xinde_status);
+                int type = response.getStudyStrongBureauList().getDatas().get(position).getIfPass();
+                if (type == 1) {
+                    xinde_status.setImageResource(R.mipmap.report_zhong);
+                } else {
+                    //xinde_status.setImageResource(R.mipmap.report_no);
+
+                }
                 xinde_title.setText(response.getStudyStrongBureauList().getDatas().get(position).getTitle());
                 xinde_dept.setText(response.getStudyStrongBureauList().getDatas().get(position).getDept());
                 xinde_author.setText(response.getStudyStrongBureauList().getDatas().get(position).getAuthor());
-                holder.getConvertView().setOnClickListener(Act_Strong_Study_Experience->{
+                holder.getConvertView().setOnClickListener(Act_Strong_Study_Experience -> {
                     Intent intent = new Intent(getActivity(), com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Strong_Study_Experience.class);
-                    intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId()+"");
-                    intent.putExtra("appTitle","学习心得");
+                    intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId() + "");
+                    intent.putExtra("appTitle", "学习心得");
                     startActivity(intent);
                 });
             }
