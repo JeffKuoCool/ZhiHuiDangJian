@@ -214,11 +214,11 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
             bezierOrganize.setData(response.getoLisfForEacherList());
         }
 
-        if(response.getoLisfForEacherList()==null||response.getoLisfForEacherList().isEmpty()){
+        if(response.getWeekEacherList()==null||response.getWeekEacherList().isEmpty()){
             viewReport.setVisibility(View.GONE);
         }else{
             viewReport.setVisibility(View.VISIBLE);
-            bezierReport.setData(response.getoLisfForEacherList());
+            bezierReport.setData(response.getWeekEacherList());
         }
     }
 

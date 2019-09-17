@@ -20,6 +20,14 @@ public class DeptDetail {
         return oListForEacherList;
     }
 
+    public List<OLisfForEacherList> getWeekEacherList() {
+        return weekEacherList;
+    }
+
+    public void setWeekEacherList(List<OLisfForEacherList> weekEacherList) {
+        this.weekEacherList = weekEacherList;
+    }
+
     public void setoLisfForEacherList(List<OLisfForEacherList> oLisfForEacherList) {
         this.oListForEacherList = oLisfForEacherList;
     }

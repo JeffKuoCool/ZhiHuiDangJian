@@ -23,6 +23,7 @@ import com.lfc.zhihuidangjianapp.ui.activity.adapter.DividerItemDecoration;
 import com.lfc.zhihuidangjianapp.ui.activity.model.DevelopParty;
 import com.lfc.zhihuidangjianapp.ui.activity.model.NativeDevelopParty;
 import com.lfc.zhihuidangjianapp.ui.activity.model.Payment;
+import com.lfc.zhihuidangjianapp.utlis.DateUtils;
 import com.lfc.zhihuidangjianapp.utlis.DispalyUtil;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -150,7 +151,7 @@ public abstract class BaseDevelopPartyFragment extends BaseFragment {
         picker.setTopPadding(ConvertUtils.toPx(getActivity(), 10));
         picker.setRangeEnd(2050, 1, 11);
         picker.setRangeStart(2016, 8, 29);
-        picker.setSelectedItem(2019, 10, 14);
+        picker.setSelectedItem(DateUtils.getYear(), DateUtils.getMonth(), DateUtils.getDay());
         picker.setResetWhileWheel(false);
         picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
             @Override
