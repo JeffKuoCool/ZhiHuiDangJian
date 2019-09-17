@@ -105,7 +105,13 @@ public class Act_Create_Meeting extends BaseActivity {
         if (requestCode == 1 && data != null) {
             try {
                 String users = data.getStringExtra("users");
-                uiNameList.get(5).setText(users);
+                StringBuilder stringBuilder = new StringBuilder();
+                if(uiNameList.get(5).getText()==null){
+                    stringBuilder.append(users);
+                }else{
+                    stringBuilder.append(uiNameList.get(5).getText()+","+users);
+                }
+                uiNameList.get(5).setText(stringBuilder.toString());
                 setRecyclerView(uiNameList);
             }catch (Exception e){}
         }
@@ -139,6 +145,11 @@ public class Act_Create_Meeting extends BaseActivity {
                     text.setOnClickListener(view -> {
                         selectTime(position, text);
                     });
+                }
+                else if (position == 4){
+                    text.setVisibility(View.VISIBLE);
+                    edit.setVisibility(View.GONE);
+                    text.setText(MyApplication.getmUserInfo().getUser().getSealName());
                 }
                 else if (position == 5) {
                     text.setVisibility(View.VISIBLE);

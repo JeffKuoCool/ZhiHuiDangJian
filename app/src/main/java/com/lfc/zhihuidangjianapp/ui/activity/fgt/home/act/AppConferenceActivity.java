@@ -10,7 +10,6 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hyphenate.EMConferenceListener;
 import com.hyphenate.EMValueCallBack;
@@ -227,7 +226,6 @@ public class AppConferenceActivity extends BaseConferenceActivity {
                                     //发送消息邀请参加会议
                                     EazyChatApi.sendMeeting(users, value.getConferenceId(), value.getPassword());
                                 }
-                                Toast.makeText(activity, "Create and join conference success", Toast.LENGTH_SHORT).show();
                                 if (callBack != null) {
                                     callBack.onSuccess(value);
                                 }
@@ -263,7 +261,6 @@ public class AppConferenceActivity extends BaseConferenceActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(activity, "Join conference success", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -274,7 +271,6 @@ public class AppConferenceActivity extends BaseConferenceActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(activity, "Join conference failed " + error + " " + errorMsg, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -609,7 +605,6 @@ public class AppConferenceActivity extends BaseConferenceActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(activity, " removed conference!", Toast.LENGTH_SHORT).show();
                     updateConferenceMembers();
                 }
             });
@@ -620,8 +615,6 @@ public class AppConferenceActivity extends BaseConferenceActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(activity, emConferenceStream.getUsername() + " stream add!", Toast.LENGTH_SHORT)
-                            .show();
                     addConferenceView(emConferenceStream);
 //                    if (CallFloatWindow.getInstance(getApplicationContext()).isShowing()) { // 通话悬浮窗显示中...
 //                        int position = streamList.indexOf(stream);
@@ -638,7 +631,6 @@ public class AppConferenceActivity extends BaseConferenceActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(activity, stream.getUsername() + " stream removed!", Toast.LENGTH_SHORT).show();
                     if (streamList.contains(stream)) {
                         int position = streamList.indexOf(stream);
                         removeConferenceView(stream);
@@ -658,7 +650,6 @@ public class AppConferenceActivity extends BaseConferenceActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(activity, emConferenceStream.getUsername() + " stream update!", Toast.LENGTH_SHORT).show();
                     updateConferenceMemberView(emConferenceStream);
                 }
             });
@@ -669,7 +660,6 @@ public class AppConferenceActivity extends BaseConferenceActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(activity, "Passive exit " + error + ", message" + error, Toast.LENGTH_SHORT).show();
                     // 隐藏悬浮窗
                     CallFloatWindow.getInstance(getApplicationContext()).dismiss();
                     DeskShareWindow.getInstance(getApplicationContext()).dismiss();
@@ -684,7 +674,6 @@ public class AppConferenceActivity extends BaseConferenceActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(activity, "State=" + conferenceState, Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -702,9 +691,7 @@ public class AppConferenceActivity extends BaseConferenceActivity {
                 public void run() {
                     if (streamId.equals(conference.getPubStreamId(EMConferenceStream.StreamType.NORMAL))
                             || streamId.equals(conference.getPubStreamId(EMConferenceStream.StreamType.DESKTOP))) {
-                        Toast.makeText(activity, "Publish setup streamId=" + streamId, Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(activity, "Subscribe setup streamId=" + streamId, Toast.LENGTH_SHORT).show();
                     }
                 }
             });
