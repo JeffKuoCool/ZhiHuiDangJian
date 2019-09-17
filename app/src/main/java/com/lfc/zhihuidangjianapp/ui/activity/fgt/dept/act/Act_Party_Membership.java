@@ -55,7 +55,7 @@ public class Act_Party_Membership extends BaseActivity {
 
     @Override
     protected void initView() {
-        findViewById(R.id.imgBack).setOnClickListener(back->finish());
+        findViewById(R.id.imgBack).setOnClickListener(back -> finish());
         initImmersionBar(0);
         recyclerView = findViewById(R.id.recyclerView);
         tvPartyShip = findViewById(R.id.tv_party_ship);
@@ -67,30 +67,37 @@ public class Act_Party_Membership extends BaseActivity {
     }
 
     private void setEvent() {
-        viewPartyShip.setOnClickListener(partyShip->{
-            if(responsePartyPayment==null)return;
+        viewPartyShip.setOnClickListener(partyShip -> {
+            if (responsePartyPayment == null) return;
             Intent intent = new Intent(this, Act_Party_Pay.class);
             intent.putExtra("pay", responsePartyPayment.getMoney());
-            intent.putExtra("partyPaymentHisId", responsePartyPayment.getPartyPaymentHisId()+"");
+            intent.putExtra("partyPaymentHisId", responsePartyPayment.getPartyPaymentHisId() + "");
             startActivity(intent);
 
         });
         //我的组织
-        findViewById(R.id.tvRight).setOnClickListener(myOrgnize->{
+        findViewById(R.id.tvRight).setOnClickListener(myOrgnize -> {
             startActivity(new Intent(this, MyOrgnizeActivity.class));
         });
     }
 
-    private void initPayView(ResponsePartyPayment response){
-        tvPartyShip.setText("需缴纳党费"+response.getMoney()+"元");
-        Glide.with(this).load(ApiConstant.ROOT_URL+MyApplication.getmUserInfo().getUser().getImgAddress()).into(ivHead);
+    private void initPayView(ResponsePartyPayment response) {
+        tvPartyShip.setText("需缴纳党费" + response.getMoney() + "元");
+        Glide.with(this).load(ApiConstant.ROOT_URL + MyApplication.getmUserInfo().getUser().getImgAddress()).into(ivHead);
         tvName.setText(response.getUserName());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(new CommonAdapter<PartyPayment>(getActivity(), R.layout.item_party_membership, response.getPartyPaymentHisList().getDatas()) {
             @Override
             protected void convert(ViewHolder holder, PartyPayment data, int position) {
-                holder.setText(R.id.tv_ship, data.getPayYearMonth()+"已缴党费"+data.getMoney()+"元");
+                //缴费状态(0:已缴纳1:未缴纳)
+                int payStatus = data.getPayStatus();
+                if (payStatus == 0) {
+                    holder.setText(R.id.tv_ship_status, "已缴纳");
+                } else {
+                    holder.setText(R.id.tv_ship_status, "未缴纳");
+                }
+                holder.setText(R.id.tv_ship, data.getPayYearMonth() + "缴纳党费" + data.getMoney() + "元");
             }
 
         });
@@ -101,7 +108,7 @@ public class Act_Party_Membership extends BaseActivity {
     protected void onResume() {
         super.onResume();
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
-                .queryMyPartyPaymentHisPageList( MyApplication.getLoginBean().getToken())
+                .queryMyPartyPaymentHisPageList(MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ResponseObserver<ResponsePartyPayment>(getActivity()) {
@@ -125,7 +132,7 @@ public class Act_Party_Membership extends BaseActivity {
     @Override
     protected void initData() {
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
-                .queryMyPartyPaymentHisPageList( MyApplication.getLoginBean().getToken())
+                .queryMyPartyPaymentHisPageList(MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ResponseObserver<ResponsePartyPayment>(getActivity()) {

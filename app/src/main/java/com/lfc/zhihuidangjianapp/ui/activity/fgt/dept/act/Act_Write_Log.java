@@ -46,6 +46,7 @@ public class Act_Write_Log extends BaseActivity {
     private String branchName;
 
     private long reportTime;
+    private String releaseDate;
 
     @Override
     protected int getLayoutId() {
@@ -70,6 +71,7 @@ public class Act_Write_Log extends BaseActivity {
         branchName = MyApplication.getmUserInfo().getUser().getDeptName();
         reportTime = System.currentTimeMillis();
         tvBranchName.setText(tvBranchName.getText()+branchName);
+        releaseDate = DateUtils.timeStampToStr(reportTime, "");
         tvReportTime.setText(tvReportTime.getText()+ DateUtils.timeStampToStr(reportTime, ""));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -103,6 +105,7 @@ public class Act_Write_Log extends BaseActivity {
 
     private void setEvent() {
         tvSubmit.setOnClickListener(submit->{
+            toast("zhoubap");
             if(unWriteLog()){
                 showTextToast("请填写周报内容");
                 return;
@@ -112,6 +115,7 @@ public class Act_Write_Log extends BaseActivity {
                 map.put("comment"+(i+1), contents[i]);
             }
             map.put("title", etTitle.getText().toString().trim());
+            map.put("releaseDate",releaseDate);
             RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
                     .insertWeeklyWorkReport( map,MyApplication.getLoginBean().getToken())
                     .subscribeOn(Schedulers.io())

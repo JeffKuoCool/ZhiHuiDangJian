@@ -124,7 +124,7 @@
         <TextView
             android:id="@+id/tv_submit"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_gravity="bottom"
             style="@style/btn_submit"
             android:text="保存"/>
