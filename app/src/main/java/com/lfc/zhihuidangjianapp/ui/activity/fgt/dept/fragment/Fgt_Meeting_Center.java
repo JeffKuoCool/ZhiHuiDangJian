@@ -92,6 +92,11 @@ public class Fgt_Meeting_Center extends BaseFragment {
         recyclerView.setAdapter(new CommonAdapter<Meeting>(MyApplication.getAppContext(), R.layout.item_meeting_center, response) {
             @Override
             protected void convert(ViewHolder holder, Meeting data, int position) {
+                holder.setText(R.id.tv_title, data.getTitle());
+                holder.setText(R.id.tv_start_time, "会议开始时间："+data.getStartTime());
+                holder.setText(R.id.tv_create_name, "会议创建人："+data.getSendPerson());
+               // holder.setText(R.id.tv_title, data.getTitle());
+              //  holder.setText(R.id.tv_title, data.getTitle());
                 if(TextUtils.isEmpty(data.getConfrId())&&!data.getCreateCode().equals(MyApplication.getmUserInfo().getUser().getLoginName())){
                     //会议室不存在，不是创建人无权限进入会议
                     return;
@@ -100,11 +105,7 @@ public class Fgt_Meeting_Center extends BaseFragment {
                 String pwd = MyApplication.getmUserInfo().getUser().getImPwd();
                 //登录环信
                 EazyChatApi.loginChat(username, pwd, (BaseActivity) getActivity(), null);
-                holder.setText(R.id.tv_title, data.getTitle());
-                holder.setText(R.id.tv_start_time, "会议开始时间："+data.getStartTime());
-                holder.setText(R.id.tv_create_name, "会议创建人："+data.getSendPerson());
-                holder.setText(R.id.tv_title, data.getTitle());
-                holder.setText(R.id.tv_title, data.getTitle());
+
                 holder.getConvertView().findViewById(R.id.tv_join_meeting).setOnClickListener(confe->{
                     //进入会议
                     Intent intent = new Intent(getActivity(), AppConferenceActivity.class);

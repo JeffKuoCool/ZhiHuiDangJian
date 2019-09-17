@@ -363,6 +363,9 @@ public class Fgt_Study_Report_Query extends BaseFragment {
                                     list.add(phBean1);
                                 }
                                 getSetPop(list, type);
+                            }else{
+                                toast("暂无权限");
+                                popupWindows_pop.dismiss();
                             }
                         }
 
@@ -392,6 +395,9 @@ public class Fgt_Study_Report_Query extends BaseFragment {
                                     list.add(phBean1);
                                 }
                                 getSetPop(list, type);
+                            }else{
+                                toast("暂无权限");
+                                popupWindows_pop.dismiss();
                             }
                         }
 
@@ -422,6 +428,9 @@ public class Fgt_Study_Report_Query extends BaseFragment {
                                     list.add(phBean1);
                                 }
                                 getSetPop(list, type);
+                            }else{
+                                toast("暂无权限");
+                                popupWindows_pop.dismiss();
                             }
                         }
 

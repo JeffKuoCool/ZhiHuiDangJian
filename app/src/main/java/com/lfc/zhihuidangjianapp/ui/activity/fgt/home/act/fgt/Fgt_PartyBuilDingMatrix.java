@@ -43,7 +43,7 @@ import io.reactivex.schedulers.Schedulers;
  * 党建矩阵fragment
  */
 public class Fgt_PartyBuilDingMatrix extends BaseFragment {
-    private String deptNumber = "10002";
+    private String deptNumber = "10001";
 
     RecyclerView recyclerView;
 

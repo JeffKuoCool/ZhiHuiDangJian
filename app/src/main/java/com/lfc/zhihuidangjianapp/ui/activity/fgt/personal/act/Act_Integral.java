@@ -99,10 +99,10 @@ public class Act_Integral extends BaseActivity {
                         String loginStatus = response.getLoginStatus();
                         String moneyStatus = response.getMoneyStatus();
                         String weekStatus = response.getWeekStatus();
-                        Log.i("yy--loginStatus",loginStatus);
+                        Log.i("yy--loginStatus",loginStatus +"=="+moneyStatus+"=="+weekStatus);
                         setImg(loginStatus,intergral_text3);
-                        setImg(moneyStatus,intergral_text4);
-                        setImg(weekStatus,intergral_text6);
+                        setImg(moneyStatus,intergral_text6);
+                        setImg(weekStatus,intergral_text4);
                         intergral_text5.setText("已完成"+response.getBureauCount()+"篇");
                     }
 
@@ -160,6 +160,7 @@ public class Act_Integral extends BaseActivity {
                 break;
             case R.id.intergral_text6://党费缴纳
                 startActivity(new Intent(getActivity(), Act_Party_Membership.class));
+                finish();
                 break;
         }
     }

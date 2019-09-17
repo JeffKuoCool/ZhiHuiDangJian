@@ -64,6 +64,7 @@ public class Act_Party_membershipDues extends BaseActivity implements View.OnCli
     private void setEvent() {
         tvPayParty.setOnClickListener(pay -> {
             startActivity(new Intent(getContext(), Act_Party_Pay.class));
+            finish();
         });
     }
 
@@ -72,6 +73,8 @@ public class Act_Party_membershipDues extends BaseActivity implements View.OnCli
 //        queryMyPartyPaymentHisPageList();
         queryPartyPaymentHisPageList();
     }
+
+
 
     @Override
     public void onClick(View v) {

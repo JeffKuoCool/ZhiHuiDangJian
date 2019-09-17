@@ -1,6 +1,7 @@
 package com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.demonstration_leadership.fgt;
 
 import android.content.Intent;
+import android.media.Image;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +17,9 @@ import com.hjq.toast.ToastUtils;
 import com.lfc.zhihuidangjianapp.R;
 import com.lfc.zhihuidangjianapp.app.MyApplication;
 import com.lfc.zhihuidangjianapp.base.BaseFragment;
+import com.lfc.zhihuidangjianapp.net.http.ApiConstant;
 import com.lfc.zhihuidangjianapp.net.http.HttpHelper;
+import com.lfc.zhihuidangjianapp.net.http.HttpService;
 import com.lfc.zhihuidangjianapp.ui.activity.adapter.DividerItemDecoration;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.Act_TitleDetails;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.demonstration_leadership.adapter.Demonstration_LeadershipAdapter;
@@ -106,11 +109,13 @@ public class Fgt_Demonstration_Leadership extends BaseFragment implements View.O
         queryLeadDemonstrationPageList();
         ArrayList<String> list =new ArrayList<>();
 
-        list.add("http://58.87.96.160:8081/PathLogo/20190909/d97e6890-d87d-4c1f-88cf-343fffaa4a97_0.5.jpg");
-        list.add("http://58.87.96.160:8081/PathLogo/20190909/7e2cd9cb-da1f-4b8a-b82f-9d07b334ec8e_0.5.jpg");
+        list.add(ApiConstant.ROOT_URL +"Path/20190912/99759f6a-dd6a-4846-a9e3-23df330d44f9.jpg");
+        list.add(ApiConstant.ROOT_URL +"Path/20190912/501d5375-1ed6-4e9e-b1c4-c9e1bf6a9147.jpg");
         ArrayList<String> list2 =new ArrayList<>();
-        list2.add("http://58.87.96.160:8081/PathLogo/20190909/8c907979-0993-44b7-b172-f298ff3e5977_0.5.jpg");
-        list2.add("http://58.87.96.160:8081/PathLogo/20190909/7e2cd9cb-da1f-4b8a-b82f-9d07b334ec8e_0.5.jpg");
+        list2.add(ApiConstant.ROOT_URL +"Path/20190912/b64de694-5faf-40f5-8c50-3a2e5aa94f63.jpg");
+        list2.add(ApiConstant.ROOT_URL +"Path/20190912/286398c2-d80e-43b1-b377-382322af57cc.jpg");
+
+
         /**
          * 专题专栏
          * 引领示范类型(0:不忘初心 牢记使命1:改革创新 奋发有为)
@@ -126,10 +131,7 @@ public class Fgt_Demonstration_Leadership extends BaseFragment implements View.O
     private void setOneData(final List<String> banner) {
 
         final ArrayList<String> p_list = new ArrayList<String>();
-       /* for (int i = 0; i < banner.size(); i++) {
-            String image = banner.get(i).getPic();
-            p_list.add(image);
-        }*/
+
         mBanner.setImageLoader(new GlideImage());
 
         //设置图片集合
@@ -152,7 +154,6 @@ public class Fgt_Demonstration_Leadership extends BaseFragment implements View.O
         });
         //banner设置方法全部调用完毕时最后调用
         mBanner.start();
-
 
     }
     @Override
