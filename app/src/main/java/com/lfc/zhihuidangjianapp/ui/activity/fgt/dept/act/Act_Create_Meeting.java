@@ -66,7 +66,6 @@ public class Act_Create_Meeting extends BaseActivity {
         recyclerView = findViewById(R.id.recyclerView);
         setRecyclerView(uiNameList);
         setEvent();
-        RxBus.get().register(this);
     }
 
     private void setEvent() {

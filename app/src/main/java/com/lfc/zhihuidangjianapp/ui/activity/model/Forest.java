@@ -29,6 +29,15 @@ public class Forest implements Serializable {
     private String thumbnailAppUrl;
     private String thumbnailSmallUrl;
     private String thumbnailUrl;
+    private String logo;
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 
     public void setAuthor(String author) {
         this.author = author;

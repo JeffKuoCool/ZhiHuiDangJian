@@ -287,7 +287,6 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
 
             @Override
             public void sendMessage(String message) {
-                RxBus.get().post(new BusEvent(-1));
                 sendTextMessage(message);
             }
 
@@ -320,9 +319,6 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
                 }
                 mRecordVoiceService.play(voiceMessageBody.getLocalUrl());
             }
-        }
-        if (rxBusEvent.getEvent() == -1) {
-            toast("event");
         }
     }
 

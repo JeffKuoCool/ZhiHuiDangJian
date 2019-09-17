@@ -97,7 +97,7 @@ public class Act_Integral_mingxi extends BaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(MyApplication.getAppContext()));
         recyclerView.setAdapter(new CommonAdapter<MyInteagalBeabMingXI.IntegralDetailListBean.DatasBean>(MyApplication.getAppContext(), R.layout.item_integral_list, workReportList) {
             @Override
-            protected void convert(ViewHolder holder, MyInteagalBeabMingXI.IntegralDetailListBean.DatasBean data, int position) {
+            protected void convert(ViewHolder holder, MyInteagalBeabMingXI.IntegralDetailListBean.DatasBean      data, int position) {
                 int type = data.getType();
                 //类型(0:登录1:周报2:心得3:党费)
                 if(type==0){

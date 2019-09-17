@@ -28,7 +28,10 @@ public class BezierView extends View {
 
     private float mWidth, mHeight;
 
-    private int count = 11;
+    //x轴
+    private int countX = 11;
+    //y轴
+    private int countY = 5;
 
     private Paint mCirclePaint, mCubicPaint, mtextPaint, mXPaint;
 
@@ -88,19 +91,29 @@ public class BezierView extends View {
 
         int maxData = Collections.max(partIntegerList(mData));
         int minData = Collections.min(partIntegerList(mData));
+        //数据源y轴数据都是0赋值默认最大值
+        if (maxData == 0) {
+            maxData = 10;
+        }
 
         float base = mHeight / (maxData - minData);
-        //画水平线
-        for (int i = 0; i < (maxData - minData); i++) {
-            canvas.drawLine(2 * textWidth, i * base + textWidth, mWidth + 2 * textWidth + margin, i * base + textWidth, mXPaint);
+
+        int baseHeightY = (maxData - minData) / countY;
+        //原点文字
+        canvas.drawText("0", textWidth, mHeight + textWidth + textWidth / 4, mtextPaint);
+        //x轴
+        canvas.drawLine(2 * textWidth, mHeight + textWidth, mWidth + 2 * textWidth + margin, mHeight + textWidth, mXPaint);
+        for (int i = 0; i < countY; i++) {
+            //画水平线
+            canvas.drawLine(2 * textWidth, i * mHeight/countY + textWidth, mWidth + 2 * textWidth + margin, i * mHeight/countY + textWidth, mXPaint);
             //y轴文字
-            canvas.drawText(((long) (mHeight - i * base - minData)) + "", textWidth, i * base + textWidth + textWidth / 4, mtextPaint);
+            canvas.drawText(maxData - i * baseHeightY+"", textWidth, i * mHeight/countY + textWidth + textWidth / 4, mtextPaint);
         }
 
         for (int i = 0; i < mData.size(); i++) {
             DeptDetail.OLisfForEacherList detail = mData.get(i);
             //点圆心
-            float centerX = mWidth / count * (detail.getMonth() - 1) + radio + 2 * textWidth;
+            float centerX = mWidth / countX * (detail.getMonth() - 1) + radio + 2 * textWidth;
             float centerY = mHeight - base * (detail.getArticalCount() - minData) + textWidth;
 
             //绘制x轴数据
@@ -110,12 +123,12 @@ public class BezierView extends View {
             //绘制数据曲线
             if (i > 0) {
                 DeptDetail.OLisfForEacherList lastDetail = mData.get(i - 1);
-                float lastCenterX = mWidth / count * (lastDetail.getMonth() - 1) + radio + 2 * textWidth;
+                float lastCenterX = mWidth / countX * (lastDetail.getMonth() - 1) + radio + 2 * textWidth;
                 float lastCenterY = mHeight - base * (lastDetail.getArticalCount() - minData) + textWidth;
 
                 Path path = new Path();
                 path.moveTo(lastCenterX, lastCenterY);
-                path.cubicTo(lastCenterX + mWidth / count / 2, lastCenterY, lastCenterX + mWidth / count / 2, centerY,
+                path.cubicTo(lastCenterX + mWidth / countX / 2, lastCenterY, lastCenterX + mWidth / countX / 2, centerY,
                         centerX, centerY);
                 canvas.drawPath(path, mCubicPaint);
             }
@@ -135,13 +148,13 @@ public class BezierView extends View {
         if (data == null || data.isEmpty()) {
             return;
         }
-        if (data.size() < count) {
+        if (data.size() < countX) {
             //月数不足12根据已有数据重组
             List<DeptDetail.OLisfForEacherList> newlist = new ArrayList<>();
-            for (int i = 0; i < count; i++) {
-                DeptDetail.OLisfForEacherList newDetail = new DeptDetail.OLisfForEacherList(0, i+1);
+            for (int i = 0; i < countX; i++) {
+                DeptDetail.OLisfForEacherList newDetail = new DeptDetail.OLisfForEacherList(0, i + 1);
                 for (int j = 0; j < data.size(); j++) {
-                    if(data.get(j).getMonth()==(i+1)){
+                    if (data.get(j).getMonth() == (i + 1)) {
                         newDetail = data.get(j);
                     }
                 }

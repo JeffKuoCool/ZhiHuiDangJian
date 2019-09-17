@@ -207,12 +207,6 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
         //添加定位图标
         aMap.addMarker(locationUtil.getMarkerOption(dept.getDeptAddress(), dept.getLatitude(), dept.getLongitude())).showInfoWindow();
 
-        //TODO mock数据
-//        List<DeptDetail.OLisfForEacherList> mock = new ArrayList<>();
-//        for (int i = 0; i < 12; i++) {
-//            mock.add(new DeptDetail.OLisfForEacherList(new Random().nextInt(10) + 1, i + 1));
-//        }
-
         if(response.getoLisfForEacherList()==null||response.getoLisfForEacherList().isEmpty()){
             viewOrganize.setVisibility(View.GONE);
         }else{
@@ -232,9 +226,7 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
         if (aMap == null) {
             aMap = mapView.getMap();
         }
-
         setLocationCallBack();
-
         //设置定位监听
         aMap.setLocationSource(this);
         //设置缩放级别

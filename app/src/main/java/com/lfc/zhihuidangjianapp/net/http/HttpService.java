@@ -514,5 +514,14 @@ public interface HttpService {
     @POST("/integralManagement/queryMyIntegralDetailPageList")
     Observable<BaseResponse<MyInteagalBeabMingXI>> queryMyIntegralDetailPageList(@QueryMap Map<String, Object> map, @Header("token") String token);
 
+    /**
+     * 周报查询党支部
+     *
+     * @param map
+     * @param token
+     * @return
+     */
+    @POST(ApiConstant.API + "/queryDeptDetail")
+    Observable<BaseResponse<QueryPopBean>> queryDeptDetail_Q(@QueryMap Map<String, Object> map, @Header("token") String token);
 
 }
