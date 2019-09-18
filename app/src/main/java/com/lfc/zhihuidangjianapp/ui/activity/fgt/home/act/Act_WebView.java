@@ -30,7 +30,7 @@ import butterknife.OnClick;
 public class Act_WebView extends BaseActivity {
     @BindView(R.id.imgBack)
     ImageView imgBack;
-    @BindView(R.id.textTitle)
+    @BindView(R.id.tv_titles)
     TextView textTitle;
     @BindView(R.id.webView)
     WebView webView;

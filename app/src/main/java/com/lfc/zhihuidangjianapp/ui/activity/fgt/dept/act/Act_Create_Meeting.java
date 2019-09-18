@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 import cn.qqtheme.framework.picker.DatePicker;
+import cn.qqtheme.framework.picker.DateTimePicker;
 import cn.qqtheme.framework.util.ConvertUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -189,18 +190,16 @@ public class Act_Create_Meeting extends BaseActivity {
 
 
     private void selectTime(final int position, TextView text) {
-        final DatePicker picker = new DatePicker(this);
-        picker.setCanceledOnTouchOutside(true);
-        picker.setUseWeight(true);
-        picker.setTopPadding(ConvertUtils.toPx(this, 10));
-        picker.setRangeEnd(2050, 1, 11);
-        picker.setRangeStart(2016, 8, 29);
-        picker.setSelectedItem(DateUtils.getYear(), DateUtils.getMonth(), DateUtils.getDay());
-        picker.setResetWhileWheel(false);
-        picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
+        DateTimePicker picker = new DateTimePicker(this, DateTimePicker.HOUR_24);
+        picker.setDateRangeStart(DateUtils.getYear(), 1, 1);
+        picker.setDateRangeEnd(DateUtils.getYear()+2, 12, 31);
+        picker.setTimeRangeStart(0, 0);
+        picker.setTimeRangeEnd(23, 59);
+        picker.setSelectedItem(DateUtils.getYear(), DateUtils.getMonth(), DateUtils.getDay(), DateUtils.getHour(), DateUtils.getMinute());
+        picker.setOnDateTimePickListener(new DateTimePicker.OnYearMonthDayTimePickListener() {
             @Override
-            public void onDatePicked(String year, String month, String day) {
-                String time = year + "-" + month + "-" + day + " 00:00:00";
+            public void onDateTimePicked(String year, String month, String day, String hour, String minute) {
+                String time = year + "-" + month + "-" + day + " "+hour+":"+minute;
                 text.setText(time);
                 uiNameList.get(position).setText(time);
             }
