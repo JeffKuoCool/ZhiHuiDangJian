@@ -105,7 +105,6 @@ public class Act_Write_Log extends BaseActivity {
 
     private void setEvent() {
         tvSubmit.setOnClickListener(submit->{
-            toast("zhoubap");
             if(unWriteLog()){
                 showTextToast("请填写周报内容");
                 return;

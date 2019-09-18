@@ -6,6 +6,7 @@ import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopRyBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.WeekendDetailsBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.queryUserListByFirstPinYinBean;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.bean.ZtBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.bean.MyInteagalBeabMingXI;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.bean.MyIntegalBean;
 import com.lfc.zhihuidangjianapp.ui.activity.model.AliPay;
@@ -523,5 +524,9 @@ public interface HttpService {
      */
     @POST(ApiConstant.API + "/queryDeptDetail")
     Observable<BaseResponse<QueryPopBean>> queryDeptDetail_Q(@QueryMap Map<String, Object> map, @Header("token") String token);
+
+    //专题--列表
+    @POST("appApi/queryLeadDemonstrationPageList")
+    Observable<BaseResponse<ZtBean>> queryLeadDemonstrationPageList_new(@QueryMap Map<String, String> map, @Header("token") String token);
 
 }

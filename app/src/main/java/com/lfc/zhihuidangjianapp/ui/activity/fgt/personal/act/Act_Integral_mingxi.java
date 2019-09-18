@@ -2,6 +2,7 @@ package com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,18 +16,24 @@ import com.lfc.zhihuidangjianapp.base.BaseActivity;
 import com.lfc.zhihuidangjianapp.net.http.HttpService;
 import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
 import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
-import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Fgt_Weekend_Details;
+
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.bean.MyInteagalBeabMingXI;
-import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.bean.MyIntegalBean;
-import com.lfc.zhihuidangjianapp.ui.activity.model.WorkReport;
+
 import com.lfc.zhihuidangjianapp.utlis.DateUtils;
+
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
-import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +43,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-
 public class Act_Integral_mingxi extends BaseActivity {
     @BindView(R.id.imgBack)
     ImageView imgBack;
@@ -50,6 +56,8 @@ public class Act_Integral_mingxi extends BaseActivity {
     SmartRefreshLayout mRefreshLayout;
     private int size=10;
     private int num=1;
+    private boolean isData = true;
+    List<MyInteagalBeabMingXI.IntegralDetailListBean.DatasBean> datas_new = new ArrayList<>();
     @Override
     protected int getLayoutId() {
         return R.layout.activity_integral_mingxi;
@@ -68,9 +76,40 @@ public class Act_Integral_mingxi extends BaseActivity {
 
     @Override
     protected void initData() {
+
+
+    }
+    private void refresh() {
+
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+
+                num = 1;
+                getDatas();
+                refreshlayout.finishRefresh(2000);
+
+            }
+        });
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                if (!isData) {
+                        //                mDefineBAGLoadView.setFooterTextOrImage("没有更多数据", false);
+                } else {
+                    //                    mDefineBAGLoadView.setFooterTextOrImage("正在玩命加载中...", true);
+                    num++;
+                    getDatas();
+                }
+                refreshLayout.finishLoadMore(2000);
+            }
+        });
+
+    }
+    private void getDatas() {
         Map<String, Object> map = new HashMap<>();
         map.put("pageSize", size);
-        map.put("pageNum", num);
+        map.put("pageNumber", num);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
                 .queryMyIntegralDetailPageList(map,MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
@@ -80,8 +119,34 @@ public class Act_Integral_mingxi extends BaseActivity {
                     @Override
                     protected void onNext(MyInteagalBeabMingXI response) {
                         Log.e("onNext= ", response.toString());
+                        List<MyInteagalBeabMingXI.IntegralDetailListBean.DatasBean> datas = response.getIntegralDetailList().getDatas();
                         if (response == null) return;
-                       setRecyclerView(response.getIntegralDetailList().getDatas());
+                        if (num == 1) {
+                            datas_new.clear();
+                        }
+                        if (datas.size() == 0) {
+                            if (num == 1 && datas_new.size() == 0) {
+                                isData = true;
+                                num--;
+                            } else {
+                                isData = false;
+                            }
+                        } else {
+                            datas_new.addAll(datas);
+                            if (datas.size() < 8) {
+                                isData = false;
+                            } else {
+                                isData = true;
+                            }
+                           /* if (mShopAdapter == null) {
+                                setRecyclerView(datas);
+                            } else {
+                                mShopAdapter.notifyDataSetChanged();
+                            }*/
+                            setRecyclerView(datas_new);
+
+                        }
+
                     }
 
                     @Override
@@ -93,7 +158,6 @@ public class Act_Integral_mingxi extends BaseActivity {
     }
 
     private void setRecyclerView(List<MyInteagalBeabMingXI.IntegralDetailListBean.DatasBean> workReportList) {
-
         recyclerView.setLayoutManager(new LinearLayoutManager(MyApplication.getAppContext()));
         recyclerView.setAdapter(new CommonAdapter<MyInteagalBeabMingXI.IntegralDetailListBean.DatasBean>(MyApplication.getAppContext(), R.layout.item_integral_list, workReportList) {
             @Override
@@ -117,10 +181,8 @@ public class Act_Integral_mingxi extends BaseActivity {
 
                 });
             }
-
         });
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,15 +196,12 @@ public class Act_Integral_mingxi extends BaseActivity {
         mRefreshLayout.setEnableHeaderTranslationContent(true);
         //设置 Header 为 Material风格
         mRefreshLayout.setRefreshHeader(new MaterialHeader(getContext()).setShowBezierWave(false));
-        //设置 Footer 为 球脉冲
-        mRefreshLayout.setRefreshFooter(new BallPulseFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
-        mRefreshLayout.setOnRefreshListener(refreshlayout -> {
-            refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
-        });
-        mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
-
-            refreshLayout.finishLoadMore(2000/*,false*/);//传入false表示刷新失败
-        });
+        //设置 Footer 为 普通样式
+        mRefreshLayout.setRefreshFooter(new ClassicsFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+        //设置 Header 为 普通样式
+        mRefreshLayout.setRefreshHeader(new ClassicsHeader(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+        refresh();
+        getDatas();
     }
 
     @OnClick({R.id.imgBack, R.id.tvRight})

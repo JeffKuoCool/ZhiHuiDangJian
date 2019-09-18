@@ -1,10 +1,14 @@
 package com.lfc.zhihuidangjianapp.ui.activity;
 
+import android.content.Intent;
+import android.graphics.Paint;
 import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -19,6 +23,7 @@ import com.lfc.zhihuidangjianapp.bean.LoginBean;
 import com.lfc.zhihuidangjianapp.chat.EazyChatApi;
 import com.lfc.zhihuidangjianapp.net.http.ApiConstant;
 import com.lfc.zhihuidangjianapp.net.http.HttpHelper;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.Act_WebView;
 import com.lfc.zhihuidangjianapp.utlis.ACache;
 
 import java.util.Locale;
@@ -37,6 +42,8 @@ public class Act_Login extends BaseActivity {
     ImageView ivCode;
     @BindView(R.id.et_code)
     EditText etCode;
+    @BindView(R.id.yingsi)
+    TextView yingsi;
     private TextToSpeech textToSpeech = null;//创建自带语音对象
     private ACache aCache;
     private static final String TAG = "LoginActivity";
@@ -67,12 +74,22 @@ public class Act_Login extends BaseActivity {
 //        }
         captcha();
         setEvent();
-
+        yingsi.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); //下划线
+        yingsi.getPaint().setAntiAlias(true);//抗锯齿
     }
 
     private void setEvent() {
         ivCode.setOnClickListener(code->{
             captcha();
+        });
+        yingsi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Act_WebView.class);
+                intent.putExtra("title", "隐私声明");
+                intent.putExtra("url", "https://dj.sxzts.cn/pc/#/ystk");
+                getActivity().startActivity(intent);
+            }
         });
     }
 

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.hjq.toast.ToastUtils;
@@ -20,34 +21,51 @@ import com.lfc.zhihuidangjianapp.base.BaseFragment;
 import com.lfc.zhihuidangjianapp.net.http.ApiConstant;
 import com.lfc.zhihuidangjianapp.net.http.HttpHelper;
 import com.lfc.zhihuidangjianapp.net.http.HttpService;
+import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
+import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
 import com.lfc.zhihuidangjianapp.ui.activity.adapter.DividerItemDecoration;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Fgt_Weekend_Details;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.Act_TitleDetails;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.bean.ZtBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.demonstration_leadership.adapter.Demonstration_LeadershipAdapter;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.demonstration_leadership.bean.QueryLeadDemonstrationPageListBean;
 
 import com.lfc.zhihuidangjianapp.ui.activity.item.BannerViewHolder;
+import com.lfc.zhihuidangjianapp.ui.activity.model.ResponseWorkReport;
+import com.lfc.zhihuidangjianapp.ui.activity.model.WorkReport;
 import com.lfc.zhihuidangjianapp.utlis.DispalyUtil;
 import com.lfc.zhihuidangjianapp.utlis.GlideImage;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
+import com.zhy.adapter.recyclerview.CommonAdapter;
+import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 专题专栏
  */
-public class Fgt_Demonstration_Leadership extends BaseFragment implements View.OnClickListener, BaseQuickAdapter.OnItemChildClickListener {
+public class Fgt_Demonstration_Leadership extends BaseFragment  {
     @BindView(R.id.my_RecyclerView)
     RecyclerView my_RecyclerView;
     @BindView(R.id.refreshLayout)
@@ -57,6 +75,10 @@ public class Fgt_Demonstration_Leadership extends BaseFragment implements View.O
     @BindView(R.id.item_title)
     TextView item_title;
     String leadDemonstrationType = "";
+    private int size=10;
+    private int num=1;
+    private boolean isData = true;
+    List<ZtBean.LeadDemonstrationListBean.DatasBean> datas_new = new ArrayList<>();
 
     public static Fgt_Demonstration_Leadership getInstance(String title) {
         Fgt_Demonstration_Leadership sf = new Fgt_Demonstration_Leadership();
@@ -70,52 +92,35 @@ public class Fgt_Demonstration_Leadership extends BaseFragment implements View.O
     }
 
     Unbinder unbinder;
-    private Demonstration_LeadershipAdapter adapter;
 
     @Override
     protected void initView(View rootView) {
         unbinder = ButterKnife.bind(this, rootView);
-        item_title.setOnClickListener(this);
 
+
+    }
+
+    @Override
+    protected void initData() {
         mRefreshLayout.setEnableRefresh(true);//是否启用下拉刷新功能
         mRefreshLayout.setEnableLoadMore(true);//是否启用上拉加载功能
         //内容跟随偏移
         mRefreshLayout.setEnableHeaderTranslationContent(true);
         //设置 Header 为 Material风格
         mRefreshLayout.setRefreshHeader(new MaterialHeader(getContext()).setShowBezierWave(false));
-        //设置 Footer 为 球脉冲
-        mRefreshLayout.setRefreshFooter(new BallPulseFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
-        mRefreshLayout.setOnRefreshListener(refreshlayout -> {
-            refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
-        });
-        mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
-
-            refreshLayout.finishLoadMore(2000/*,false*/);//传入false表示刷新失败
-        });
-        my_RecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new Demonstration_LeadershipAdapter(getContext(), datas);
-        adapter.setOnItemChildClickListener(this);
-        my_RecyclerView.setAdapter(adapter);
-        my_RecyclerView.addItemDecoration(new DividerItemDecoration(
-                DividerItemDecoration.VERTICAL_LIST,
-                ContextCompat.getColor(MyApplication.getAppContext(), R.color.background),
-                DispalyUtil.dp2px(MyApplication.getAppContext(), 3),
-                0, 0, false
-        ));
-    }
-
-    @Override
-    protected void initData() {
-        queryLeadDemonstrationPageList();
+        //设置 Footer 为 普通样式
+        mRefreshLayout.setRefreshFooter(new ClassicsFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+        //设置 Header 为 普通样式
+        mRefreshLayout.setRefreshHeader(new ClassicsHeader(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+        refresh();
+        getDatas();
+       // queryLeadDemonstrationPageList();
         ArrayList<String> list =new ArrayList<>();
-
         list.add(ApiConstant.ROOT_URL +"Path/20190912/99759f6a-dd6a-4846-a9e3-23df330d44f9.jpg");
         list.add(ApiConstant.ROOT_URL +"Path/20190912/501d5375-1ed6-4e9e-b1c4-c9e1bf6a9147.jpg");
         ArrayList<String> list2 =new ArrayList<>();
         list2.add(ApiConstant.ROOT_URL +"Path/20190912/b64de694-5faf-40f5-8c50-3a2e5aa94f63.jpg");
         list2.add(ApiConstant.ROOT_URL +"Path/20190912/286398c2-d80e-43b1-b377-382322af57cc.jpg");
-
-
         /**
          * 专题专栏
          * 引领示范类型(0:不忘初心 牢记使命1:改革创新 奋发有为)
@@ -162,76 +167,118 @@ public class Fgt_Demonstration_Leadership extends BaseFragment implements View.O
         unbinder.unbind();
     }
 
-    private List<QueryLeadDemonstrationPageListBean.DataBean.LeadDemonstrationListBean.DatasBean> datas = new ArrayList<>();
+    private void refresh() {
 
-    /**
-     * 专题专栏
-     * 引领示范类型(0:不忘初心 牢记使命1:改革创新 奋发有为)
-     */
-    public void queryLeadDemonstrationPageList() {
-        int pageNum = 1;
-        int pageSize=10;
-        HttpHelper.queryLeadDemonstrationPageList(leadDemonstrationType, pageNum ,pageSize, new HttpHelper.HttpUtilsCallBack<String>() {
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onFailure(String failure) {
-            }
+            public void onRefresh(RefreshLayout refreshlayout) {
 
-            @Override
-            public void onSucceed(String succeed) {
-                loding.dismiss();
-                Gson gson = new Gson();
-                QueryLeadDemonstrationPageListBean entity = gson.fromJson(succeed, QueryLeadDemonstrationPageListBean.class);
-                if (entity.getCode() == 0) {
-                    for (int i = 0; i < entity.getData().getLeadDemonstrationList().getDatas().size(); i++) {
-                        datas.add(entity.getData().getLeadDemonstrationList().getDatas().get(i));
-                    }
-                    adapter.notifyDataSetChanged();
-                    if (entity.getData().getLeadDemonstrationList().getDatas().size() > 0) {
-                       // Glide.with(getContext()).load(ApiConstant.ROOT_URL + entity.getData().getLeadDemonstrationList().getDatas().get(0).getThumbnailUrl()).into(item_hader);
-                        item_title.setText(Html.fromHtml(entity.getData().getLeadDemonstrationList().getDatas().get(0).getComment()));
-                      //  item_title.setText(entity.getData().getLeadDemonstrationList().get);
-                    }
-                } else {
-                    ToastUtils.show(entity.getMsg());
-                }
-            }
+                num = 1;
+                getDatas();
+                refreshlayout.finishRefresh(2000);
 
-            @Override
-            public void onError(String error) {
-                loding.dismiss();
-                ToastUtils.show(error);
             }
         });
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                if (!isData) {
+                    //                mDefineBAGLoadView.setFooterTextOrImage("没有更多数据", false);
+                } else {
+                    //                    mDefineBAGLoadView.setFooterTextOrImage("正在玩命加载中...", true);
+                    num++;
+                    getDatas();
+                }
+                refreshLayout.finishLoadMore(2000);
+            }
+        });
+
+    }
+    private void getDatas() {
+        Map<String, String> map = new HashMap<>();
+        map.put("leadDemonstrationType", leadDemonstrationType);
+        map.put("pageSize", size + "");
+        map.put("pageNumber", num + "");
+        RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
+                .queryLeadDemonstrationPageList_new(map, MyApplication.getLoginBean().getToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResponseObserver<ZtBean>(getActivity()) {
+
+                    @Override
+                    protected void onNext(ZtBean response) {
+                        Log.e("onNext= ", response.toString());
+                        if (response == null) return;
+                        List<ZtBean.LeadDemonstrationListBean.DatasBean> datas = response.getLeadDemonstrationList().getDatas();
+                        Log.i("yy00datas",datas.size()+"");
+                        if (num == 1) {
+                            datas_new.clear();
+                        }
+                        if (datas.size() == 0) {
+                            if (num == 1 && datas_new.size() == 0) {
+                                isData = true;
+                                num--;
+                            } else {
+                                isData = false;
+                            }
+                        } else {
+                            datas_new.addAll(datas);
+                            if (datas.size() < 8) {
+                                isData = false;
+                            } else {
+                                isData = true;
+                            }
+                            setRecyclerView(datas_new);
+                        }
+                    }
+
+                    @Override
+                    protected void onError(Throwable e) {
+                        super.onError(e);
+                        Log.e("Throwable= ", e.getMessage());
+                    }
+                }.actual());
+
+
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.item_title://跳转详情页
-           /* case R.id.item_hader:
-                if (datas.size() < 0) {
-                    return;
-                }
-                Intent intent = new Intent();
-                intent.putExtra("title", datas.get(0).getTitle());
-                intent.putExtra("context", datas.get(0).getComment());
-                intent.putExtra("author", datas.get(0).getAuthor());
-                intent.setClass(getContext(), Act_TitleDetails.class);
-                startActivity(intent);
-                break;*/
-        }
-    }
-    @Override
-    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-        switch (view.getId()) {
-            case R.id.demonstration_item:
-                Intent intent = new Intent();
-                intent.putExtra("title", datas.get(position).getTitle());
-                intent.putExtra("context", datas.get(position).getComment());
-                intent.putExtra("context", datas.get(position).getComment());
-                intent.setClass(getContext(), Act_TitleDetails.class);
-                startActivity(intent);
-                break;
-        }
+    private void setRecyclerView(List<ZtBean.LeadDemonstrationListBean.DatasBean> datas_new) {
+        my_RecyclerView.setLayoutManager(new LinearLayoutManager(MyApplication.getAppContext()));
+        my_RecyclerView.setAdapter(new CommonAdapter<ZtBean.LeadDemonstrationListBean.DatasBean>(MyApplication.getAppContext(), R.layout.item_home_head, datas_new) {
+            @Override
+            protected void convert(ViewHolder holder, ZtBean.LeadDemonstrationListBean.DatasBean data, int position) {
+                holder.setText(R.id.tv_title, datas_new.get(position).getTitle());
+                holder.setText(R.id.tv_content,  datas_new.get(position).getReleaseDate());
+                ImageView image = holder.getConvertView().findViewById(R.id.image);
+                Glide.with(image.getContext()).load(ApiConstant.ROOT_URL+ datas_new.get(position).getThumbnailUrl()).into(image);
+                holder.getConvertView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        intent.putExtra("title", datas_new.get(position).getTitle());
+                        intent.putExtra("context", datas_new.get(position).getComment());
+                        intent.putExtra("context", datas_new.get(position).getComment());
+                        intent.setClass(getContext(), Act_TitleDetails.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+
+        });
+        my_RecyclerView.addItemDecoration(new DividerItemDecoration(
+                DividerItemDecoration.VERTICAL_LIST,
+                ContextCompat.getColor(MyApplication.getAppContext(), R.color.background),
+                DispalyUtil.dp2px(MyApplication.getAppContext(), 3),
+                0, 0, false
+        ));
+       /* adapter = new Demonstration_LeadershipAdapter(getContext(), datas_new);
+        adapter.setOnItemChildClickListener(this);
+        my_RecyclerView.setAdapter(adapter);
+        my_RecyclerView.addItemDecoration(new DividerItemDecoration(
+                DividerItemDecoration.VERTICAL_LIST,
+                ContextCompat.getColor(MyApplication.getAppContext(), R.color.background),
+                DispalyUtil.dp2px(MyApplication.getAppContext(), 3),
+                0, 0, false
+        ));*/
     }
 }

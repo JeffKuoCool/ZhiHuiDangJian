@@ -24,10 +24,20 @@ import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Craftsman_Training
 import com.lfc.zhihuidangjianapp.ui.activity.model.StudyCraftTrainingList;
 import com.lfc.zhihuidangjianapp.ui.activity.model.StudyStrongBureau;
 import com.lfc.zhihuidangjianapp.utlis.DispalyUtil;
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -43,7 +53,11 @@ public class Fgt_study_craft extends BaseFragment {
     private RecyclerView recyclerView;
 
     private int studyStrongBureauType;
-
+    private int size=10;
+    private int num=1;
+    private boolean isData = true;
+    SmartRefreshLayout mRefreshLayout;
+    List<StudyStrongBureau> datas_new = new ArrayList<>();
     @Override
     protected int getLayoutId() {
         return R.layout.parent_recyclerview;
@@ -52,12 +66,57 @@ public class Fgt_study_craft extends BaseFragment {
     @Override
     protected void initView(View rootView) {
         recyclerView = rootView.findViewById(R.id.recyclerView);
+        mRefreshLayout = rootView.findViewById(R.id.refreshLayout);
     }
 
     @Override
     protected void initData() {
+        mRefreshLayout.setEnableRefresh(true);//是否启用下拉刷新功能
+        mRefreshLayout.setEnableLoadMore(true);//是否启用上拉加载功能
+        //内容跟随偏移
+        mRefreshLayout.setEnableHeaderTranslationContent(true);
+        //设置 Header 为 Material风格
+        mRefreshLayout.setRefreshHeader(new MaterialHeader(getContext()).setShowBezierWave(false));
+        //设置 Footer 为 普通样式
+        mRefreshLayout.setRefreshFooter(new ClassicsFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+        //设置 Header 为 普通样式
+        mRefreshLayout.setRefreshHeader(new ClassicsHeader(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+        refresh();
+        getDatas();
+
+    }
+    private void refresh() {
+
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+
+                num = 1;
+                getDatas();
+                refreshlayout.finishRefresh(2000);
+
+            }
+        });
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                if (!isData) {
+                    //                mDefineBAGLoadView.setFooterTextOrImage("没有更多数据", false);
+                } else {
+                    //                    mDefineBAGLoadView.setFooterTextOrImage("正在玩命加载中...", true);
+                    num++;
+                    getDatas();
+                }
+                refreshLayout.finishLoadMore(2000);
+            }
+        });
+
+    }
+    private void getDatas() {
         Map<String, Object> map = new HashMap<>();
         map.put("studyStrongBureauType", 1);
+        map.put("pageSize", size + "");
+        map.put("pageNumber", num + "");
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
                 .queryStudyStrongBureauCraftsmanPageList( map,MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
@@ -68,7 +127,30 @@ public class Fgt_study_craft extends BaseFragment {
                     protected void onNext(StudyCraftTrainingList response) {
                         Log.e("onNext= ", response.toString());
                         if(response==null)return;
-                        setRecyclerView(response);
+                        // setRecyclerView(response);
+
+                        List<StudyStrongBureau> datas = response.getStudyStrongBureauCraftsmanList().getDatas();
+
+                        Log.i("yy00datas",datas.size()+"");
+                        if (num == 1) {
+                            datas_new.clear();
+                        }
+                        if (datas.size() == 0) {
+                            if (num == 1 && datas_new.size() == 0) {
+                                isData = true;
+                                num--;
+                            } else {
+                                isData = false;
+                            }
+                        } else {
+                            datas_new.addAll(datas);
+                            if (datas.size() < 8) {
+                                isData = false;
+                            } else {
+                                isData = true;
+                            }
+                            setRecyclerView(datas_new);
+                        }
                     }
 
                     @Override
@@ -77,11 +159,12 @@ public class Fgt_study_craft extends BaseFragment {
                         Log.e("Throwable= ", e.getMessage());
                     }
                 }.actual());
-    }
 
-    public void setRecyclerView(StudyCraftTrainingList response) {
+
+    }
+    public void setRecyclerView(List<StudyStrongBureau> response) {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
-        recyclerView.setAdapter(new CommonAdapter<StudyStrongBureau>(getActivity(), R.layout.item_craftsman, response.getStudyStrongBureauCraftsmanList().getDatas()) {
+        recyclerView.setAdapter(new CommonAdapter<StudyStrongBureau>(getActivity(), R.layout.item_craftsman, response) {
             @Override
             protected void convert(ViewHolder holder, StudyStrongBureau data, int position) {
                 holder.setText(R.id.tv_title, data.getTitle());
