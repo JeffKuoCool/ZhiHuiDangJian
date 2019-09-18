@@ -31,6 +31,7 @@ import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
 import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Fgt_Weekend_Details;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.ForestDetailActivity;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.ChaXunBean_new;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.PopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopRyBean;
@@ -39,6 +40,14 @@ import com.lfc.zhihuidangjianapp.ui.activity.model.ResponseWorkReport;
 import com.lfc.zhihuidangjianapp.ui.activity.model.StudyCraftReportList;
 import com.lfc.zhihuidangjianapp.ui.activity.model.StudyStrongBureau;
 import com.lfc.zhihuidangjianapp.ui.activity.model.WorkReport;
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -93,6 +102,9 @@ public class Fgt_Study_Report_Query extends BaseFragment {
     private String deptNumberry = "";//人员deptNumber
     private  RecyclerView recyclerView;
     private PopupWindows_pop_sx popupWindows_pops_sx;
+    SmartRefreshLayout mRefreshLayout;
+    private boolean isData = true;
+    List<StudyStrongBureau> datas_new = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -200,8 +212,20 @@ public class Fgt_Study_Report_Query extends BaseFragment {
                 m_pop_text.setText("查询结果");
 
             recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-            //查询周报信息
-            getWeekQuery(deptNumberzb, deptNumberry);
+            mRefreshLayout = view.findViewById(R.id.refreshLayout);
+            mRefreshLayout.setEnableRefresh(true);//是否启用下拉刷新功能
+            mRefreshLayout.setEnableLoadMore(true);//是否启用上拉加载功能
+            //内容跟随偏移
+            mRefreshLayout.setEnableHeaderTranslationContent(true);
+            //设置 Header 为 Material风格
+            mRefreshLayout.setRefreshHeader(new MaterialHeader(getContext()).setShowBezierWave(false));
+            //设置 Footer 为 普通样式
+            mRefreshLayout.setRefreshFooter(new ClassicsFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+            //设置 Header 为 普通样式
+            mRefreshLayout.setRefreshHeader(new ClassicsHeader(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+            refresh();
+            getDatas();
+
             cView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
@@ -218,14 +242,44 @@ public class Fgt_Study_Report_Query extends BaseFragment {
 
         }
     }
+    private void refresh() {
 
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+
+                num = 1;
+                getDatas();
+                refreshlayout.finishRefresh(2000);
+
+            }
+        });
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                if (!isData) {
+                    //                mDefineBAGLoadView.setFooterTextOrImage("没有更多数据", false);
+                } else {
+                    //                    mDefineBAGLoadView.setFooterTextOrImage("正在玩命加载中...", true);
+                    num++;
+                    getDatas();
+                }
+                refreshLayout.finishLoadMore(2000);
+            }
+        });
+
+    }
+    private void getDatas() {
+        //查询周报信息
+        getWeekQuery(deptNumberzb, deptNumberry);
+    }
     //查询心得信息
     private void getWeekQuery(String deptNumberzb, String deptNumberry) {
         Map<String, Object> map = new HashMap<>();
         map.put("createCode", deptNumberry);
         map.put("deptNumber", deptNumberzb);
         map.put("pageSize", size);
-        map.put("pageNum", num);
+        map.put("pageNumber", num);
         map.put("studyStrongBureauType",2);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
                 .queryStudyStrongBureauPageList(map, MyApplication.getLoginBean().getToken())
@@ -235,12 +289,34 @@ public class Fgt_Study_Report_Query extends BaseFragment {
                     @Override
                     protected void onNext(StudyCraftReportList response) {
                         Log.e("onNext= ", response.toString());
-                        if (response == null) return;
-                        if (response.getStudyStrongBureauList().getDatas().size() == 0) {
-                            toast("暂无数据");
-                            popupWindows_pops_sx.dismiss();
-                        } else {
-                            setRecyclerView_shaux(response.getStudyStrongBureauList().getDatas());
+
+                            if (response == null) return;
+                            if (response.getStudyStrongBureauList().getDatas().size() == 0) {
+                                toast("暂无数据");
+                                popupWindows_pops_sx.dismiss();
+                            } else {
+                                // setRecyclerView_shaux(response.getWeeklyWorkReportList().getDatas());
+                                List<StudyStrongBureau> datas = response.getStudyStrongBureauList().getDatas();
+                                if (num == 1) {
+                                    datas_new.clear();
+                                }
+                                if (datas.size() == 0) {
+                                    if (num == 1 && datas_new.size() == 0) {
+                                        isData = true;
+                                        num--;
+                                    } else {
+                                        isData = false;
+                                    }
+                                } else {
+                                    datas_new.addAll(datas);
+                                    if (datas.size() < 8) {
+                                        isData = false;
+                                    } else {
+                                        isData = true;
+                                    }
+                                    setRecyclerView_shaux(datas_new);
+                                }
+
                         }
 
                     }

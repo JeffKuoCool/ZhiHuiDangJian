@@ -27,10 +27,20 @@ import com.lfc.zhihuidangjianapp.ui.activity.model.Forest;
 import com.lfc.zhihuidangjianapp.ui.activity.model.ForestDistrict;
 import com.lfc.zhihuidangjianapp.ui.activity.model.ResponsePartyDynamicList;
 import com.lfc.zhihuidangjianapp.utlis.DispalyUtil;
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.Unbinder;
@@ -51,7 +61,11 @@ public class Fgt_Forest_List extends BaseBindViewFragment {
     private int partyDynamicType;
 
     private int layoutId;
-
+    private int size=10;
+    private int num=1;
+    private boolean isData = true;
+    SmartRefreshLayout mRefreshLayout;
+    List<Forest> datas_new = new ArrayList<>();
     @Override
     protected int getLayoutId() {
         return R.layout.parent_recyclerview;
@@ -59,6 +73,56 @@ public class Fgt_Forest_List extends BaseBindViewFragment {
 
     @Override
     protected void initData() {
+        mRefreshLayout.setEnableRefresh(true);//是否启用下拉刷新功能
+        mRefreshLayout.setEnableLoadMore(true);//是否启用上拉加载功能
+        //内容跟随偏移
+        mRefreshLayout.setEnableHeaderTranslationContent(true);
+        //设置 Header 为 Material风格
+        mRefreshLayout.setRefreshHeader(new MaterialHeader(getContext()).setShowBezierWave(false));
+        //设置 Footer 为 普通样式
+        mRefreshLayout.setRefreshFooter(new ClassicsFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+        //设置 Header 为 普通样式
+        mRefreshLayout.setRefreshHeader(new ClassicsHeader(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+        refresh();
+        getDatas();
+
+    }
+
+    @Override
+    protected void initView(View rootView) {
+        super.initView(rootView);
+        recyclerView = rootView.findViewById(R.id.recyclerView);
+        mRefreshLayout = rootView.findViewById(R.id.refreshLayout);
+    }
+
+    private void refresh() {
+
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+
+                num = 1;
+                getDatas();
+                refreshlayout.finishRefresh(2000);
+
+            }
+        });
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                if (!isData) {
+                    //                mDefineBAGLoadView.setFooterTextOrImage("没有更多数据", false);
+                } else {
+                    //                    mDefineBAGLoadView.setFooterTextOrImage("正在玩命加载中...", true);
+                    num++;
+                    getDatas();
+                }
+                refreshLayout.finishLoadMore(2000);
+            }
+        });
+
+    }
+    private void getDatas() {
         partyDynamicType = getArguments().getInt("leadDemonstrationType", 0);
         if (partyDynamicType == 0) {
             layoutId = R.layout.item_fine_party_group;
@@ -67,7 +131,8 @@ public class Fgt_Forest_List extends BaseBindViewFragment {
         }
         Map<String, Object> map = new HashMap<>();
         map.put("forestDistrictType", partyDynamicType);
-        map.put("pageSize", 20);
+        map.put("pageSize", size + "");
+        map.put("pageNumber", num + "");
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
                 .queryForestShowPageList(map, MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
@@ -77,8 +142,29 @@ public class Fgt_Forest_List extends BaseBindViewFragment {
                     @Override
                     protected void onNext(ForestDistrict response) {
                         Log.e("onNext= ", response.toString());
-                        if (response == null) return;
-                        setRecyclerView(response);
+                        if(response==null)return;
+                        // setRecyclerView(response);
+                        List<Forest> datas = response.getForestDistrictList().getDatas();
+                        Log.i("yy00datas",datas.size()+"");
+                        if (num == 1) {
+                            datas_new.clear();
+                        }
+                        if (datas.size() == 0) {
+                            if (num == 1 && datas_new.size() == 0) {
+                                isData = true;
+                                num--;
+                            } else {
+                                isData = false;
+                            }
+                        } else {
+                            datas_new.addAll(datas);
+                            if (datas.size() < 8) {
+                                isData = false;
+                            } else {
+                                isData = true;
+                            }
+                            setRecyclerView( datas_new);
+                        }
                     }
 
                     @Override
@@ -87,18 +173,14 @@ public class Fgt_Forest_List extends BaseBindViewFragment {
                         Log.e("Throwable= ", e.getMessage());
                     }
                 }.actual());
+
+
     }
 
-    @Override
-    protected void initView(View rootView) {
-        super.initView(rootView);
-        recyclerView = rootView.findViewById(R.id.recyclerView);
-    }
-
-    private void setRecyclerView(ForestDistrict response) {
+    private void setRecyclerView(List<Forest> response) {
         if (partyDynamicType == 0) {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            recyclerView.setAdapter(new CommonAdapter<Forest>(getActivity(), layoutId, response.getForestDistrictList().getDatas()) {
+            recyclerView.setAdapter(new CommonAdapter<Forest>(getActivity(), layoutId, response) {
                 @Override
                 protected void convert(ViewHolder holder, Forest data, int position) {
                     TextView tvContent = holder.getConvertView().findViewById(R.id.tv_content);
@@ -122,7 +204,7 @@ public class Fgt_Forest_List extends BaseBindViewFragment {
             ));
         } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            recyclerView.setAdapter(new CommonAdapter<Forest>(getActivity(), layoutId, response.getForestDistrictList().getDatas()) {
+            recyclerView.setAdapter(new CommonAdapter<Forest>(getActivity(), layoutId, response) {
                 @Override
                 protected void convert(ViewHolder holder, Forest data, int position) {
                     ImageView image = holder.getConvertView().findViewById(R.id.image);

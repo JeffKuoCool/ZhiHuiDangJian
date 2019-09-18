@@ -40,6 +40,14 @@ import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopRyBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.queryUserListByFirstPinYinBean;
 import com.lfc.zhihuidangjianapp.ui.activity.model.ResponseWorkReport;
 import com.lfc.zhihuidangjianapp.ui.activity.model.WorkReport;
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -95,7 +103,9 @@ public class Fgt_Weekend_Query extends BaseFragment {
     private String deptNumberry = "";//人员deptNumber
     private RecyclerView recyclerView;
     private PopupWindows_pop_sx popupWindows_pops_sx;
-
+    SmartRefreshLayout mRefreshLayout;
+    private boolean isData = true;
+    List<ChaXunBean_new.WeeklyWorkReportListBean.DatasBean> datas_new = new ArrayList<>();
     @Override
     protected int getLayoutId() {
         return R.layout.weekend_query;
@@ -200,10 +210,21 @@ public class Fgt_Weekend_Query extends BaseFragment {
             TextView m_pop_text = (TextView) view
                     .findViewById(R.id.m_pop_text);
             m_pop_text.setText("查询结果");
-
             recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-            //查询周报信息
-            getWeekQuery(deptNumberzb, deptNumberry);
+            mRefreshLayout = view.findViewById(R.id.refreshLayout);
+            mRefreshLayout.setEnableRefresh(true);//是否启用下拉刷新功能
+            mRefreshLayout.setEnableLoadMore(true);//是否启用上拉加载功能
+            //内容跟随偏移
+            mRefreshLayout.setEnableHeaderTranslationContent(true);
+            //设置 Header 为 Material风格
+            mRefreshLayout.setRefreshHeader(new MaterialHeader(getContext()).setShowBezierWave(false));
+            //设置 Footer 为 普通样式
+            mRefreshLayout.setRefreshFooter(new ClassicsFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+            //设置 Header 为 普通样式
+            mRefreshLayout.setRefreshHeader(new ClassicsHeader(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+            refresh();
+            getDatas();
+
             cView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
@@ -220,7 +241,37 @@ public class Fgt_Weekend_Query extends BaseFragment {
 
         }
     }
+    private void refresh() {
 
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+
+                num = 1;
+                getDatas();
+                refreshlayout.finishRefresh(2000);
+
+            }
+        });
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                if (!isData) {
+                    //                mDefineBAGLoadView.setFooterTextOrImage("没有更多数据", false);
+                } else {
+                    //                    mDefineBAGLoadView.setFooterTextOrImage("正在玩命加载中...", true);
+                    num++;
+                    getDatas();
+                }
+                refreshLayout.finishLoadMore(2000);
+            }
+        });
+
+    }
+    private void getDatas() {
+        //查询周报信息
+        getWeekQuery(deptNumberzb, deptNumberry);
+    }
     //查询心得信息
     private void getWeekQuery(String deptNumberzb, String deptNumberry) {
         Log.i("yy--deptNumber",deptNumberry+"=="+deptNumberzb);
@@ -228,7 +279,7 @@ public class Fgt_Weekend_Query extends BaseFragment {
         map.put("createCode", deptNumberry);
         map.put("deptNumber", deptNumberzb);
         map.put("pageSize", size);
-        map.put("pageNum", num);
+        map.put("pageNumber", num);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
                 .queryWeeklyWorkReportPageList_new(map, MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
@@ -242,7 +293,28 @@ public class Fgt_Weekend_Query extends BaseFragment {
                             toast("暂无数据");
                             popupWindows_pops_sx.dismiss();
                         } else {
-                            setRecyclerView_shaux(response.getWeeklyWorkReportList().getDatas());
+                           // setRecyclerView_shaux(response.getWeeklyWorkReportList().getDatas());
+                            if (response == null) return;
+                            List<ChaXunBean_new.WeeklyWorkReportListBean.DatasBean> datas = response.getWeeklyWorkReportList().getDatas();
+                            if (num == 1) {
+                                datas_new.clear();
+                            }
+                            if (datas.size() == 0) {
+                                if (num == 1 && datas_new.size() == 0) {
+                                    isData = true;
+                                    num--;
+                                } else {
+                                    isData = false;
+                                }
+                            } else {
+                                datas_new.addAll(datas);
+                                if (datas.size() < 8) {
+                                    isData = false;
+                                } else {
+                                    isData = true;
+                                }
+                                setRecyclerView_shaux(datas_new);
+                            }
                         }
 
                     }
