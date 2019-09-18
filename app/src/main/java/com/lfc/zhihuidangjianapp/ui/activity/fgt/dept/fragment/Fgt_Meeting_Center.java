@@ -52,6 +52,11 @@ public class Fgt_Meeting_Center extends BaseFragment {
 
     @Override
     protected void initData() {
+        String username = MyApplication.getmUserInfo().getUser().getLoginName();
+        String pwd = MyApplication.getmUserInfo().getUser().getImPwd();
+        //登录环信
+        EazyChatApi.loginChat(username, pwd, (BaseActivity) getActivity(), null);
+
         type = getArguments().getInt("type");
         Observable<BaseResponse<ResponseMeetingMine>> observable;
         if(type == 0){
@@ -101,10 +106,6 @@ public class Fgt_Meeting_Center extends BaseFragment {
                     //会议室不存在，不是创建人无权限进入会议
                     return;
                 }
-                String username = MyApplication.getmUserInfo().getUser().getLoginName();
-                String pwd = MyApplication.getmUserInfo().getUser().getImPwd();
-                //登录环信
-                EazyChatApi.loginChat(username, pwd, (BaseActivity) getActivity(), null);
 
                 holder.getConvertView().findViewById(R.id.tv_join_meeting).setOnClickListener(confe->{
                     //进入会议

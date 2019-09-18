@@ -11,6 +11,7 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMOptions;
+import com.lfc.zhihuidangjianapp.BuildConfig;
 import com.lfc.zhihuidangjianapp.base.BaseActivity;
 import com.lfc.zhihuidangjianapp.ui.activity.model.User;
 
@@ -99,6 +100,7 @@ public class EazyChatApi {
 
     /**
      * 发送会议邀请
+     *
      * @param users
      * @param conferenceId
      */
@@ -145,8 +147,9 @@ public class EazyChatApi {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d("main", "登录聊天服务器失败！");
-                        activity.toast("登录聊天服务器失败！");
+                        Log.d(TAG, code + "  " + message);
+                        if (BuildConfig.DEBUG && code != 200)
+                            activity.toast("登录聊天服务器失败！");
                     }
                 });
                 if (code == 200) {
