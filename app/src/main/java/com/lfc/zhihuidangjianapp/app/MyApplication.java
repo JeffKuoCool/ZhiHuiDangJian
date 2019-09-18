@@ -54,7 +54,7 @@ public class MyApplication extends DemoApplication {
         ARouter.openDebug();
         ARouter.init(this);
         //bugly
-        CrashReport.initCrashReport(getApplicationContext(), "4040802878", false);
+        CrashReport.initCrashReport(getApplicationContext(), "8e9f06cfbc", false);
 
     }
 

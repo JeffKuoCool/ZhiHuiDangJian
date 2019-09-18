@@ -267,10 +267,10 @@ public class AppConferenceActivity extends BaseConferenceActivity {
 
             @Override
             public void onError(final int error, final String errorMsg) {
-                EMLog.e(TAG, "join conference failed error " + error + ", msg " + errorMsg);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        EMLog.e(TAG, "join conference failed error " + error + ", msg " + errorMsg);
                     }
                 });
             }
