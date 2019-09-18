@@ -25,6 +25,7 @@ import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
 import com.lfc.zhihuidangjianapp.ui.activity.model.UiName;
 import com.lfc.zhihuidangjianapp.ui.activity.model.User;
 import com.lfc.zhihuidangjianapp.ui.activity.model.UserInfo;
+import com.lfc.zhihuidangjianapp.utlis.DateUtils;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -183,7 +184,7 @@ public class Act_Create_Meeting extends BaseActivity {
         picker.setTopPadding(ConvertUtils.toPx(this, 10));
         picker.setRangeEnd(2050, 1, 11);
         picker.setRangeStart(2016, 8, 29);
-        picker.setSelectedItem(2019, 10, 14);
+        picker.setSelectedItem(DateUtils.getYear(), DateUtils.getMonth(), DateUtils.getDay());
         picker.setResetWhileWheel(false);
         picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
             @Override
