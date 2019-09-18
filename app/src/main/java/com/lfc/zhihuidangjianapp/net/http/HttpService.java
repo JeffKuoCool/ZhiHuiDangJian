@@ -6,6 +6,7 @@ import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopRyBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.WeekendDetailsBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.queryUserListByFirstPinYinBean;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.bean.AnnouncementBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.bean.ZtBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.bean.MyInteagalBeabMingXI;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.bean.MyIntegalBean;
@@ -528,5 +529,12 @@ public interface HttpService {
     //专题--列表
     @POST("appApi/queryLeadDemonstrationPageList")
     Observable<BaseResponse<ZtBean>> queryLeadDemonstrationPageList_new(@QueryMap Map<String, String> map, @Header("token") String token);
+    /**
+     * 公告列表
+     * @param token
+     * @return
+     */
+    @POST("appApi/queryNoticeAnnouncementPageList")
+    Observable<BaseResponse<AnnouncementBean>> queryNoticeAnnouncementPageList_new(@QueryMap Map<String, String> map, @Header("token") String token);
 
 }
