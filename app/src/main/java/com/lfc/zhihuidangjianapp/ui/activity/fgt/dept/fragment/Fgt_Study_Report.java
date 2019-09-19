@@ -22,6 +22,8 @@ import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
 import com.lfc.zhihuidangjianapp.ui.activity.adapter.DividerItemDecoration;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Craftsman_Training;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Weekend_Report;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Write_Study_Report;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Update_Act_Write_Report;
 import com.lfc.zhihuidangjianapp.ui.activity.model.OrganizationalLife;
 import com.lfc.zhihuidangjianapp.ui.activity.model.OrganizationalLifeDetail;
 import com.lfc.zhihuidangjianapp.ui.activity.model.StudyCraftReportList;
@@ -173,23 +175,37 @@ public class Fgt_Study_Report extends BaseFragment {
                 TextView xinde_author = holder.getConvertView().findViewById(R.id.xinde_author);
                 TextView xinde_dept = holder.getConvertView().findViewById(R.id.xinde_dept);
                 TextView xinde_title = holder.getConvertView().findViewById(R.id.xinde_title);
-                //我得心得是否通过(0:是1:否)
+                //是否通过(状态(0:已通过1:审核中2:不通过))
                 ImageView xinde_status =holder.getView(R.id.xinde_status);
                 int type = response.get(position).getIfPass();
-                if (type == 1) {
+                if (type == 0) {
+                   // xinde_status.setImageResource(R.mipmap.report_yes);
+                } else if(type==1) {
                     xinde_status.setImageResource(R.mipmap.report_zhong);
-                } else {
-                    //xinde_status.setImageResource(R.mipmap.report_no);
-
+                }else if(type==2){
+                    xinde_status.setImageResource(R.mipmap.report_no);
                 }
                 xinde_title.setText(response.get(position).getTitle());
                 xinde_dept.setText(response.get(position).getDept());
                 xinde_author.setText(response.get(position).getAuthor());
                 holder.getConvertView().setOnClickListener(Act_Strong_Study_Experience -> {
-                    Intent intent = new Intent(getActivity(), com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Strong_Study_Experience.class);
-                    intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId() + "");
-                    intent.putExtra("appTitle", "学习心得");
-                    startActivity(intent);
+                    //ifpass  ==2  没有通过进行修改 0  1 进详情查看
+                    int ifPass = data.getIfPass();
+                    if(ifPass==2){
+                        Intent intent = new Intent(getActivity(),Update_Act_Write_Report.class);
+                        intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId() + "");
+                        intent.putExtra("title", data.getTitle() + "");
+                        intent.putExtra("dept", data.getComment() + "");
+                        intent.putExtra("author", data.getAuthor() + "");
+
+                        startActivity(intent);
+                   }else{
+                        Intent intent = new Intent(getActivity(), com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Strong_Study_Experience.class);
+                        intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId() + "");
+                        intent.putExtra("appTitle", "学习心得");
+                        startActivity(intent);
+
+                    }
                 });
             }
 

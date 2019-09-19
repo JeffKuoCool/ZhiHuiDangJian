@@ -135,6 +135,9 @@
         <activity
             android:name=".ui.activity.fgt.personal.act.Act_Integral_mingxi"
             android:label="积分明细" />
+        <activity
+            android:name=".ui.activity.fgt.dept.act.Update_Act_Write_Report"
+            android:label="修改学习心得" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Dept_Detail" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Dept_dynamic" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Dept_Dynamic_Detail" />
