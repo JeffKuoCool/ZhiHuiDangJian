@@ -29,6 +29,7 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMTextMessageBody;
 import com.hyphenate.chat.EMVoiceMessageBody;
 import com.lfc.zhihuidangjianapp.R;
 import com.lfc.zhihuidangjianapp.app.Constants;
@@ -333,6 +334,8 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
         //标记当前回话为已读
         try {
             EMClient.getInstance().chatManager().getConversation(chatUserId).markAllMessagesAsRead();
+            //刷新消息页更新已读
+            RxBus.get().post(EMMessage.createTxtSendMessage("refresh", chatUserId));
         } catch (Exception e) {
         }
     }

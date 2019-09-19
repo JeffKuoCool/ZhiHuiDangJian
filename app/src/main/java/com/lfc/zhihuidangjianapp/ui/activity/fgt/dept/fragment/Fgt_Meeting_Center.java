@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hwangjr.rxbus.RxBus;
 import com.lfc.zhihuidangjianapp.R;
@@ -125,9 +126,11 @@ public class Fgt_Meeting_Center extends BaseFragment {
                     //会议室不存在，不是创建人无权限进入会议
                     return;
                 }
-
-                holder.getConvertView().findViewById(R.id.tv_join_meeting).setOnClickListener(confe->{
+                View convertView =  holder.getConvertView();
+                TextView tvJoinMeeting = convertView.findViewById(R.id.tv_join_meeting);
+                tvJoinMeeting.setOnClickListener(confe->{
                     //进入会议
+                    Log.e("join_meeting", "");
                     if(!data.getCreateCode().equals(MyApplication.getmUserInfo().getUser().getLoginName())&&
                             !data.getUsers().contains(MyApplication.getmUserInfo().getUser().getLoginName())){
                         verify(data);
