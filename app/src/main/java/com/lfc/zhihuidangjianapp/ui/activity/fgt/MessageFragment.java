@@ -21,6 +21,8 @@ import com.lfc.zhihuidangjianapp.ui.activity.adapter.DividerItemDecoration;
 import com.lfc.zhihuidangjianapp.ui.activity.items.MessageItemsAdapter;
 import com.lfc.zhihuidangjianapp.ui.activity.model.Conversation;
 import com.lfc.zhihuidangjianapp.utlis.DispalyUtil;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -93,6 +95,7 @@ public class MessageFragment extends BaseFragment {
             }
         });
         mAdapter.notifyDataSetChanged();
+        mBinding.refreshLayout.finishRefresh();
         //TODO 导航栏显示有未读消息
 //        RxBus.get().post(new BusEvent( Constants.BUS_RED_POINT,isAllRead));
     }
@@ -132,6 +135,12 @@ public class MessageFragment extends BaseFragment {
                 }
                 //TODO 标记已读
 //                RxBus.get().post(new BusEvent( Constants.BUS_RED_POINT,isAllRead));
+            }
+        });
+        mBinding.refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                loadMessage();
             }
         });
     }

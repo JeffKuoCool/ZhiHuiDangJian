@@ -183,6 +183,7 @@ public class Act_Party_Change extends BaseActivity {
                     uiName.setName(user.getNation()+"");
                     break;
                 case 3://出生日期
+
                     uiName.setName(DateUtils.timeStampToStr(user.getBirthday(), "yyyy-MM-dd"));
                     break;
                 case 4://学历
