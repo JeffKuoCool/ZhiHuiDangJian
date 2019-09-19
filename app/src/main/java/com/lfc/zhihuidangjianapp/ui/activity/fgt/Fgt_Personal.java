@@ -185,8 +185,10 @@ public class Fgt_Personal extends BaseFragment {
                     minZhibu.setText(entity.getData().getUser().getDeptName() + "");
                     minZhiwu.setText(entity.getData().getUser().getPartyPosts() + "");
                     minCanjai.setText(entity.getData().getUser().getJoinWorkTime() + "");
-                    minJiaru.setText(DateUtils.timeStampToStr(entity.getData().getUser().getJoinPartyTime(), "yyyy-MM-dd"));
-                    minChengwei.setText(DateUtils.timeStampToStr(entity.getData().getUser().getToFormalPartyTime(), "yyyy-MM-dd"));
+//                    minJiaru.setText(DateUtils.timeStampToStr(entity.getData().getUser().getJoinPartyTime(), "yyyy-MM-dd"));
+//                    minChengwei.setText(DateUtils.timeStampToStr(entity.getData().getUser().getToFormalPartyTime(), "yyyy-MM-dd"));
+                    minJiaru.setText(entity.getData().getUser().getJoinPartyTime());
+                    minChengwei.setText(entity.getData().getUser().getToFormalPartyTime());
                     minTotal.setText(entity.getData().getTotal() + "积分");
                     minStarPartyMember.setText(entity.getData().getUser().getStarPartyMember() + "星党员");
                     minTotal1.setText(entity.getData().getUser().getStarPartyMember() + "积分");

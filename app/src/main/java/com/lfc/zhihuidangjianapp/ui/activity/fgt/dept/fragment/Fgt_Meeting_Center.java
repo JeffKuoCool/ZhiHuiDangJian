@@ -1,25 +1,36 @@
 package com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.fragment;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.hwangjr.rxbus.RxBus;
 import com.lfc.zhihuidangjianapp.R;
 import com.lfc.zhihuidangjianapp.app.MyApplication;
 import com.lfc.zhihuidangjianapp.base.BaseActivity;
 import com.lfc.zhihuidangjianapp.base.BaseFragment;
 import com.lfc.zhihuidangjianapp.chat.EazyChatApi;
+import com.lfc.zhihuidangjianapp.databinding.WindowMeetingCenterBinding;
 import com.lfc.zhihuidangjianapp.net.http.HttpService;
 import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
 import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
+import com.lfc.zhihuidangjianapp.ui.activity.chat.ChatActivity;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.MeetingDetailActivity;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.AppConferenceActivity;
 import com.lfc.zhihuidangjianapp.ui.activity.model.BaseResponse;
 import com.lfc.zhihuidangjianapp.ui.activity.model.Meeting;
 import com.lfc.zhihuidangjianapp.ui.activity.model.ResponseMeetingMine;
+import com.lfc.zhihuidangjianapp.widget.CustomPopWindow;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -39,6 +50,14 @@ public class Fgt_Meeting_Center extends BaseFragment {
     private int type;
 
     private RecyclerView recyclerView;
+
+    private WindowMeetingCenterBinding windowCommenBinding;
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        windowCommenBinding = DataBindingUtil.inflate(inflater, R.layout.window_meeting_center, container, false);
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
 
     @Override
     protected int getLayoutId() {
@@ -109,10 +128,12 @@ public class Fgt_Meeting_Center extends BaseFragment {
 
                 holder.getConvertView().findViewById(R.id.tv_join_meeting).setOnClickListener(confe->{
                     //进入会议
-                    Intent intent = new Intent(getActivity(), AppConferenceActivity.class);
-                    intent.putExtra("Meeting", data);
-                    intent.putExtra("enterType", AppConferenceActivity.SUBSCRIBE);
-                    startActivity(intent);
+                    if(!data.getCreateCode().equals(MyApplication.getmUserInfo().getUser().getLoginName())&&
+                            !data.getUsers().contains(MyApplication.getmUserInfo().getUser().getLoginName())){
+                        verify(data);
+                    }else{
+                        enter(data);
+                    }
                 });
                 holder.getConvertView().findViewById(R.id.tv_meeting_detail).setOnClickListener(confe->{
                     //会议详情
@@ -123,6 +144,40 @@ public class Fgt_Meeting_Center extends BaseFragment {
             }
 
         });
+    }
+    /**
+     * 非邀请进入验证密码
+     */
+    private void verify( Meeting data){
+        CustomPopWindow popWindow = new CustomPopWindow.Builder(getContext())
+                .setwidth(LinearLayout.LayoutParams.MATCH_PARENT)
+                .setheight(LinearLayout.LayoutParams.WRAP_CONTENT)
+                .setContentView(windowCommenBinding.getRoot())
+                .setFouse(true)
+                .setOutSideCancel(true)
+                .setBgAlpha(0.5f)
+                .builder()
+                .showAtLocation(R.layout.parent_recyclerview, Gravity.CENTER, 0, 0);
+        windowCommenBinding.btnRight.setOnClickListener(submit->{
+            if(windowCommenBinding.tvDec.getText().toString().trim().equals(data.getPassword())){
+                enter(data);
+            }else{
+                toast("密码错误");
+            }
+            popWindow.dismiss();
+        });
+        windowCommenBinding.btnLeft.setOnClickListener(cancel->popWindow.dismiss());
+    }
+
+    /**
+     * 进入会议
+     * @param data
+     */
+    private void enter(Meeting data){
+        Intent intent = new Intent(getActivity(), AppConferenceActivity.class);
+        intent.putExtra("Meeting", data);
+        intent.putExtra("enterType", AppConferenceActivity.SUBSCRIBE);
+        startActivity(intent);
     }
 
 

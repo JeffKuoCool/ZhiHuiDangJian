@@ -271,6 +271,7 @@ public class AppConferenceActivity extends BaseConferenceActivity {
                     @Override
                     public void run() {
                         EMLog.e(TAG, "join conference failed error " + error + ", msg " + errorMsg);
+                        toast("会议还没有开始!请等待会议发起人加入！");
                     }
                 });
             }
