@@ -45,7 +45,7 @@ public class User implements Parcelable {
     private String isEnableText;
     private String jobTitle;
     private String joinPartyIntroducer;
-    private long joinPartyTime;
+    private String joinPartyTime;
     private String joinWorkTime;
     private String loginName;
     private String loginPwd;
@@ -81,7 +81,7 @@ public class User implements Parcelable {
     private int startIndex;
     private int status;
     private String subordinatePartyGroup;
-    private long toFormalPartyTime;
+    private String toFormalPartyTime;
     private String token;
     private String userId;
     private String userNumber;
@@ -394,11 +394,11 @@ public class User implements Parcelable {
         return joinPartyIntroducer;
     }
 
-    public void setJoinPartyTime(long joinPartyTime) {
+    public void setJoinPartyTime(String joinPartyTime) {
         this.joinPartyTime = joinPartyTime;
     }
 
-    public long getJoinPartyTime() {
+    public String getJoinPartyTime() {
         return joinPartyTime;
     }
 
@@ -674,11 +674,11 @@ public class User implements Parcelable {
         return subordinatePartyGroup;
     }
 
-    public void setToFormalPartyTime(long toFormalPartyTime) {
+    public void setToFormalPartyTime(String toFormalPartyTime) {
         this.toFormalPartyTime = toFormalPartyTime;
     }
 
-    public long getToFormalPartyTime() {
+    public String getToFormalPartyTime() {
         return toFormalPartyTime;
     }
 

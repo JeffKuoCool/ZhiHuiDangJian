@@ -113,8 +113,12 @@ public class Fgt_Personal extends BaseFragment {
     LinearLayout lefit;
     @BindView(R.id.min_chengnuo)
     TextView min_chengnuo;
-    @BindView(R.id.min_shifangang)
-    TextView min_shifangang;
+    @BindView(R.id.min_shifangang1)
+    TextView min_shifangang1;
+    @BindView(R.id.min_shifangang2)
+    TextView min_shifangang2;
+    @BindView(R.id.min_shifangang3)
+    TextView min_shifangang3;
     @BindView(R.id.drawlayout)
     DrawerLayout drawerLayout;
     Unbinder unbinder;
@@ -195,7 +199,9 @@ public class Fgt_Personal extends BaseFragment {
                     //partyPromise党员承诺
                     min_chengnuo.setText(entity.getData().getUser().getPartyPromise()+"");
                     //partyPromise党员示范岗
-                    min_shifangang.setText(entity.getData().getUser().getPartyPromise()+"");
+                    min_shifangang1.setText("党内职务："+entity.getData().getUser().getPartyPosts());
+                    min_shifangang2.setText("负责区域："+entity.getData().getUser().getArea());
+                    min_shifangang3.setText("岗位介绍："+entity.getData().getUser().getPosts());
                 }
             }
 
@@ -206,10 +212,6 @@ public class Fgt_Personal extends BaseFragment {
             }
         });
     }
-
-
-
-
     /*
      * 将时间戳转换为时间
      */

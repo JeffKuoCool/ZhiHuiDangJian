@@ -142,13 +142,16 @@ public class Fgt_Study_Report_Query extends BaseFragment {
             case R.id.tv_dw_et:
                 //type  1党委弹出  2总支弹出  3支部弹出  4人员弹出  5查询弹出
                 getPoP(1);
+                Log.i("YY",deptNumberdw +"==" + deptNumberzz +"=="+deptNumberzb +"==" +deptNumberry);
                 break;
             case R.id.tv_zz_et:
+
                 if (tvDwEt.getText().toString().trim().equals("")) {
                     ToastUtils.show("请选择党委");
                     return;
                 }
                 getPoP(2);
+                Log.i("YY",deptNumberdw +"==" + deptNumberzz +"=="+deptNumberzb +"==" +deptNumberry);
                 break;
             case R.id.tv_zb_et:
                 if (tvZzEt.getText().toString().trim().equals("")) {
@@ -156,6 +159,7 @@ public class Fgt_Study_Report_Query extends BaseFragment {
                     return;
                 }
                 getPoP(3);
+                Log.i("YY",deptNumberdw +"==" + deptNumberzz +"=="+deptNumberzb +"==" +deptNumberry);
                 break;
             case R.id.tv_ry_et:
                 if (tvZbEt.getText().toString().trim().equals("")) {
@@ -163,6 +167,7 @@ public class Fgt_Study_Report_Query extends BaseFragment {
                     return;
                 }
                 getPoP(4);
+                Log.i("YY",deptNumberdw +"==" + deptNumberzz +"=="+deptNumberzb +"==" +deptNumberry);
                 break;
             case R.id.tv_quey:
                 if (tvDwEt.getText().toString().trim().equals("")) {
@@ -177,6 +182,7 @@ public class Fgt_Study_Report_Query extends BaseFragment {
                     ToastUtils.show("请选择支部");
                     return;
                 }
+                Log.i("YY",deptNumberdw +"==" + deptNumberzz +"=="+deptNumberzb +"==" +deptNumberry);
                 getPoP();
 
                 break;
@@ -275,6 +281,7 @@ public class Fgt_Study_Report_Query extends BaseFragment {
     }
     //查询心得信息
     private void getWeekQuery(String deptNumberzb, String deptNumberry) {
+
         Map<String, Object> map = new HashMap<>();
         map.put("createCode", deptNumberry);
         map.put("deptNumber", deptNumberzb);

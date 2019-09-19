@@ -950,6 +950,25 @@ public class UserDataBean {
             private Object workPost;
             private Object abbreviation;
             private Object partyPromise;
+            private String area;
+
+            private String posts;
+
+            public String getArea() {
+                return area;
+            }
+
+            public void setArea(String area) {
+                this.area = area;
+            }
+
+            public String getPosts() {
+                return posts;
+            }
+
+            public void setPosts(String posts) {
+                this.posts = posts;
+            }
 
             public Object getPartyPromise() {
                 return partyPromise ==null?"暂无":partyPromise;
