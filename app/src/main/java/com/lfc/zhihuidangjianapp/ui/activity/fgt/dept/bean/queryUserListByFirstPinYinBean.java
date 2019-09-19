@@ -164,7 +164,7 @@ public class queryUserListByFirstPinYinBean {
             private Object isEnableText;
             private Object jobTitle;
             private String joinPartyIntroducer;
-            private long joinPartyTime;
+            private String joinPartyTime;
             private String joinWorkTime;
             private String loginName;
             private String loginPwd;
@@ -199,7 +199,7 @@ public class queryUserListByFirstPinYinBean {
             private int startIndex;
             private int status;
             private String subordinatePartyGroup;
-            private long toFormalPartyTime;
+            private String toFormalPartyTime;
             private Object token;
             private String userId;
             private String userNumber;
@@ -486,11 +486,11 @@ public class queryUserListByFirstPinYinBean {
                 this.joinPartyIntroducer = joinPartyIntroducer;
             }
 
-            public long getJoinPartyTime() {
+            public String getJoinPartyTime() {
                 return joinPartyTime;
             }
 
-            public void setJoinPartyTime(long joinPartyTime) {
+            public void setJoinPartyTime(String joinPartyTime) {
                 this.joinPartyTime = joinPartyTime;
             }
 
@@ -766,11 +766,11 @@ public class queryUserListByFirstPinYinBean {
                 this.subordinatePartyGroup = subordinatePartyGroup;
             }
 
-            public long getToFormalPartyTime() {
+            public String getToFormalPartyTime() {
                 return toFormalPartyTime;
             }
 
-            public void setToFormalPartyTime(long toFormalPartyTime) {
+            public void setToFormalPartyTime(String toFormalPartyTime) {
                 this.toFormalPartyTime = toFormalPartyTime;
             }
 
