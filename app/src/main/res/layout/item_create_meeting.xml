@@ -24,7 +24,7 @@
         android:layout_weight="1"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:hint="1"
+        android:hint=""
         android:padding="@dimen/dip_8" />
 
     <TextView
@@ -36,7 +36,7 @@
         android:layout_weight="1"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:hint="1"
+        android:hint=""
         android:padding="@dimen/dip_8" />
 
 </LinearLayout>
