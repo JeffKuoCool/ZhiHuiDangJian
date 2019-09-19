@@ -195,7 +195,7 @@ public class Fgt_Study_Report extends BaseFragment {
                         Intent intent = new Intent(getActivity(),Update_Act_Write_Report.class);
                         intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId() + "");
                         intent.putExtra("title", data.getTitle() + "");
-                        intent.putExtra("dept", data.getComment() + "");
+                        intent.putExtra("comment", data.getComment() + "");
                         intent.putExtra("author", data.getAuthor() + "");
 
                         startActivity(intent);

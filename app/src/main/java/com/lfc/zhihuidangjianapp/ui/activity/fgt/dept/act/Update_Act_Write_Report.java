@@ -50,7 +50,7 @@ public class Update_Act_Write_Report extends BaseActivity {
         etTheme = findViewById(R.id.et_theme);
         etContent = findViewById(R.id.et_content);
         title = getIntent().getStringExtra("title");
-        dept = getIntent().getStringExtra("dept");
+        dept = getIntent().getStringExtra("comment");
         author = getIntent().getStringExtra("author");
         studyStrongBureauId = getIntent().getStringExtra("studyStrongBureauId");
          etTheme.setText(title);
