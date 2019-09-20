@@ -287,6 +287,7 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
         super.onResume();
         //重新绘制加载地图
         mapView.onResume();
+
     }
 
     @Override

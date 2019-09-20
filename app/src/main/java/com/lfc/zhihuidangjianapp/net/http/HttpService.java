@@ -347,6 +347,13 @@ public interface HttpService {
      */
     @POST(ApiConstant.API + "/insertStudyStrongBureau")
     Observable<BaseResponse<Object>> insertStudyStrongBureau(@QueryMap Map<String, Object> map,@Header("token") String token);
+    /**
+     * 修改学习强局信息--学习心得
+     * @param token
+     * @return
+     */
+    @POST(ApiConstant.API + "/updateStudyStrongBureauApp")
+    Observable<BaseResponse<Object>> updateStudyStrongBureauApp(@QueryMap Map<String, Object> map,@Header("token") String token);
 
     /**
      * 分页查询精选周报信息

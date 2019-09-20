@@ -67,6 +67,7 @@ public class Act_PartyBuildingMatrix extends BaseActivity implements View.OnClic
 
     MyPagerAdapter mAdapter;
 
+
     @Override
     protected void initData() {
         mFragments.clear();

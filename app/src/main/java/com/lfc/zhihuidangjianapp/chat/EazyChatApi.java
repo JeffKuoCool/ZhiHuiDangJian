@@ -119,7 +119,7 @@ public class EazyChatApi {
 
     public static void loginChat(String username, String password, BaseActivity activity, EMCallBack emCallBack) {
         if (username == null || password == null) {
-            activity.toast("用户名密码错误！");
+            activity.toast("用户名密    码错误！");
             return;
         }
         EMClient.getInstance().login(username, password, emCallBack == null ? new EMCallBack() {//回调
