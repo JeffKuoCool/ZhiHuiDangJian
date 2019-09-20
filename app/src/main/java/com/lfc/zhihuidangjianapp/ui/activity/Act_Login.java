@@ -34,6 +34,7 @@ import butterknife.OnClick;
 
 public class Act_Login extends BaseActivity {
 
+
     @BindView(R.id.editAccountNumber)
     EditText editAccountNumber;
     @BindView(R.id.editPassword)
