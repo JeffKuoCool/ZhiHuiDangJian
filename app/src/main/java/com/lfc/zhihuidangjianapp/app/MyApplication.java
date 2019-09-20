@@ -59,7 +59,7 @@ public class MyApplication extends DemoApplication {
         ARouter.init(this);
         //bugly
         //CrashReport.initCrashReport(getApplicationContext(), "8e9f06cfbc", false);
-        Bugly.init(getApplicationContext(), "8e9f06cfbc", false);
+        Bugly.init(getApplicationContext(), AppConstants.getBuglyAppId(), false);
 
     }
 
