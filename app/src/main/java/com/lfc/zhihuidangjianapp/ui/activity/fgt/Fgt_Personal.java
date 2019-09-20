@@ -152,6 +152,11 @@ public class Fgt_Personal extends BaseFragment {
         queryJoinPartyStageDeatil();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        queryJoinPartyStageDeatil();
+    }
 
     /**
      * 查询发展党员信息

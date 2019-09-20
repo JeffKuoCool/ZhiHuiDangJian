@@ -80,6 +80,16 @@ public class Act_Integral extends BaseActivity {
 
     @Override
     protected void initData() {
+       getDatas();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getDatas();
+    }
+
+    private void getDatas() {
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
                 .queryMyTotal( MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())

@@ -20,7 +20,7 @@ public class User implements Parcelable {
     private String beginCreateDt;
     private long birthday;
     private String company;
-    private long createDt;
+    private String createDt;
     private String createrId;
     private String createrIp;
     private String createrName;
@@ -194,11 +194,11 @@ public class User implements Parcelable {
         return company;
     }
 
-    public void setCreateDt(long createDt) {
+    public void setCreateDt(String createDt) {
         this.createDt = createDt;
     }
 
-    public long getCreateDt() {
+    public String getCreateDt() {
         return createDt;
     }
 

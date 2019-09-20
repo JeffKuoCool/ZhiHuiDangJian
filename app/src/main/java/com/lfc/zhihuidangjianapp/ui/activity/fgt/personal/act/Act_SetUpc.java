@@ -2,6 +2,7 @@
 package com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act;
 
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.hjq.toast.ToastUtils;
 import com.lfc.zhihuidangjianapp.R;
@@ -18,6 +19,9 @@ import butterknife.OnClick;
  * 设置页面
  */
 public class Act_SetUpc extends BaseActivity {
+
+    private TextView relative1_text;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_set_upctivity;
@@ -30,13 +34,20 @@ public class Act_SetUpc extends BaseActivity {
 
     @Override
     protected void initView() {
+
         ButterKnife.bind(this);
+        relative1_text = findViewById(R.id.relative1_text);
         initImmersionBar(1);
     }
 
     @Override
     protected void initData() {
-
+        //清除缓存
+        try {
+            relative1_text.setText(CacheDataManager.getTotalCacheSize(Act_SetUpc.this));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @OnClick(R.id.imgBack)
@@ -96,6 +107,7 @@ public class Act_SetUpc extends BaseActivity {
             public void doClickRight() {
                 ImageLoader.clear(Act_SetUpc.this);
                 CacheDataManager.clearAllCache(Act_SetUpc.this);
+                relative1_text.setText(CacheDataManager.getTotalCacheSize(Act_SetUpc.this));
                 ToastUtils.show("缓存已清理");
             }
 
