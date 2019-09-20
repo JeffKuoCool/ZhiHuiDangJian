@@ -156,7 +156,6 @@ public class Act_Login extends BaseActivity {
 
     @OnClick(R.id.btnLoginCommit)
     public void onBtnLoginCommitClicked() {
-//        startAuto("您有一笔QQ订单,请注意收款情况");
         if (editAccountNumber.getText().toString().trim().equals("")) {
             ToastUtils.show("请输入您的账号");
             return;

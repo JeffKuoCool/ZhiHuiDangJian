@@ -4,12 +4,14 @@ import android.app.Application;
 import android.content.Context;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.google.gson.Gson;
 import com.hjq.toast.ToastUtils;
 import com.hyphenate.chatuidemo.DemoApplication;
 import com.lfc.zhihuidangjianapp.bean.LoginBean;
 import com.lfc.zhihuidangjianapp.chat.EazyChatApi;
 import com.lfc.zhihuidangjianapp.image.ImageLoader;
 import com.lfc.zhihuidangjianapp.ui.activity.model.UserInfo;
+import com.lfc.zhihuidangjianapp.utlis.SPUtil;
 import com.tencent.bugly.crashreport.CrashReport;
 
 public class MyApplication extends DemoApplication {
@@ -23,16 +25,17 @@ public class MyApplication extends DemoApplication {
         return app;
     }
 
-    public static LoginBean.DataBean loginBean;
     private static UserInfo mUserInfo;
 
     public static LoginBean.DataBean getLoginBean() {
+        String aoth = SPUtil.getObject(getAppContext(), UserConstants.AUTHORIZATION, "").toString();
+        LoginBean.DataBean loginBean = new Gson().fromJson(aoth, LoginBean.DataBean.class);
         if (loginBean == null) return new LoginBean.DataBean();
         return loginBean;
     }
 
     public static void setLoginBean(LoginBean.DataBean loginBean) {
-        MyApplication.loginBean = loginBean;
+        SPUtil.putObject(getAppContext(), UserConstants.AUTHORIZATION, new Gson().toJson(loginBean));
     }
 
     @Override

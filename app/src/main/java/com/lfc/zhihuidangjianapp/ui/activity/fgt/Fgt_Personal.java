@@ -20,6 +20,7 @@ import com.hjq.toast.ToastUtils;
 import com.hyphenate.chatuidemo.ui.MainActivity;
 import com.lfc.zhihuidangjianapp.R;
 import com.lfc.zhihuidangjianapp.app.MyApplication;
+import com.lfc.zhihuidangjianapp.app.UserConstants;
 import com.lfc.zhihuidangjianapp.base.BaseFragment;
 import com.lfc.zhihuidangjianapp.net.http.ApiConstant;
 import com.lfc.zhihuidangjianapp.net.http.HttpHelper;
@@ -36,6 +37,7 @@ import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.bean.UserDataBean;
 import com.lfc.zhihuidangjianapp.ui.activity.model.ResponseWorkReport;
 import com.lfc.zhihuidangjianapp.utlis.DateUtils;
 import com.lfc.zhihuidangjianapp.utlis.DialogUtils;
+import com.lfc.zhihuidangjianapp.utlis.SPUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -288,6 +290,7 @@ public class Fgt_Personal extends BaseFragment {
                     protected void onNext(Object response) {
                         Log.e("onNext= ", response.toString());
                         if (response == null) return;
+                        SPUtil.remove(getActivity(), UserConstants.AUTHORIZATION);
                         startActivity(new Intent(getActivity(), Act_Login.class));
                         getActivity().finish();
                         toast("退出成功");

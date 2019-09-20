@@ -74,12 +74,14 @@
             android:name="com.amap.api.v2.apikey"
             android:value="eb1c1801db8d7dbb3f8f8953d24c7d4c"></meta-data>
 
-        <activity android:name=".ui.activity.Act_Login">
+        <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.Act_Login">
         </activity>
         <activity
             android:name=".ui.activity.Act_Main"
