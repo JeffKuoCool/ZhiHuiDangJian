@@ -184,7 +184,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dip_10"
                     style="@style/dept_detail_title"
-                    android:text="集中学习研究的专题和内容"/>
+                    android:text="学习形式"/>
 
                 <TextView
                     android:id="@+id/tv_type"
