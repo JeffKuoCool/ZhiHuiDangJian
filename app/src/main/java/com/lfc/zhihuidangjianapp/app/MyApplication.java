@@ -12,6 +12,7 @@ import com.lfc.zhihuidangjianapp.chat.EazyChatApi;
 import com.lfc.zhihuidangjianapp.image.ImageLoader;
 import com.lfc.zhihuidangjianapp.ui.activity.model.UserInfo;
 import com.lfc.zhihuidangjianapp.utlis.SPUtil;
+import com.tencent.bugly.Bugly;
 import com.tencent.bugly.crashreport.CrashReport;
 
 public class MyApplication extends DemoApplication {
@@ -57,7 +58,8 @@ public class MyApplication extends DemoApplication {
         ARouter.openDebug();
         ARouter.init(this);
         //bugly
-        CrashReport.initCrashReport(getApplicationContext(), "8e9f06cfbc", false);
+        //CrashReport.initCrashReport(getApplicationContext(), "8e9f06cfbc", false);
+        Bugly.init(getApplicationContext(), "8e9f06cfbc", false);
 
     }
 
