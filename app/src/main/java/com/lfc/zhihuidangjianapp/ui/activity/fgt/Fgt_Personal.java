@@ -17,6 +17,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.hjq.toast.ToastUtils;
+import com.hyphenate.chat.EMClient;
 import com.hyphenate.chatuidemo.ui.MainActivity;
 import com.lfc.zhihuidangjianapp.R;
 import com.lfc.zhihuidangjianapp.app.MyApplication;
@@ -296,6 +297,7 @@ public class Fgt_Personal extends BaseFragment {
                         Log.e("onNext= ", response.toString());
                         if (response == null) return;
                         SPUtil.remove(getActivity(), UserConstants.AUTHORIZATION);
+                        EMClient.getInstance().logout(true, null);
                         startActivity(new Intent(getActivity(), Act_Login.class));
                         getActivity().finish();
                         toast("退出成功");

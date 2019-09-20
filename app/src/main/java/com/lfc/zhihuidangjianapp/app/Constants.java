@@ -6,6 +6,7 @@ package com.lfc.zhihuidangjianapp.app;
  * @description:
  */
 public class Constants {
+    //环信app key
     public static final String APP_KEY = "1105190516090369#ztzhdj";
 
     public static final String CONFERENCE_PASSWORD = "123456";
