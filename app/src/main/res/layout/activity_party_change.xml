@@ -46,6 +46,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_submit">
 
         <LinearLayout
+            android:id="@+id/lin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -85,7 +86,97 @@
 
 
             </android.support.v7.widget.CardView>
+            <TextView
+                android:id="@+id/et_party_type_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:paddingLeft="@dimen/dip_20"
+                android:paddingRight="@dimen/dip_20"
+                android:paddingTop="@dimen/dip_8"
+                android:paddingBottom="@dimen/dip_8"
+                android:layout_marginTop="@dimen/dip_15"
+                android:background="@color/background"
+                style="@style/text_14"
+                android:text="转移类型"/>
 
+            <EditText
+                android:editable="false"
+                android:id="@+id/et_party_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_10"
+                style="@style/text_14"
+                android:paddingLeft="@dimen/dip_20"
+                android:gravity="center_vertical"
+                android:hint="转移类型"
+                android:background="@null"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:paddingLeft="@dimen/dip_20"
+                android:paddingRight="@dimen/dip_20"
+                android:paddingTop="@dimen/dip_8"
+                android:paddingBottom="@dimen/dip_8"
+                android:layout_marginTop="@dimen/dip_15"
+                android:background="@color/background"
+                style="@style/text_14"
+                android:text="转移状态"/>
+
+            <EditText
+                android:editable="false"
+                android:id="@+id/et_party_zhangtai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_10"
+                style="@style/text_14"
+                android:paddingLeft="@dimen/dip_20"
+                android:gravity="center_vertical"
+                android:hint="转移状态"
+                android:background="@null"/>
+           <LinearLayout
+               android:visibility="gone"
+               android:id="@+id/type1"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:layout_constraintTop_toTopOf="parent"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintLeft_toLeftOf="parent"
+                   android:paddingLeft="@dimen/dip_20"
+                   android:paddingRight="@dimen/dip_20"
+                   android:paddingTop="@dimen/dip_8"
+                   android:paddingBottom="@dimen/dip_8"
+                   android:layout_marginTop="@dimen/dip_15"
+                   android:background="@color/background"
+                   style="@style/text_14"
+                   android:text="关系转移"/>
+
+               <EditText
+                   android:id="@+id/et_party_name"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="@dimen/dip_10"
+                   style="@style/text_14"
+                   android:paddingLeft="@dimen/dip_20"
+                   android:gravity="center_vertical"
+                   android:hint="请填写申请转移组织的名称"
+                   android:background="@null"/>
+           </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/type2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,18 +191,148 @@
                 android:background="@color/background"
                 style="@style/text_14"
                 android:text="关系转移"/>
-
-            <EditText
-                android:id="@+id/et_party_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dip_10"
-                style="@style/text_14"
+            <LinearLayout
                 android:paddingLeft="@dimen/dip_20"
-                android:gravity="center_vertical"
-                android:hint="请填写申请转移组织的名称"
-                android:background="@null"/>
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择党委："/>
+                <LinearLayout
+                    android:id="@+id/tv_dw_lin"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/bg_round_gray"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:hint="请选择党委"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:cursorVisible="false"
+                        android:id="@+id/tv_dw_et"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        />
+                    <ImageView
+                        android:layout_marginRight="10dp"
+                        android:textSize="15sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:src="@mipmap/icon_down"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
 
+                android:paddingLeft="@dimen/dip_20"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择总支："/>
+                <LinearLayout
+                    android:id="@+id/tv_zz_lin"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/bg_round_gray"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:hint="请选择总支"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:cursorVisible="false"
+                        android:id="@+id/tv_zz_et"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        />
+                    <ImageView
+                        android:layout_marginRight="10dp"
+                        android:textSize="15sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:src="@mipmap/icon_down"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+
+                android:paddingLeft="@dimen/dip_20"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择支部："/>
+                <LinearLayout
+
+                    android:id="@+id/tv_zb_lin"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/bg_round_gray"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:hint="请选择支部"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:cursorVisible="false"
+                        android:id="@+id/tv_zb_et"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        />
+                    <ImageView
+                        android:layout_marginRight="10dp"
+                        android:textSize="15sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:src="@mipmap/icon_down"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -128,13 +349,14 @@
                 android:text="申请理由"/>
             
             <EditText
+
                 android:id="@+id/et_reason"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:layout_marginTop="@dimen/dip_10"
                 style="@style/text_14"
                 android:paddingLeft="@dimen/dip_20"
-                android:gravity="center_vertical"
+                android:gravity="top"
                 android:hint="请填写转移组织的原因"
                 android:layout_marginBottom="@dimen/dip_20"
                 android:background="@null"/>

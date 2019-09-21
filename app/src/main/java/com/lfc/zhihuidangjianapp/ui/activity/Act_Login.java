@@ -86,9 +86,8 @@ public class Act_Login extends BaseActivity {
         yingsi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Act_WebView.class);
-                intent.putExtra("title", "隐私声明");
-                intent.putExtra("url", "https://dj.sxzts.cn/pc/#/ystk");
+                Intent intent = new Intent(getActivity(), Act_YinSiActivity.class);
+
                 getActivity().startActivity(intent);
             }
         });

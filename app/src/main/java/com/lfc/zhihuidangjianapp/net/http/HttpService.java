@@ -1,6 +1,7 @@
 package com.lfc.zhihuidangjianapp.net.http;
 
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.ChaXunBean_new;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.ChangeBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.MianDeptBeanD;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopRyBean;
@@ -223,6 +224,14 @@ public interface HttpService {
      */
     @POST(ApiConstant.API + "/insertTransferOrganizationalRelations")
     Observable<BaseResponse<Object>> insertTransferOrganizationalRelations(@QueryMap Map<String, Object> map, @Header("token") String token);
+    /**
+     * 修改党组织关系转移信息
+     *
+     * @param token
+     * @return
+     */
+    @POST(ApiConstant.API + "/updateTransfer")
+    Observable<BaseResponse<Object>> updateTransfer(@QueryMap Map<String, Object> map, @Header("token") String token);
 
     /**
      * 查看党组织关系转移详情信息
@@ -239,7 +248,7 @@ public interface HttpService {
      * @return
      */
     @POST(ApiConstant.API + "/queryMyTransferOrganizationalRelationsDetail")
-    Observable<BaseResponse<PartyOrganiza>> queryMyTransferOrganizationalRelationsDetail(@Header("token") String token);
+    Observable<BaseResponse<ChangeBean>> queryMyTransferOrganizationalRelationsDetail(@Header("token") String token);
 
     /**
      * 我的党费（待缴党费信息+党费缴纳列表）
