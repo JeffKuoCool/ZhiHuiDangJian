@@ -211,6 +211,7 @@ public class Act_Create_Meeting extends BaseActivity {
      * 创建会议
      */
     private void createMeeting() {
+        uiNameList.get(4).setText(MyApplication.getmUserInfo().getUser().getSealName());
         for (UiName uiName : uiNameList) {
             if (TextUtils.isEmpty(uiName.getText())) {
                 showTextToast("请完善信息");
