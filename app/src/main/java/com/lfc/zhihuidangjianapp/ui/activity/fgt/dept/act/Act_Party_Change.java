@@ -422,42 +422,56 @@ public class Act_Party_Change extends BaseActivity {
                             tvSubmit.setVisibility(View.GONE);
                             et_party_type_lin.setEnabled(false);
                             type1.setVisibility(View.VISIBLE);
+                            etReason.setEnabled(false);
+                            etParyName.setEnabled(false);
 
                         }else if(status ==1){
                             et_party_zhangtai.setText("待转入");
                             tvSubmit.setVisibility(View.GONE);
                             et_party_type_lin.setEnabled(false);
                             type1.setVisibility(View.VISIBLE);
+                            etReason.setEnabled(false);
+                            etParyName.setEnabled(false);
 
                         }else if(status ==2){
                             et_party_zhangtai.setText("已转出");
                             tvSubmit.setVisibility(View.GONE);
                             et_party_type_lin.setEnabled(false);
                             type1.setVisibility(View.VISIBLE);
+                            etReason.setEnabled(false);
+                            etParyName.setEnabled(false);
 
                         }else if(status ==3){
                             et_party_zhangtai.setText("已转入");
                             tvSubmit.setVisibility(View.GONE);
                             et_party_type_lin.setEnabled(false);
                             type1.setVisibility(View.VISIBLE);
+                            etReason.setEnabled(false);
+                            etParyName.setEnabled(false);
 
                         }else if(status ==4){
                             et_party_zhangtai.setText("已驳回");
                             tvSubmit.setVisibility(View.VISIBLE);
                             et_party_type_lin.setEnabled(true);
                             type1.setVisibility(View.VISIBLE);
+                            etReason.setEnabled(true);
+                            etParyName.setEnabled(true);
 
                         }else if(status ==5){
                             et_party_zhangtai.setText("内部待转");
                             tvSubmit.setVisibility(View.GONE);
                             et_party_type_lin.setEnabled(false);
                             type1.setVisibility(View.VISIBLE);
+                            etReason.setEnabled(false);
+                            etParyName.setEnabled(false);
 
                         }else if(status ==6){
                             et_party_zhangtai.setText("内部已转");
                             tvSubmit.setVisibility(View.GONE);
                             et_party_type_lin.setEnabled(false);
                             type1.setVisibility(View.VISIBLE);
+                            etReason.setEnabled(false);
+                            etParyName.setEnabled(false);
 
                         }
                     }
