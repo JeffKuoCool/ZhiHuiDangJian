@@ -638,11 +638,13 @@
         </RelativeLayout>
 
         <View
+
             android:layout_width="match_parent"
             android:layout_height="@dimen/dip_1"
             android:background="#10000000" />
 
         <RelativeLayout
+
             android:id="@+id/min_zhanghuanquan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
