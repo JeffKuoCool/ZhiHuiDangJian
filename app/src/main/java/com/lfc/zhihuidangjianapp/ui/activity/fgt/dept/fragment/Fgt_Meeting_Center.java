@@ -120,12 +120,10 @@ public class Fgt_Meeting_Center extends BaseFragment {
                 holder.setText(R.id.tv_title, data.getTitle());
                 holder.setText(R.id.tv_start_time, "会议开始时间："+data.getStartTime());
                 holder.setText(R.id.tv_create_name, "会议创建人："+data.getSendPerson());
-               // holder.setText(R.id.tv_title, data.getTitle());
-              //  holder.setText(R.id.tv_title, data.getTitle());
-                if(TextUtils.isEmpty(data.getConfrId())&&!data.getCreateCode().equals(MyApplication.getmUserInfo().getUser().getLoginName())){
-                    //会议室不存在，不是创建人无权限进入会议
-                    return;
-                }
+//                if(TextUtils.isEmpty(data.getConfrId())&&!data.getCreateCode().equals(MyApplication.getmUserInfo().getUser().getLoginName())){
+//                    //会议室不存在，不是创建人无权限进入会议
+//                    return;
+//                }
                 View convertView =  holder.getConvertView();
                 TextView tvJoinMeeting = convertView.findViewById(R.id.tv_join_meeting);
                 tvJoinMeeting.setOnClickListener(confe->{

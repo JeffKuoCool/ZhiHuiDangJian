@@ -24,6 +24,7 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.hjq.toast.ToastUtils;
 import com.hwangjr.rxbus.RxBus;
 import com.lfc.zhihuidangjianapp.app.MyApplication;
+import com.lfc.zhihuidangjianapp.helper.ActivityManager;
 import com.lfc.zhihuidangjianapp.service.LoginOutBroadcastReceiver;
 import com.wuxiaolong.androidutils.library.ActivityManagerUtil;
 import com.zyao89.view.zloading.ZLoadingDialog;
@@ -81,6 +82,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ViewTree
         initLayout();
         initView();
         initData();
+        ActivityManager.addActivity(this);
     }
 
     /**
@@ -209,6 +211,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ViewTree
         RxBus.get().unregister(this);
         //结束Activity&从栈中移除该Activity
         activityManagerUtil.popOneActivity(this);
+        ActivityManager.removeActivity(this);
     }
 
     /**
