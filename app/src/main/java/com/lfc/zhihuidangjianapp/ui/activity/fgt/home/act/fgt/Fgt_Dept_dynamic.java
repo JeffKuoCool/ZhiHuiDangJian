@@ -70,6 +70,8 @@ public class Fgt_Dept_dynamic extends BaseBindViewFragment {
 
     @Override
     protected void initData() {
+        partyDynamicType = getArguments().getInt("partyDynamicType", 0);
+        Log.i("yy--partyDynamicType",partyDynamicType+"");
         mRefreshLayout.setEnableRefresh(true);//是否启用下拉刷新功能
         mRefreshLayout.setEnableLoadMore(true);//是否启用上拉加载功能
         //内容跟随偏移
@@ -155,8 +157,7 @@ public class Fgt_Dept_dynamic extends BaseBindViewFragment {
 
     }
     private void getDatas() {
-        partyDynamicType = getArguments().getInt("partyDynamicType", 0);
-        Log.i("yy--partyDynamicType",partyDynamicType+"");
+
         Map<String, Object> map = new HashMap<>();
         map.put("partyDynamicType", partyDynamicType);
         map.put("pageSize", size + "");

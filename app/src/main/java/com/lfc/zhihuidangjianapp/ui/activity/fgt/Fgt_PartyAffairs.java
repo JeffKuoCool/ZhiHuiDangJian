@@ -163,13 +163,14 @@ public class Fgt_PartyAffairs extends BaseFragment {
         switch (position){
             case 0://党建矩阵 TODO
                 startActivity(intent);
+                intent.putExtra("tabType", 0);
                 break;
             case 1://群团统战
-                intent.putExtra("tabType", Act_Dept_dynamic.TAB_DEPT_GROUP);
+                intent.putExtra("tabType", 1);
                 startActivity(intent);
                 break;
             case 2://廉政建设
-                intent.putExtra("tabType", Act_Dept_dynamic.TAB_DEPT_BUILD);
+                intent.putExtra("tabType", 2);
                 startActivity(intent);
                 break;
         }

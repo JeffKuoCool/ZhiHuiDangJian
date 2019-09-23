@@ -13,6 +13,7 @@ import com.lfc.zhihuidangjianapp.R;
 import com.lfc.zhihuidangjianapp.bean.TabEntity;
 import com.lfc.zhihuidangjianapp.ui.activity.BaseBindViewActivity;
 import com.lfc.zhihuidangjianapp.ui.activity.adapter.FragPagerAdapter;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.fragment.Fgt_Forest_List;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.fgt.Fgt_Dept_dynamic;
 
 import java.util.ArrayList;
@@ -36,12 +37,12 @@ public class Act_Dept_dynamic extends BaseBindViewActivity {
     //0党建动态 1群团统战 2廉政建设
     private int tabType = 0;
 
-    public static final int TAB_DEPT_ACTIVE = 0;
+   /* public static final int TAB_DEPT_ACTIVE = 0;
     public static final int TAB_DEPT_GROUP = 1;
     public static final int TAB_DEPT_BUILD = 2;
-
+*/
     @BindView(R.id.tab)
-    CommonTabLayout tab;
+   CommonTabLayout tab;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
     TextView tvAppTitle;
@@ -60,12 +61,13 @@ public class Act_Dept_dynamic extends BaseBindViewActivity {
     protected void initView() {
         super.initView();
         tvAppTitle = findViewById(R.id.tv_apptitle);
-        tvAppTitle.setText("党务资讯");
+       /* tvAppTitle.setText("党务资讯");
 
         tabType = getIntent().getIntExtra("tabType", 0);
-        if (tabType > TAB_DEPT_BUILD) {
-            tabType = TAB_DEPT_ACTIVE;
+        if (tabType >= mTitles.length) {
+            tabType = 0;
         }
+
         FragPagerAdapter fpa = new FragPagerAdapter(getSupportFragmentManager());
         fpa.setFragmentList(list());
         viewPager.setOffscreenPageLimit(mTitles.length);
@@ -102,6 +104,77 @@ public class Act_Dept_dynamic extends BaseBindViewActivity {
 
             }
         });
+        setEvent();*/
+      /*  TextView tvAppTitle = findViewById(R.id.tv_apptitle);
+        tvAppTitle.setText("林区风采");
+        tabType = getIntent().getIntExtra("tabType", 0);
+        if (tabType >= mTitles.length) {
+            tabType = 0;
+        }
+
+        FragPagerAdapter fpa = new FragPagerAdapter(getSupportFragmentManager());
+        fpa.setFragmentList(list());
+        viewPager.setOffscreenPageLimit(mTitles.length);
+        viewPager.setAdapter(fpa);
+       // tab.setViewPager(viewPager, mTitles);
+        tab.setTabData(mTabEntities);
+        viewPager.setCurrentItem(tabType);
+        tab.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                viewPager.setCurrentItem(position);
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+
+            }
+        });
+        tab.setCurrentTab(tabType);
+        setEvent();*/
+        tvAppTitle.setText("党务资讯");
+        tabType = getIntent().getIntExtra("tabType", 0);
+        /*if (tabType > TAB_DEPT_BUILD) {
+            tabType = TAB_DEPT_ACTIVE;
+        }*/
+        FragPagerAdapter fpa = new FragPagerAdapter(getSupportFragmentManager());
+        fpa.setFragmentList(list());
+        viewPager.setOffscreenPageLimit(mTitles.length);
+        viewPager.setAdapter(fpa);
+        for (int i = 0; i < mTitles.length; i++) {
+            mTabEntities.add(new TabEntity(mTitles[i]));
+        }
+
+        tab.setTabData(mTabEntities);
+        tab.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                viewPager.setCurrentItem(position);
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+
+            }
+        });
+        tab.setCurrentTab(tabType);
+        viewPager.setCurrentItem(tabType);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                tab.setCurrentTab(i);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
         setEvent();
     }
 
@@ -110,14 +183,24 @@ public class Act_Dept_dynamic extends BaseBindViewActivity {
     }
 
     private List<Fragment> list() {
+
         fragments = new ArrayList<>();
-        for (int i = 0; i < mTitles.length; i++) {
-            Fgt_Dept_dynamic fgtDeptDynamic = new Fgt_Dept_dynamic();
-            Bundle bundle = new Bundle();
-            bundle.putInt("partyDynamicType", i);
-            fgtDeptDynamic.setArguments(bundle);
-            fragments.add(fgtDeptDynamic);
-        }
+        //0党建动态 1群团统战 2廉政建设
+        Fgt_Dept_dynamic orderListFragment0 = new Fgt_Dept_dynamic();//0党建动态
+        Fgt_Dept_dynamic orderListFragment1 = new Fgt_Dept_dynamic();//1群团统战
+        Fgt_Dept_dynamic orderListFragment2 = new Fgt_Dept_dynamic();//2廉政建设
+        Bundle bundle0 = new Bundle();
+        Bundle bundle1 = new Bundle();
+        Bundle bundle2 = new Bundle();
+        bundle0.putInt("partyDynamicType", 0);
+        bundle1.putInt("partyDynamicType", 1);
+        bundle2.putInt("partyDynamicType", 2);
+        orderListFragment0.setArguments(bundle0);
+        orderListFragment1.setArguments(bundle1);
+        orderListFragment2.setArguments(bundle2);
+        fragments.add(orderListFragment0);
+        fragments.add(orderListFragment1);
+        fragments.add(orderListFragment2);
         return fragments;
     }
 

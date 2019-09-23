@@ -153,6 +153,7 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
      * 加载个人信息
      */
     private void loadPartyInfo() {
+        Log.i("Token()",MyApplication.getLoginBean().getToken());
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
                 .queryJoinPartyInfo(MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
