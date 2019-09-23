@@ -36,8 +36,8 @@ public class FriendListAdapter extends CommonAdapter<User> {
         }
     }
 
-    public List<User> getSelectUser(){
-        List<User> temp = new ArrayList<>();
+    public ArrayList<User> getSelectUser(){
+        ArrayList<User> temp = new ArrayList<>();
         for (Friend friend: selectUsers){
             if(friend.isSelect()){
                 temp.add(friend.getUser());

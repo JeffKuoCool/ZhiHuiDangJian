@@ -51,6 +51,8 @@ public class Act_Create_Meeting extends BaseActivity {
 
     private List<UiName> uiNameList = loadData();
 
+    private ArrayList<User> selectUsers = new ArrayList<>();
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_create_meeting;
@@ -100,21 +102,39 @@ public class Act_Create_Meeting extends BaseActivity {
 
     }
 
+    private String getSealNameString(ArrayList<User> list) {
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            if (i == 0) {
+                stringBuilder.append(list.get(i).getSealName());
+            } else {
+                stringBuilder.append("," + list.get(i).getSealName());
+            }
+        }
+        return stringBuilder.toString();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && data != null) {
             try {
-                String users = data.getStringExtra("users");
+                selectUsers = data.getParcelableArrayListExtra("users");
                 StringBuilder stringBuilder = new StringBuilder();
-                if(uiNameList.get(5).getText()==null){
-                    stringBuilder.append(users);
-                }else{
-                    stringBuilder.append(uiNameList.get(5).getText()+","+users);
+                for (int i = 0; i < selectUsers.size(); i++) {
+                    if (i == 0) {
+                        stringBuilder.append(selectUsers.get(i).getLoginName());
+                    } else {
+                        stringBuilder.append("," + selectUsers.get(i).getLoginName());
+                    }
                 }
                 uiNameList.get(5).setText(stringBuilder.toString());
                 setRecyclerView(uiNameList);
-            }catch (Exception e){}
+            } catch (Exception e) {
+            }
         }
     }
 
@@ -142,20 +162,18 @@ public class Act_Create_Meeting extends BaseActivity {
                 if (position == 1 || position == 2 || position == 3) {
                     text.setVisibility(View.VISIBLE);
                     edit.setVisibility(View.GONE);
-                    text.setText(TextUtils.isEmpty(data.getText())?data.getName():data.getText());
+                    text.setText(TextUtils.isEmpty(data.getText()) ? data.getName() : data.getText());
                     text.setOnClickListener(view -> {
                         selectTime(position, text);
                     });
-                }
-                else if (position == 4){
+                } else if (position == 4) {
                     text.setVisibility(View.VISIBLE);
                     edit.setVisibility(View.GONE);
                     text.setText(MyApplication.getmUserInfo().getUser().getSealName());
-                }
-                else if (position == 5) {
+                } else if (position == 5) {
                     text.setVisibility(View.VISIBLE);
                     edit.setVisibility(View.GONE);
-                    text.setText(TextUtils.isEmpty(data.getText())?data.getName():data.getText());
+                    text.setText(TextUtils.isEmpty(data.getText()) ? data.getName() : getSealNameString(selectUsers));
                     text.setOnClickListener(view -> {
                         //通讯录-支部
                         Intent intent = new Intent(getActivity(), Act_Mail_list.class);
@@ -165,9 +183,9 @@ public class Act_Create_Meeting extends BaseActivity {
                 } else {
                     edit.setVisibility(View.VISIBLE);
                     text.setVisibility(View.GONE);
-                    if(TextUtils.isEmpty(data.getText())){
+                    if (TextUtils.isEmpty(data.getText())) {
                         edit.setHint(data.getName());
-                    }else{
+                    } else {
                         edit.setText(data.getText());
                     }
                     edit.addTextChangedListener(new TextWatcher() {
@@ -196,14 +214,14 @@ public class Act_Create_Meeting extends BaseActivity {
     private void selectTime(final int position, TextView text) {
         DateTimePicker picker = new DateTimePicker(this, DateTimePicker.HOUR_24);
         picker.setDateRangeStart(DateUtils.getYear(), 1, 1);
-        picker.setDateRangeEnd(DateUtils.getYear()+2, 12, 31);
+        picker.setDateRangeEnd(DateUtils.getYear() + 2, 12, 31);
         picker.setTimeRangeStart(0, 0);
         picker.setTimeRangeEnd(23, 59);
         picker.setSelectedItem(DateUtils.getYear(), DateUtils.getMonth(), DateUtils.getDay(), DateUtils.getHour(), DateUtils.getMinute());
         picker.setOnDateTimePickListener(new DateTimePicker.OnYearMonthDayTimePickListener() {
             @Override
             public void onDateTimePicked(String year, String month, String day, String hour, String minute) {
-                String time = year + "-" + month + "-" + day + " "+hour+":"+minute;
+                String time = year + "-" + month + "-" + day + " " + hour + ":" + minute;
                 text.setText(time);
                 uiNameList.get(position).setText(time);
             }

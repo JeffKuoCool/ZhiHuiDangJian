@@ -72,7 +72,6 @@ public class Act_Friend_list extends BaseActivity {
         tvTitle.setText("通讯录");
         recyclerView = findViewById(R.id.recyclerView);
         tvRight = findViewById(R.id.tvRight);
-        RxBus.get().register(this);
     }
 
     private void setEvent() {
@@ -117,18 +116,10 @@ public class Act_Friend_list extends BaseActivity {
                             tvRight.setVisibility(View.VISIBLE);
                             tvRight.setText("邀请");
                             tvRight.setOnClickListener(users -> {
-                                List<User> selectUsers = getSelectUser();
-                                StringBuilder stringBuilder = new StringBuilder();
-                                for (int i = 0; i < selectUsers.size(); i++) {
-                                    if (i == 0) {
-                                        stringBuilder.append(selectUsers.get(i).getLoginName());
-                                    } else {
-                                        stringBuilder.append("," + selectUsers.get(i).getLoginName());
-                                    }
-                                }
+                                ArrayList<User> selectUsers = getSelectUser();
 
                                 Intent intent = new Intent();
-                                intent.putExtra("users", stringBuilder.toString());
+                                intent.putParcelableArrayListExtra("users", selectUsers);
                                 setResult(EventConstants.EVENT_APPLY, intent);
                                 finish();
                             });
@@ -160,7 +151,7 @@ public class Act_Friend_list extends BaseActivity {
         setEvent();
     }
 
-    private List<User> getSelectUser() {
+    private ArrayList<User> getSelectUser() {
         if (friendListAdapter == null) {
             return new ArrayList<>();
         }
