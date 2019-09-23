@@ -367,6 +367,7 @@ public class Act_Party_Change extends BaseActivity {
         Map<String, Object> map = new HashMap<>();
         map.put("applyDeptName", etParyName);
         map.put("transferReason", etReason);
+        map.put("type", type);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
                 .insertTransferOrganizationalRelations(map, MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
@@ -403,76 +404,84 @@ public class Act_Party_Change extends BaseActivity {
                         if (response == null) return;
                         Log.e("onNext= ", response.toString());
                         transferOrganizationalRelationsId=response.getTransferOrganizationalRelations().getTransferOrganizationalRelationsId();
-                        //状态(0:待转出1:待转入2:已转出3:已转入4:已驳回5:内部待转6：内部已转)
-                        status = response.getTransferOrganizationalRelations().getStatus();
-                        //转移类型(0:系统外转入1:系统内转出2:系统内转移)
-                        int type = response.getTransferOrganizationalRelations().getType();
-                        if(type==0){
-                            et_party_type.setText("系统外转入");
-                        } else if(type==1){
-                            et_party_type.setText("系统内转出");
-                        }else if(type==2){
-                            et_party_type.setText("系统内转移");
-                        }
+                        //transferOrganizationalRelationsId==0没有申请过可以直接申请
+                        if(transferOrganizationalRelationsId!=0){
+                            //状态(0:待转出1:待转入2:已转出3:已转入4:已驳回5:内部待转6：内部已转)
+                            status = response.getTransferOrganizationalRelations().getStatus();
+                            //转移类型(0:系统外转入1:系统内转出2:系统内转移)
+                            int type = response.getTransferOrganizationalRelations().getType();
+                            if(type==0){
+                                et_party_type.setText("系统外转入");
+                            } else if(type==1){
+                                et_party_type.setText("系统内转出");
+                            }else if(type==2){
+                                et_party_type.setText("系统内转移");
+                            }
 
-                        etParyName.setText(response.getTransferOrganizationalRelations().getApplyDeptName());
-                        etReason.setText(response.getTransferOrganizationalRelations().getTransferReason());
-                        if(status ==0){
-                            et_party_zhangtai.setText("待转出");
-                            tvSubmit.setVisibility(View.GONE);
-                            et_party_type_lin.setEnabled(false);
-                            type1.setVisibility(View.VISIBLE);
-                            etReason.setEnabled(false);
-                            etParyName.setEnabled(false);
+                            etParyName.setText(response.getTransferOrganizationalRelations().getApplyDeptName());
+                            etReason.setText(response.getTransferOrganizationalRelations().getTransferReason());
+                            if(status ==0){
+                                et_party_zhangtai.setText("待转出");
+                                tvSubmit.setVisibility(View.GONE);
+                                et_party_type_lin.setEnabled(false);
+                                type1.setVisibility(View.VISIBLE);
+                                etReason.setEnabled(false);
+                                etParyName.setEnabled(false);
 
-                        }else if(status ==1){
-                            et_party_zhangtai.setText("待转入");
-                            tvSubmit.setVisibility(View.GONE);
-                            et_party_type_lin.setEnabled(false);
-                            type1.setVisibility(View.VISIBLE);
-                            etReason.setEnabled(false);
-                            etParyName.setEnabled(false);
+                            }else if(status ==1){
+                                et_party_zhangtai.setText("待转入");
+                                tvSubmit.setVisibility(View.GONE);
+                                et_party_type_lin.setEnabled(false);
+                                type1.setVisibility(View.VISIBLE);
+                                etReason.setEnabled(false);
+                                etParyName.setEnabled(false);
 
-                        }else if(status ==2){
-                            et_party_zhangtai.setText("已转出");
-                            tvSubmit.setVisibility(View.GONE);
-                            et_party_type_lin.setEnabled(false);
-                            type1.setVisibility(View.VISIBLE);
-                            etReason.setEnabled(false);
-                            etParyName.setEnabled(false);
+                            }else if(status ==2){
+                                et_party_zhangtai.setText("已转出");
+                                tvSubmit.setVisibility(View.GONE);
+                                et_party_type_lin.setEnabled(false);
+                                type1.setVisibility(View.VISIBLE);
+                                etReason.setEnabled(false);
+                                etParyName.setEnabled(false);
 
-                        }else if(status ==3){
-                            et_party_zhangtai.setText("已转入");
-                            tvSubmit.setVisibility(View.GONE);
-                            et_party_type_lin.setEnabled(false);
-                            type1.setVisibility(View.VISIBLE);
-                            etReason.setEnabled(false);
-                            etParyName.setEnabled(false);
+                            }else if(status ==3){
+                                et_party_zhangtai.setText("已转入");
+                                tvSubmit.setVisibility(View.GONE);
+                                et_party_type_lin.setEnabled(false);
+                                type1.setVisibility(View.VISIBLE);
+                                etReason.setEnabled(false);
+                                etParyName.setEnabled(false);
 
-                        }else if(status ==4){
-                            et_party_zhangtai.setText("已驳回");
+                            }else if(status ==4){
+                                et_party_zhangtai.setText("已驳回");
+                                tvSubmit.setVisibility(View.VISIBLE);
+                                et_party_type_lin.setEnabled(true);
+                                type1.setVisibility(View.VISIBLE);
+                                etReason.setEnabled(true);
+                                etParyName.setEnabled(true);
+
+                            }else if(status ==5){
+                                et_party_zhangtai.setText("内部待转");
+                                tvSubmit.setVisibility(View.GONE);
+                                et_party_type_lin.setEnabled(false);
+                                type1.setVisibility(View.VISIBLE);
+                                etReason.setEnabled(false);
+                                etParyName.setEnabled(false);
+                            }else if(status ==6){
+                                et_party_zhangtai.setText("内部已转");
+                                tvSubmit.setVisibility(View.GONE);
+                                et_party_type_lin.setEnabled(false);
+                                type1.setVisibility(View.VISIBLE);
+                                etReason.setEnabled(false);
+                                etParyName.setEnabled(false);
+                            }
+                        }else{
+                            et_party_zhangtai.setText("待申请");
                             tvSubmit.setVisibility(View.VISIBLE);
                             et_party_type_lin.setEnabled(true);
                             type1.setVisibility(View.VISIBLE);
                             etReason.setEnabled(true);
                             etParyName.setEnabled(true);
-
-                        }else if(status ==5){
-                            et_party_zhangtai.setText("内部待转");
-                            tvSubmit.setVisibility(View.GONE);
-                            et_party_type_lin.setEnabled(false);
-                            type1.setVisibility(View.VISIBLE);
-                            etReason.setEnabled(false);
-                            etParyName.setEnabled(false);
-
-                        }else if(status ==6){
-                            et_party_zhangtai.setText("内部已转");
-                            tvSubmit.setVisibility(View.GONE);
-                            et_party_type_lin.setEnabled(false);
-                            type1.setVisibility(View.VISIBLE);
-                            etReason.setEnabled(false);
-                            etParyName.setEnabled(false);
-
                         }
                     }
 
