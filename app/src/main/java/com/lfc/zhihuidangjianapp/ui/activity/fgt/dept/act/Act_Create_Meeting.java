@@ -122,7 +122,10 @@ public class Act_Create_Meeting extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && data != null) {
             try {
-                selectUsers = data.getParcelableArrayListExtra("users");
+                ArrayList<User> users = data.getParcelableArrayListExtra("users");
+                if (users != null && !users.isEmpty()) {
+                    selectUsers.addAll(users);
+                }
                 StringBuilder stringBuilder = new StringBuilder();
                 for (int i = 0; i < selectUsers.size(); i++) {
                     if (i == 0) {
