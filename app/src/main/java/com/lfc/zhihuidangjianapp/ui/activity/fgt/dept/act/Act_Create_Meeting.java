@@ -165,7 +165,11 @@ public class Act_Create_Meeting extends BaseActivity {
                 } else {
                     edit.setVisibility(View.VISIBLE);
                     text.setVisibility(View.GONE);
-                    edit.setHint(TextUtils.isEmpty(data.getText())?data.getName():data.getText());
+                    if(TextUtils.isEmpty(data.getText())){
+                        edit.setHint(data.getName());
+                    }else{
+                        edit.setText(data.getText());
+                    }
                     edit.addTextChangedListener(new TextWatcher() {
                         @Override
                         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
