@@ -65,14 +65,6 @@ public class Act_Login extends BaseActivity {
         initImmersionBar(0);
         ButterKnife.bind(this);
         aCache = ACache.get(this);
-//        initTTS();
-//        if (aCache.getAsString("data") != null) {
-//            String stData = aCache.getAsString("data");
-//            Gson gson = new Gson();
-//            LoginBean bean = gson.fromJson(stData, LoginBean.class);
-//            MyApplication.setLoginBean(bean.getData());
-//            startActivity(Act_Main.class);
-//        }
         captcha();
         setEvent();
         yingsi.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); //下划线

@@ -1,8 +1,14 @@
 package com.lfc.zhihuidangjianapp.net.http;
 
 import android.content.Context;
+import android.content.Intent;
 
+import com.hyphenate.chat.EMClient;
+import com.lfc.zhihuidangjianapp.app.UserConstants;
+import com.lfc.zhihuidangjianapp.helper.ActivityManager;
+import com.lfc.zhihuidangjianapp.ui.activity.Act_Login;
 import com.lfc.zhihuidangjianapp.ui.activity.model.BaseResponse;
+import com.lfc.zhihuidangjianapp.utlis.SPUtil;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -10,9 +16,10 @@ import io.reactivex.disposables.Disposable;
 public class ResponseObserver<T> {
     private final String TAG = "ResponseObserver";
     private final InternalObserver actual = new InternalObserver();
+    private Context mContext;
 
     public ResponseObserver(Context context) {
-        Context context1 = context;
+        mContext = context;
     }
 
     protected void onSubscribe(Disposable d) {
@@ -44,9 +51,14 @@ public class ResponseObserver<T> {
 
         @Override
         public void onNext(BaseResponse<T> response) {
-            if (response.isSuccessful() || response.getCode() == 90512) {
+            if (response.isSuccessful() ) {
                 ResponseObserver.this.onNext(response.getData());
                 return;
+            }else if(response.isLoginFailure()){
+                SPUtil.remove(mContext, UserConstants.AUTHORIZATION);
+                EMClient.getInstance().logout(true, null);
+                ActivityManager.finishAll();
+                mContext.startActivity(new Intent(mContext, Act_Login.class));
             }
         }
 

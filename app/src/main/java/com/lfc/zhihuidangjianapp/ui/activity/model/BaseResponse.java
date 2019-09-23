@@ -47,7 +47,7 @@ public class BaseResponse<T> {
     }
 
     public boolean isLoginFailure() {
-        return getCode() == 90001 || getCode() == 90002;
+        return getCode() == 1 || getCode() == 2;
     }
 
 }
