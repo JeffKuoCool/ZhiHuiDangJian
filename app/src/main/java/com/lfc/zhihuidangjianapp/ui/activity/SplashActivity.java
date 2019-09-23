@@ -98,4 +98,9 @@ public class SplashActivity extends BaseActivity {
                 .take((time + 1));
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mCompositeDisposable.dispose();
+    }
 }

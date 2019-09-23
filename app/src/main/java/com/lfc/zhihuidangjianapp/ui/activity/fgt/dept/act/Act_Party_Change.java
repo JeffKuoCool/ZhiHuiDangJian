@@ -63,9 +63,9 @@ public class Act_Party_Change extends BaseActivity {
 
     private ImageView ivHead;
 
-    private TextView tvSubmit,et_party_type_lin;
+    private TextView tvSubmit,et_party_type_lin,et_party_zhangtai_lin,et_party_type;
 
-    private EditText etParyName, etReason,et_party_type,tv_dw_et,tv_zz_et,tv_zb_et,et_party_zhangtai;
+    private EditText etParyName, etReason,tv_dw_et,tv_zz_et,tv_zb_et,et_party_zhangtai;
 
     private String[] titles = {"姓名", "性别", "民族", "出生日期", "学历", "支部"};
 
@@ -110,6 +110,7 @@ public class Act_Party_Change extends BaseActivity {
         tv_zz_et =findViewById(R.id.tv_zz_et);
         tv_zb_et =findViewById(R.id.tv_zb_et);
         et_party_zhangtai =findViewById(R.id.et_party_zhangtai);
+        et_party_zhangtai_lin=findViewById(R.id.et_party_zhangtai_lin);
         loadOrganizational();
         setEvent();
     }
@@ -171,6 +172,14 @@ public class Act_Party_Change extends BaseActivity {
         });
         //选择转移类型
         et_party_type_lin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //转移类型(0:系统外转入1:系统内转出2:系统内转移)
+                getPoPType();
+            }
+        });
+        //选择转移类型
+        et_party_type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //转移类型(0:系统外转入1:系统内转出2:系统内转移)
@@ -417,7 +426,8 @@ public class Act_Party_Change extends BaseActivity {
                             }else if(type==2){
                                 et_party_type.setText("系统内转移");
                             }
-
+                            et_party_zhangtai_lin.setVisibility(View.VISIBLE);
+                            et_party_zhangtai.setVisibility(View.VISIBLE);
                             etParyName.setText(response.getTransferOrganizationalRelations().getApplyDeptName());
                             etReason.setText(response.getTransferOrganizationalRelations().getTransferReason());
                             if(status ==0){
@@ -476,7 +486,8 @@ public class Act_Party_Change extends BaseActivity {
                                 etParyName.setEnabled(false);
                             }
                         }else{
-                            et_party_zhangtai.setText("待申请");
+                            et_party_zhangtai_lin.setVisibility(View.GONE);
+                            et_party_zhangtai.setVisibility(View.GONE);
                             tvSubmit.setVisibility(View.VISIBLE);
                             et_party_type_lin.setEnabled(true);
                             type1.setVisibility(View.VISIBLE);
@@ -528,13 +539,16 @@ public class Act_Party_Change extends BaseActivity {
                     uiName.setName(user.getSealName());
                     break;
                 case 1://性别
-                    uiName.setName(user.getUserNumber()+"");
+                    if (user.getSex() == 2) {
+                        uiName.setName("女");
+                    } else {
+                        uiName.setName("男");
+                    }
                     break;
                 case 2://民族
                     uiName.setName(user.getNation()+"");
                     break;
                 case 3://出生日期
-
                     uiName.setName(DateUtils.timeStampToStr(user.getBirthday(), "yyyy-MM-dd"));
                     break;
                 case 4://学历

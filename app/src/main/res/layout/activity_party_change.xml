@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="36dp"
-            android:text="党关系转移"
+            android:text="党员关系转移"
             android:textColor="@color/white"
             android:textSize="19dp"
             android:textStyle="bold" />
@@ -102,7 +102,7 @@
                 style="@style/text_14"
                 android:text="转移类型"/>
 
-            <EditText
+            <TextView
                 android:editable="false"
                 android:id="@+id/et_party_type"
                 android:layout_width="match_parent"
@@ -111,9 +111,10 @@
                 style="@style/text_14"
                 android:paddingLeft="@dimen/dip_20"
                 android:gravity="center_vertical"
-                android:hint="转移类型"
+                android:hint="请选择转移类型"
                 android:background="@null"/>
             <TextView
+                android:id="@+id/et_party_zhangtai_lin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
@@ -129,6 +130,7 @@
                 android:text="转移状态"/>
 
             <EditText
+
                 android:editable="false"
                 android:id="@+id/et_party_zhangtai"
                 android:layout_width="match_parent"

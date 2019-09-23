@@ -29,6 +29,7 @@ import com.jpeng.jpspringmenu.SpringMenu;
 import com.lfc.zhihuidangjianapp.R;
 import com.lfc.zhihuidangjianapp.app.MyApplication;
 import com.lfc.zhihuidangjianapp.base.BaseFragmentAdapter;
+import com.lfc.zhihuidangjianapp.chat.ChatMessageListener;
 import com.lfc.zhihuidangjianapp.chat.EazyChatApi;
 import com.lfc.zhihuidangjianapp.net.http.HttpService;
 import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
@@ -104,7 +105,10 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
         EMClient.getInstance().chatManager().addMessageListener(emMessageListener);
         requstPermissions(this);
         checkPermission();
-
+        //私信消息通知
+        try {
+            EMClient.getInstance().chatManager().addMessageListener(new ChatMessageListener(this));
+        }catch (Exception e){}
 
     }
 
