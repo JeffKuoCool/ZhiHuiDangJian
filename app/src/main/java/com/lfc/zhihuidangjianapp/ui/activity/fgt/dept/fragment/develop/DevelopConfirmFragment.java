@@ -67,16 +67,16 @@ public class DevelopConfirmFragment extends BaseDevelopPartyFragment {
     }
 
     public void setPartyData(DevelopParty developParty){
-        parties.get(0).setContent(developParty.partyGroupPassTime3);
-        parties.get(1).setContent(developParty.partyBranchPassTime3);
-        parties.get(2).setContent(developParty.branchCommitteePassTime3);
-        parties.get(3).setContent(developParty.partyCommitteeResearchDecisionTime3);
+        parties.get(0).setContent(developParty.partyGroupPassTime3==null?developParty.partyGroupPassTime3:developParty.partyGroupPassTime3.substring(0,10));
+        parties.get(1).setContent(developParty.partyBranchPassTime3==null?developParty.partyBranchPassTime3:developParty.partyBranchPassTime3.substring(0,10));
+        parties.get(2).setContent(developParty.branchCommitteePassTime3==null?developParty.branchCommitteePassTime3:developParty.branchCommitteePassTime3.substring(0,10));
+        parties.get(3).setContent(developParty.partyCommitteeResearchDecisionTime3==null?developParty.partyCommitteeResearchDecisionTime3:developParty.partyCommitteeResearchDecisionTime3.substring(0,10));
         parties.get(4).setContent(developParty.defineJoinPartyPerson3);
-        parties.get(5).setContent(developParty.talkTime3);
+        parties.get(5).setContent(developParty.talkTime3==null?developParty.talkTime3:developParty.talkTime3.substring(0,10));
         parties.get(6).setContent(developParty.talkCount3);
         parties.get(7).setContent(developParty.politicalConclusion3);
-        parties.get(8).setContent(developParty.partyCommitteeResearchDecisionTime3);
-        parties.get(9).setContent(developParty.concentratedTrainingTime3);
+        parties.get(8).setContent(developParty.partyCommitteeResearchDecisionTime3==null?developParty.partyCommitteeResearchDecisionTime3:developParty.partyCommitteeResearchDecisionTime3.substring(0,10));
+        parties.get(9).setContent(developParty.concentratedTrainingTime3==null?developParty.concentratedTrainingTime3:developParty.concentratedTrainingTime3.substring(0,10));
         parties.get(10).setContent(developParty.trainingResults3);
         if(developParty.submitStatus == 1){
             mRootView.findViewById(R.id.tvSave).setVisibility(View.GONE);

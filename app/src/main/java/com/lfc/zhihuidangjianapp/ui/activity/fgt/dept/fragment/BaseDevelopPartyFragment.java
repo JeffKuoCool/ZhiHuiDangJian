@@ -150,7 +150,7 @@ public abstract class BaseDevelopPartyFragment extends BaseFragment {
         picker.setUseWeight(true);
         picker.setTopPadding(ConvertUtils.toPx(getActivity(), 10));
         picker.setRangeEnd(2050, 1, 11);
-        picker.setRangeStart(2016, 8, 29);
+        picker.setRangeStart(1970, 1, 1);
         picker.setSelectedItem(DateUtils.getYear(), DateUtils.getMonth(), DateUtils.getDay());
         picker.setResetWhileWheel(false);
         picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {

@@ -13,13 +13,14 @@ import com.lfc.zhihuidangjianapp.ui.activity.fgt.Fgt_Home;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeAdapter extends BaseAdapter {
 
-    private ArrayList<QueryHomeNoticeAnnouncementPageListBean.DataBean.NoticeAnnouncementListBean.DatasBean> list;
+    private List<QueryHomeNoticeAnnouncementPageListBean.DataBean.NoticeAnnouncementListBean.DatasBean> list;
     private Context context;
 
-    public HomeAdapter(ArrayList<QueryHomeNoticeAnnouncementPageListBean.DataBean.NoticeAnnouncementListBean.DatasBean> list, Context context) {
+    public HomeAdapter(List<QueryHomeNoticeAnnouncementPageListBean.DataBean.NoticeAnnouncementListBean.DatasBean> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -45,6 +46,7 @@ public class HomeAdapter extends BaseAdapter {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.item_home, null);
+
             viewHolder.textView = convertView.findViewById(R.id.text);
             convertView.setTag(viewHolder);
         } else {

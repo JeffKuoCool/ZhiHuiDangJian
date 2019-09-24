@@ -53,15 +53,15 @@ public class PrepareReceiveFragment extends BaseDevelopPartyFragment {
     }
 
     public void setPartyData(DevelopParty developParty){
-        parties.get(0).setContent(developParty.subcommitteeReviewTime4);
-        parties.get(1).setContent(developParty.publicityTime4);
-        parties.get(2).setContent(developParty.parentPartyCommitteePretrialTime4);
-        parties.get(3).setContent(developParty.branchConferencePassTime4);
-        parties.get(4).setContent(developParty.parentPartyCommitteeTalkTime4);
+        parties.get(0).setContent(developParty.subcommitteeReviewTime4==null?developParty.subcommitteeReviewTime4:developParty.subcommitteeReviewTime4.substring(0,10));
+        parties.get(1).setContent(developParty.publicityTime4==null?developParty.publicityTime4:developParty.publicityTime4.substring(0,10));
+        parties.get(2).setContent(developParty.parentPartyCommitteePretrialTime4==null?developParty.parentPartyCommitteePretrialTime4:developParty.parentPartyCommitteePretrialTime4.substring(0,10));
+        parties.get(3).setContent(developParty.branchConferencePassTime4==null?developParty.branchConferencePassTime4:developParty.branchConferencePassTime4.substring(0,10));
+        parties.get(4).setContent(developParty.parentPartyCommitteeTalkTime4==null?developParty.parentPartyCommitteeTalkTime4:developParty.parentPartyCommitteeTalkTime4.substring(0,10));
         parties.get(5).setContent(developParty.talker4);
-        parties.get(6).setContent(developParty.meetingTime4);
-        parties.get(7).setContent(developParty.partyMembersCount4);
-        parties.get(8).setContent(developParty.partyMembershipCount4);
+        parties.get(6).setContent(developParty.parentPartyCommitteePassTime4==null?developParty.parentPartyCommitteePassTime4:developParty.parentPartyCommitteePassTime4.substring(0,10));
+        parties.get(7).setContent(developParty.meetingTime4==null?developParty.meetingTime4:developParty.meetingTime4.substring(0,10));
+        parties.get(8).setContent(developParty.partyMembersCount4);
         parties.get(9).setContent(developParty.partyMembershipCount4);
         parties.get(10).setContent(developParty.sendVotes4);
         parties.get(11).setContent(developParty.takeBackVotes4);

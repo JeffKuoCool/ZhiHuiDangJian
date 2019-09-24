@@ -42,6 +42,7 @@ import com.zhy.adapter.recyclerview.base.ViewHolder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -60,7 +61,7 @@ public class Fgt_Home extends BaseFragment {
     Banner banner;
     Unbinder unbinder;
     private ArrayList<QueryHomeNoticeAnnouncementPageListBean.DataBean.NoticeAnnouncementListBean.DatasBean> list = new ArrayList<>();
-    private HomeAdapter homeAdapter;
+   // private HomeAdapter homeAdapter;
     private RecyclerView recyclerView;
     private int[] images = {R.mipmap.img_home_tab1, R.mipmap.img_home_tab2,
             R.mipmap.img_home_tab3, R.mipmap.img_home_tab4, R.mipmap.img_home_tab5,R.mipmap.img_dangwu_tab5_item1};
@@ -75,13 +76,7 @@ public class Fgt_Home extends BaseFragment {
     protected void initView(View rootView) {
         unbinder = ButterKnife.bind(this, rootView);
         recyclerView = rootView.findViewById(R.id.recyclerView);
-        homeAdapter = new HomeAdapter(list, getActivity());
-        homeListView.setAdapter(homeAdapter);
-        homeListView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(getActivity(), Act_Announcement.class);
-            intent.putExtra("id", list.get(position).getNoticeAnnouncementId() + "");
-            startActivity(intent);
-        });
+
        ImmersionBar.with(this).statusBarDarkFont(true).init();
         getFragmentManager().beginTransaction().add( R.id.homeHead,new HomeHeadLinesFragment()).commit();
     }
@@ -182,8 +177,29 @@ public class Fgt_Home extends BaseFragment {
                 Gson gson = new Gson();
                 QueryHomeNoticeAnnouncementPageListBean entity = gson.fromJson(succeed, QueryHomeNoticeAnnouncementPageListBean.class);
                 if (entity.getCode() == 0) {
-                    list.addAll(entity.getData().getNoticeAnnouncementList().getDatas());
-                    homeAdapter.notifyDataSetChanged();
+                    if(entity.getData().getNoticeAnnouncementList().getDatas().size()>=6){
+                        //list.addAll(entity.getData().getNoticeAnnouncementList().getDatas());
+                        List<QueryHomeNoticeAnnouncementPageListBean.DataBean.NoticeAnnouncementListBean.DatasBean> datas = entity.getData().getNoticeAnnouncementList().getDatas();
+                        HomeAdapter  homeAdapter = new HomeAdapter(datas.subList(0, 6), getActivity());
+                        homeListView.setAdapter(homeAdapter);
+                        homeListView.setOnItemClickListener((parent, view, position, id) -> {
+                            Intent intent = new Intent(getActivity(), Act_Announcement.class);
+                            intent.putExtra("id", datas.get(position).getNoticeAnnouncementId() + "");
+                            startActivity(intent);
+                        });
+                    }else{
+                       // list.addAll(entity.getData().getNoticeAnnouncementList().getDatas());
+                        List<QueryHomeNoticeAnnouncementPageListBean.DataBean.NoticeAnnouncementListBean.DatasBean> datas = entity.getData().getNoticeAnnouncementList().getDatas();
+                        HomeAdapter  homeAdapter = new HomeAdapter(datas, getActivity());
+                        homeListView.setAdapter(homeAdapter);
+                        homeListView.setOnItemClickListener((parent, view, position, id) -> {
+                            Intent intent = new Intent(getActivity(), Act_Announcement.class);
+                            intent.putExtra("id", datas.get(position).getNoticeAnnouncementId() + "");
+                            startActivity(intent);
+                        });
+                    }
+
+                  //  homeAdapter.notifyDataSetChanged();
                 }
             }
 

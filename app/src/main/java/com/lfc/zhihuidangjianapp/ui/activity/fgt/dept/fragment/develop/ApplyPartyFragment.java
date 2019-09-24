@@ -1,12 +1,15 @@
 package com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.fragment.develop;
 
+import android.util.Log;
 import android.view.View;
 
 import com.lfc.zhihuidangjianapp.R;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.fragment.BaseDevelopPartyFragment;
 import com.lfc.zhihuidangjianapp.ui.activity.model.DevelopParty;
 import com.lfc.zhihuidangjianapp.ui.activity.model.NativeDevelopParty;
+import com.lfc.zhihuidangjianapp.utlis.DateUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,8 +56,8 @@ public class ApplyPartyFragment extends BaseDevelopPartyFragment {
 
     public void setPartyData(DevelopParty developParty){
         List<NativeDevelopParty> partyList = parties;
-        partyList.get(0).setContent(developParty.submitApplicationTime1);
-        partyList.get(1).setContent(developParty.talkTime1);
+        partyList.get(0).setContent(developParty.submitApplicationTime1==null?developParty.submitApplicationTime1:developParty.submitApplicationTime1.substring(0,10));
+        partyList.get(1).setContent(developParty.talkTime1==null?developParty.talkTime1:developParty.talkTime1.substring(0,10));
         partyList.get(2).setContent(developParty.talker1);
         parties = partyList;
         if(developParty.submitStatus == 1){
