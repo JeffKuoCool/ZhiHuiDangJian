@@ -116,11 +116,12 @@ public class Fgt_Demonstration_Leadership extends BaseFragment  {
         getDatas();
        // queryLeadDemonstrationPageList();
         ArrayList<String> list =new ArrayList<>();
-        list.add(ApiConstant.ROOT_URL +"Path/20190912/99759f6a-dd6a-4846-a9e3-23df330d44f9.jpg");
-        list.add(ApiConstant.ROOT_URL +"Path/20190912/501d5375-1ed6-4e9e-b1c4-c9e1bf6a9147.jpg");
+        list.add(ApiConstant.ROOT_URL +"Path/20190912/b64de694-5faf-40f5-8c50-3a2e5aa94f63.jpg");
+        list.add(ApiConstant.ROOT_URL +"Path/20190912/286398c2-d80e-43b1-b377-382322af57cc.jpg");
         ArrayList<String> list2 =new ArrayList<>();
-        list2.add(ApiConstant.ROOT_URL +"Path/20190912/b64de694-5faf-40f5-8c50-3a2e5aa94f63.jpg");
-        list2.add(ApiConstant.ROOT_URL +"Path/20190912/286398c2-d80e-43b1-b377-382322af57cc.jpg");
+        list2.add(ApiConstant.ROOT_URL +"Path/20190912/99759f6a-dd6a-4846-a9e3-23df330d44f9.jpg");
+        list2.add(ApiConstant.ROOT_URL +"Path/20190912/501d5375-1ed6-4e9e-b1c4-c9e1bf6a9147.jpg");
+
         /**
          * 专题专栏
          * 引领示范类型(0:不忘初心 牢记使命1:改革创新 奋发有为)
