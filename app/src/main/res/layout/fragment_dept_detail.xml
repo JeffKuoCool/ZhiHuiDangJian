@@ -170,7 +170,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="第一小组"
+                        android:text="第一党小组"
                         android:textColor="@color/white" />
 
                     <ImageView
@@ -231,7 +231,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="第二小组"
+                        android:text="第二党小组"
                         android:textColor="@color/white" />
 
                     <ImageView
@@ -292,7 +292,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="第三小组"
+                        android:text="第三党小组"
                         android:textColor="@color/white" />
 
                     <ImageView
@@ -353,7 +353,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="第三小组"
+                        android:text="第四党小组"
                         android:textColor="@color/white" />
 
                     <ImageView
@@ -414,7 +414,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="第三小组"
+                        android:text="第五党小组"
                         android:textColor="@color/white" />
 
                     <ImageView
