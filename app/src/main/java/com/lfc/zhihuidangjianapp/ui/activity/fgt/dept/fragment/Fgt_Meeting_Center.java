@@ -127,6 +127,9 @@ public class Fgt_Meeting_Center extends BaseFragment {
                 View convertView =  holder.getConvertView();
                 TextView tvJoinMeeting = convertView.findViewById(R.id.tv_join_meeting);
                 tvJoinMeeting.setOnClickListener(confe->{
+                    if(data.getUsers()==null){
+                        return;
+                    }
                     //进入会议
                     Log.e("join_meeting", "");
                     if(!data.getCreateCode().equals(MyApplication.getmUserInfo().getUser().getLoginName())&&
