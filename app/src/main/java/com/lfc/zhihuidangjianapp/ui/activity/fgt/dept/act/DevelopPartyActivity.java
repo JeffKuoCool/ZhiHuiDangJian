@@ -73,6 +73,7 @@ public class DevelopPartyActivity extends TabWithToolbarActivity {
         getTvRight().setVisibility(View.VISIBLE);
         getTvRight().setOnClickListener(submit->{
             //TODO 提交
+
             submitParty();
         });
         getDevelopData();
@@ -96,7 +97,7 @@ public class DevelopPartyActivity extends TabWithToolbarActivity {
 
                     @Override
                     protected void onNext(Object response) {
-                        Log.e("onNext= ", response.toString());
+                        Log.e("onNext=已提交党员信息", response.toString());
                         if(response==null) return;
                         toast("已提交党员信息");
                         finish();
