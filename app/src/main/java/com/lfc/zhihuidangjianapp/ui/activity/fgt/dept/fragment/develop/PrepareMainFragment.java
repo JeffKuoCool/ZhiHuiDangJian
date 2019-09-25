@@ -84,7 +84,7 @@ public class PrepareMainFragment extends BaseDevelopPartyFragment {
         partyList.add(new NativeDevelopParty(0,"编入党支部和党小组时间", ""));
         partyList.add(new NativeDevelopParty(0,"入党宣誓时间", ""));
         partyList.add(new NativeDevelopParty(0,"提出转正申请时间", ""));
-        partyList.add(new NativeDevelopParty(0,"支部大会通过时间", ""));
+        partyList.add(new NativeDevelopParty(0,"党小组通过时间", ""));
         partyList.add(new NativeDevelopParty(0,"支部大会通过时间", ""));
         partyList.add(new NativeDevelopParty(0,"上级党委谈话时间", ""));
         partyList.add(new NativeDevelopParty(1,"谈话人", ""));
