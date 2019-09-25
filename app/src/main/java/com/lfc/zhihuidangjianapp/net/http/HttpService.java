@@ -485,7 +485,7 @@ public interface HttpService {
     Observable<BaseResponse<Object>> updatePwd(@QueryMap Map<String, Object> map,@Header("token") String token);
 
     /**
-     * 支部一级一级查询
+     * 支部一级一级查询有权限
      *
      * @param map
      * @param token
@@ -493,7 +493,16 @@ public interface HttpService {
      */
     @POST(ApiConstant.API + "/queryDeptListByLevel")
     Observable<BaseResponse<QueryPopBean>> getQuery(@QueryMap Map<String, Object> map, @Header("token") String token);
-//queryUserListByFirstPinYinBean
+
+    /**
+     * 支部一级一级查询无权限
+     *
+     * @param map
+     * @param token
+     * @return
+     */
+    @POST(ApiConstant.API + "/queryDeptListByLevelNoPromise")
+    Observable<BaseResponse<QueryPopBean>> queryDeptListByLevelNoPromise(@QueryMap Map<String, Object> map, @Header("token") String token);
     /**
      * 支部一级一级人员查询
      *

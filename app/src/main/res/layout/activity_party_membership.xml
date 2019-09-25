@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="36dp"
-            android:text="党费缴纳"
+            android:text="党费收缴"
             android:textColor="@color/white"
             android:textSize="19dp"
             android:textStyle="bold" />

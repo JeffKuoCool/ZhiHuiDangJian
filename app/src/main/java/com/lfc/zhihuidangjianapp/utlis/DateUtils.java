@@ -217,4 +217,17 @@ public class DateUtils {
         Calendar cd = Calendar.getInstance();
         return  cd.get(Calendar.MINUTE);
     }
+    /**
+     * 时间(yyyy-MM):String格式转Date格式
+     */
+    public static Date parseTimeFormattoMonthDate(String date) {
+        Date time = null;
+        try {
+            time = new SimpleDateFormat("yyyy-MM").parse(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return time;
+    }
+
 }

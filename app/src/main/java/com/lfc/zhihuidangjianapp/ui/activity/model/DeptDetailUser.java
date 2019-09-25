@@ -10,6 +10,15 @@ public class DeptDetailUser {
     private String displayName;
     private String subordinatePartyGroup;
     private String mobileNumber;
+    private String partyPosts;
+
+    public String getPartyPosts() {
+        return partyPosts;
+    }
+
+    public void setPartyPosts(String partyPosts) {
+        this.partyPosts = partyPosts;
+    }
 
     public String getDisplayName() {
         return displayName;

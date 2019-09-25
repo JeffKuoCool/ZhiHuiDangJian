@@ -1,7 +1,11 @@
 package com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act;
 
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.lfc.zhihuidangjianapp.R;
 import com.lfc.zhihuidangjianapp.app.MyApplication;
@@ -9,6 +13,8 @@ import com.lfc.zhihuidangjianapp.base.BaseActivity;
 import com.lfc.zhihuidangjianapp.net.http.HttpService;
 import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
 import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
+import com.lfc.zhihuidangjianapp.widget.ContainsEmojiEditText;
+import com.lfc.zhihuidangjianapp.widget.SpaceFilter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,8 +29,10 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class Act_Write_Report extends BaseActivity {
 
-    private EditText etTheme, etContent;
-
+    private EditText etTheme;
+    private ContainsEmojiEditText etContent;
+    private TextView ui_edit_text;
+    private static final int MAX_NUM = 3000;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_write_report;
@@ -41,7 +49,34 @@ public class Act_Write_Report extends BaseActivity {
         initImmersionBar(0);
         etTheme = findViewById(R.id.et_theme);
         etContent = findViewById(R.id.et_content);
+        ui_edit_text=findViewById(R.id.ui_edit_text);
+        //输入框禁止输入空格
+        etContent.setFilters(new InputFilter[]{new SpaceFilter()});
+        //监听输入框
+        etContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                //编辑框内容变化之后会调用该方法，s为编辑框内容变化后的内容
+                Log.i("afterTextChanged", s.toString().trim());
+                if (s.length() > MAX_NUM) {
+                    s.delete(MAX_NUM, s.length());
+                }
+
+                ui_edit_text.setText(String.valueOf(s.length()));
+
+            }
+        });
         setEvent();
     }
 

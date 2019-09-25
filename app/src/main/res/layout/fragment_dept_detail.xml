@@ -143,9 +143,10 @@
                     android:layout_height="150dp" />
 
             </LinearLayout>
-            
+
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/view_member"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -169,7 +170,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="支部成员列表"
+                        android:text="第一党小组"
                         android:textColor="@color/white" />
 
                     <ImageView
@@ -204,7 +205,280 @@
                 </LinearLayout>
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:id="@+id/view_member2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
+
+                <LinearLayout
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/rv_zblb2"
+                    style="@style/dept_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_marginLeft="50dp"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="第二党小组"
+                        android:textColor="@color/white" />
+
+                    <ImageView
+
+                        android:id="@+id/rv_zblb_img2"
+                        android:layout_marginRight="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/jt_top" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rv_zblb_lin2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dip_14" />
+
+                    <include layout="@layout/item_dept_user" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_group2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dip_12">
+
+                    </android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:id="@+id/view_member3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/rv_zblb3"
+                    style="@style/dept_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_marginLeft="50dp"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="第三党小组"
+                        android:textColor="@color/white" />
+
+                    <ImageView
+
+                        android:id="@+id/rv_zblb_img3"
+                        android:layout_marginRight="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/jt_top" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rv_zblb_lin3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dip_14" />
+
+                    <include layout="@layout/item_dept_user" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_group3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dip_12">
+
+                    </android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:id="@+id/view_member4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/rv_zblb4"
+                    style="@style/dept_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_marginLeft="50dp"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="第四党小组"
+                        android:textColor="@color/white" />
+
+                    <ImageView
+
+                        android:id="@+id/rv_zblb_img4"
+                        android:layout_marginRight="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/jt_top" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rv_zblb_lin4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dip_14" />
+
+                    <include layout="@layout/item_dept_user" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_group4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dip_12">
+
+                    </android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:id="@+id/view_member5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/rv_zblb5"
+                    style="@style/dept_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_marginLeft="50dp"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="第五党小组"
+                        android:textColor="@color/white" />
+
+                    <ImageView
+
+                        android:id="@+id/rv_zblb_img5"
+                        android:layout_marginRight="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/jt_top" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rv_zblb_lin5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dip_14" />
+
+                    <include layout="@layout/item_dept_user" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_group5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dip_12">
+
+                    </android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/dept_detail_tl_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dip_12">
+
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    style="@style/dept_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:padding="10dp"
+                    android:text="离退休支部" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/dept_detail_tl_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/dip_5"
+                    android:paddingRight="@dimen/dip_5">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

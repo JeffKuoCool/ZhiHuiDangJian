@@ -103,7 +103,9 @@ public class HomeStudyFragment extends BaseFragment {
         //  林草大讲堂、工匠培养、学习心得三个内容，每个版块展示4条新闻，如需查看所有，点击更多
         if(studyStrongBureauType==0){
             //林草大讲堂
+
             if (response.getStudyStrongBureauList().getDatas().size() >= 4) {
+
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setAdapter(new CommonAdapter<StudyStrongBureau>(getActivity(), R.layout.item_dept_dynamic
@@ -133,6 +135,7 @@ public class HomeStudyFragment extends BaseFragment {
                         0, 0, false
                 ));
             }else{
+
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setAdapter(new CommonAdapter<StudyStrongBureau>(getActivity(), R.layout.item_dept_dynamic

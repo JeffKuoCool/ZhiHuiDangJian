@@ -634,7 +634,7 @@ public class Act_Party_Change extends BaseActivity {
             Map<String, Object> map = new HashMap<>();
             map.put("deptNumber", deptNumberdw);
             RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
-                    .getQuery(map, MyApplication.getLoginBean().getToken())
+                    .queryDeptListByLevelNoPromise(map, MyApplication.getLoginBean().getToken())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new ResponseObserver<QueryPopBean>(getActivity()) {
@@ -666,7 +666,7 @@ public class Act_Party_Change extends BaseActivity {
             Map<String, Object> map = new HashMap<>();
             map.put("deptNumber", deptNumberzz);
             RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
-                    .getQuery(map, MyApplication.getLoginBean().getToken())
+                    .queryDeptListByLevelNoPromise(map, MyApplication.getLoginBean().getToken())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new ResponseObserver<QueryPopBean>(getActivity()) {
