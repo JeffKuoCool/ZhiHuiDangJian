@@ -257,7 +257,7 @@ public class Fgt_Personal extends BaseFragment {
 
                 break;
             case R.id.min_starPartyMember_lin:
-                toast("星星");
+                //toast("星星");
                 break;
             case R.id.min_shezhi:
                 startActivity(new Intent(getActivity(), Act_SetUpc.class));

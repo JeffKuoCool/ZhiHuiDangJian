@@ -73,7 +73,6 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:visibility="gone"
         android:id="@id/relative2"
         android:layout_width="match_parent"
         android:layout_height="44dp"
@@ -85,18 +84,22 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:text="新版本检测"
+            android:text="版本号"
             android:textColor="@color/grey_color1"
             android:textSize="16dp" />
 
-        <ImageView
+        <TextView
+            android:id="@+id/code_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="10dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/icon_mi_right" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text=""
+            android:textColor="@color/grey_color1"
+            android:textSize="16dp" />
+
     </RelativeLayout>
 
 </LinearLayout>

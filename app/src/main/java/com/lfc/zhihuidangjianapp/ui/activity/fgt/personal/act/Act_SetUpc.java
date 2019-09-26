@@ -1,6 +1,9 @@
 
 package com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act;
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,7 +23,7 @@ import butterknife.OnClick;
  */
 public class Act_SetUpc extends BaseActivity {
 
-    private TextView relative1_text;
+    private TextView relative1_text,code_text;
 
     @Override
     protected int getLayoutId() {
@@ -37,11 +40,13 @@ public class Act_SetUpc extends BaseActivity {
 
         ButterKnife.bind(this);
         relative1_text = findViewById(R.id.relative1_text);
+        code_text=findViewById(R.id.code_text);
         initImmersionBar(1);
     }
 
     @Override
     protected void initData() {
+        code_text.setText(packageName(this));
         //清除缓存
         try {
             relative1_text.setText(CacheDataManager.getTotalCacheSize(Act_SetUpc.this));
@@ -168,5 +173,18 @@ public class Act_SetUpc extends BaseActivity {
             }
 
         };
+    }
+    //获取系统版本信息
+    public static String packageName(Context context) {
+        PackageManager manager = context.getPackageManager();
+        String name = null;
+        try {
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            name = info.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return name;
     }
 }
