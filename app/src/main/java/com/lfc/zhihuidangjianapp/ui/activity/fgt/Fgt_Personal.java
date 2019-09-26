@@ -122,6 +122,10 @@ public class Fgt_Personal extends BaseFragment {
     TextView min_shifangang2;
     @BindView(R.id.min_shifangang3)
     TextView min_shifangang3;
+    @BindView(R.id.min_shifangang0)
+    TextView min_shifangang0;
+    @BindView(R.id.min_shifangangname)
+    TextView min_shifangangname;
     @BindView(R.id.drawlayout)
     DrawerLayout drawerLayout;
     Unbinder unbinder;
@@ -207,9 +211,11 @@ public class Fgt_Personal extends BaseFragment {
                     //partyPromise党员承诺
                     min_chengnuo.setText(entity.getData().getUser().getPartyPromise()+"");
                     //partyPromise党员示范岗
+                    min_shifangangname.setText("姓名："+entity.getData().getUser().getSealName());
+                    min_shifangang0.setText("所在支部："+entity.getData().getUser().getDeptName());
                     min_shifangang1.setText("党内职务："+entity.getData().getUser().getPartyPosts());
-                    min_shifangang2.setText("负责区域："+entity.getData().getUser().getArea());
-                    min_shifangang3.setText("岗位介绍："+entity.getData().getUser().getPosts());
+                    min_shifangang2.setText("目标职责："+entity.getData().getUser().getArea());
+                    min_shifangang3.setText("示范岗："+entity.getData().getUser().getPosts());
                 }
             }
 

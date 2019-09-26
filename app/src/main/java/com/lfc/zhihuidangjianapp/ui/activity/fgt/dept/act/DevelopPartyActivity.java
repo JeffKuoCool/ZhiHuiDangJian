@@ -41,7 +41,6 @@ public class DevelopPartyActivity extends TabWithToolbarActivity {
     private DevelopConfirmFragment developConfirmFragment = new DevelopConfirmFragment();
     private PrepareReceiveFragment prepareReceiveFragment = new PrepareReceiveFragment();
     private PrepareMainFragment prepareMainFragment = new PrepareMainFragment();
-
     @Override
     public List<Fragment> getFragments() {
         initFragments();
@@ -125,9 +124,10 @@ public class DevelopPartyActivity extends TabWithToolbarActivity {
                     protected void onNext(JoinPartyStage response) {
                         Log.e("onNext= ", response.toString());
                         if(response==null||response.getJoinPartyStage()==null) return;
+                        Log.i("yy-status",response.getJoinPartyStage().submitStatus+"");
                         if(response.getJoinPartyStage().submitStatus==1){
                             getTvRight().setVisibility(View.GONE);
-                        }else{
+                        } else {
                             getTvRight().setVisibility(View.VISIBLE);
                         }
                         applyPartyFragment.setPartyData(response.getJoinPartyStage());

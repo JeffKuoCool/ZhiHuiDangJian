@@ -429,7 +429,7 @@ public interface HttpService {
     Observable<BaseResponse<Object>> createChatroom(@QueryMap Map<String, Object> map, @Header("token") String token);
 
     /**
-     *  首页-头条-党建资讯
+     *  首页-头条-党务资讯
      * @param token
      * @return
      */

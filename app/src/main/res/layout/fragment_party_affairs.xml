@@ -190,7 +190,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
-            android:text="党建资讯"
+            android:text="党务资讯"
             android:textColor="@color/black3"
             android:textSize="19dp" />
 

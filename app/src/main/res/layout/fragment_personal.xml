@@ -501,7 +501,24 @@
                         android:textColor="@color/red3"
                         android:textSize="18sp"
                         android:textStyle="bold" />
-
+                    <TextView
+                        android:id="@+id/min_shifangangname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=""
+                        android:textColor="@color/grey_color1"
+                        android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/min_shifangang0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=""
+                        android:textColor="@color/grey_color1"
+                        android:textSize="14sp" />
                     <TextView
                         android:id="@+id/min_shifangang1"
                         android:layout_width="wrap_content"
@@ -512,7 +529,7 @@
                         android:textColor="@color/grey_color1"
                         android:textSize="14sp" />
                     <TextView
-                        android:id="@+id/min_shifangang2"
+                        android:id="@+id/min_shifangang3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -521,7 +538,7 @@
                         android:textColor="@color/grey_color1"
                         android:textSize="14sp" />
                     <TextView
-                        android:id="@+id/min_shifangang3"
+                        android:id="@+id/min_shifangang2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
