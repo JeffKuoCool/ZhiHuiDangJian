@@ -232,7 +232,7 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
             tvDeptTitle.setText("党委介绍");
             tvDirectorTitle.setText("党委成员");
         } else if (position == 1) {
-            tvDeptTitle.setText("支部介绍");
+            tvDeptTitle.setText("总支介绍");
             tvDirectorTitle.setText("支委成员");
         } else if (position == 2) {
             tvDeptTitle.setText("支部介绍");

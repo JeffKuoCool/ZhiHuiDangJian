@@ -36,12 +36,12 @@ public class Act_Write_Log extends BaseActivity {
 
     private TextView tvSubmit, tvBranchName, tvReportTime;
 
-    private String[] titles = {"组织生活情况","学习教育情况",
-    "承诺践诺完成情况","其他需报告党组织事宜"};
+  /*  private String[] titles = {"组织生活情况","学习教育情况",
+    "承诺践诺完成情况","其他需报告党组织事宜"};*/
 
-    private String[] contents = {"", "", "", ""};
+   // private String[] contents = {"", "", "", ""};
 
-    private EditText etTitle;
+    private EditText etTitle,et_content1,et_content2;
 
     private String branchName;
 
@@ -67,6 +67,9 @@ public class Act_Write_Log extends BaseActivity {
         etTitle = findViewById(R.id.et_title);
         tvBranchName = findViewById(R.id.tv_branch_name);
         tvReportTime = findViewById(R.id.tv_report_time);
+        et_content1=findViewById(R.id.et_content1);
+        et_content2=findViewById(R.id.et_content2);
+
 
         branchName = MyApplication.getmUserInfo().getUser().getDeptName();
         reportTime = System.currentTimeMillis();
@@ -74,7 +77,7 @@ public class Act_Write_Log extends BaseActivity {
         releaseDate = DateUtils.timeStampToStr(reportTime, "");
         tvReportTime.setText(tvReportTime.getText()+ DateUtils.timeStampToStr(reportTime, ""));
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+       /* recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(new CommonAdapter<String>(Act_Write_Log.this, R.layout.item_write_log, Arrays.asList(titles)) {
             @Override
             protected void convert(ViewHolder holder, String data, int position) {
@@ -98,21 +101,32 @@ public class Act_Write_Log extends BaseActivity {
                 });
             }
 
-        });
+        });*/
 
         setEvent();
     }
 
     private void setEvent() {
         tvSubmit.setOnClickListener(submit->{
-            if(unWriteLog()){
-                showTextToast("请填写周报内容");
+            if(etTitle.getText().toString().trim().isEmpty()){
+                showTextToast("请填写标题");
+                return ;
+            }
+            if(et_content1.getText().toString().trim().equals("")){
+                showTextToast("请填写组织生活情况");
+                return;
+            }
+            if(et_content2.getText().toString().trim().equals("")){
+                showTextToast("请填写党组织事宜");
                 return;
             }
             Map<String, Object> map = new HashMap<>();
+          /*
             for (int i=0;i<contents.length;i++){
                 map.put("comment"+(i+1), contents[i]);
-            }
+            }*/
+            map.put("comment1", et_content1.getText().toString().trim());
+            map.put("comment4", et_content2.getText().toString().trim());
             map.put("title", etTitle.getText().toString().trim());
             map.put("releaseDate",releaseDate);
             RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
@@ -138,7 +152,7 @@ public class Act_Write_Log extends BaseActivity {
         });
     }
 
-    private boolean unWriteLog(){
+    /*private boolean unWriteLog(){
         if(etTitle.getText().toString().trim().isEmpty()){
             return false;
         }
@@ -148,7 +162,7 @@ public class Act_Write_Log extends BaseActivity {
             }
         }
         return true;
-    }
+    }*/
 
     @Override
     protected void initData() {
