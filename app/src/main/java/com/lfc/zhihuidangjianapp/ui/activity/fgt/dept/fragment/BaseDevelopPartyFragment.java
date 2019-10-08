@@ -98,7 +98,9 @@ public abstract class BaseDevelopPartyFragment extends BaseFragment {
                     TextView tvContent = holder.getConvertView().findViewById(R.id.tvContent);
                     tvContent.setVisibility(View.VISIBLE);
                     if(TextUtils.isEmpty(data.getContent())){
-                        tvContent.setText("请选择"+data.getTitle());
+                        //tvContent.setText("请选择"+data.getTitle());
+                        tvContent.setText(data.getTitle());
+
                     }else{
                         tvContent.setText(data.getContent());
                     }
@@ -114,7 +116,8 @@ public abstract class BaseDevelopPartyFragment extends BaseFragment {
                 }else{
                     EditText input = holder.getConvertView().findViewById(R.id.input);
                     if(TextUtils.isEmpty(data.getContent())){
-                        input.setHint("请输入"+data.getTitle());
+                       //input.setHint("请输入"+data.getTitle());
+                        input.setHint(data.getTitle());
                     }else{
                         input.setText(data.getContent());
                     }
