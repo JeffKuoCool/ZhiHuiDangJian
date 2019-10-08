@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -204,6 +205,29 @@ public class Act_Login extends BaseActivity {
         String currentUsername = loginBean.getLoginName();
         String currentPassword = loginBean.getImPwd();
 
+
+    }
+    //对返回键进行监听
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            exit();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    //退出时的时间
+    private long mExitTime;
+
+    public void exit() {
+        if ((System.currentTimeMillis() - mExitTime) > 2000) {
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            mExitTime = System.currentTimeMillis();
+        } else {
+            activityManagerUtil.finishAllActivity();
+//            System.exit(0);
+        }
 
     }
 
