@@ -92,7 +92,7 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
         partyPaymentHisId = getIntent().getStringExtra("partyPaymentHisId");
 
         tvPayDetail.setText(pay + "元");
-        tvPayTime.setText(DateUtils.timeStampToStr(System.currentTimeMillis(), "yyyy-MM-dd"));
+        tvPayTime.setText(DateUtils.timeStampToStr(System.currentTimeMillis(), "yyyy-MM"));
     }
 
     private void initPayView() {
