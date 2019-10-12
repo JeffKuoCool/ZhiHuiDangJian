@@ -111,8 +111,11 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
         Map<String, Object> map = new HashMap<>();
         map.put("total_fee", pay);
         map.put("body", user.getDisplayName() + "缴纳" + tvPayTime.getText().toString().trim() + "党费" + pay + "元");
-        map.put("memberid", user.getUserId());
+        map.put("memberid", user.getLoginName());
         map.put("ifSubstitute", 1);
+        map.put("attach", "payPartyPayment@" + user.getLoginName() + "@1");
+        map.put("partyPaymentIds", partyPaymentHisId);
+
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
                 .alipayToApp(map, MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())

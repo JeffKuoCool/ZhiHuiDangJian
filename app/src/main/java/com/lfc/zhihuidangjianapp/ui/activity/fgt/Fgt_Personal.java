@@ -188,6 +188,7 @@ public class Fgt_Personal extends BaseFragment {
                     minName.setText(entity.getData().getUser().getDisplayName());
                     minNaem1.setText(entity.getData().getUser().getDisplayName());
                     minCode.setText("账号："+entity.getData().getUser().getLoginName());
+                    Log.i("yysex",entity.getData().getUser().getSex()+"");
                     if (entity.getData().getUser().getSex() == 2) {
                         minSex.setText("女");
                     } else {
