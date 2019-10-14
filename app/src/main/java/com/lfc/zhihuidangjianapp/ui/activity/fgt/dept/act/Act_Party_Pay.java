@@ -39,7 +39,7 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
 
     private int event = 0;
 
-    private String pay;
+    private String pays;
     private String partyPaymentHisId;
 
     @Override
@@ -61,18 +61,29 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
         tvAlipay = findViewById(R.id.tv_alipay);
         tvPayDetail = findViewById(R.id.tv_pay_detail);
         tvPayTime = findViewById(R.id.tv_pay_time);
-        initPayView();
-        setEvent();
+
     }
 
     private void setEvent() {
         tvPay.setOnClickListener(pay -> {
             if (payType == 0) {
+                Log.i("yy---",payType+"=="+pays);
 
-                getWechatOrderInfo();
+                if(pays.equals("0")){
+                    showTextToast("本月已缴纳");
+                }else{
+                    getWechatOrderInfo();
+                }
 
             } else {
-                getAliPayOrderInfo();
+                Log.i("yy---",payType+"=="+pays);
+                if(pays.equals("0")){
+                    showTextToast("本月已缴纳");
+                }else{
+                    getAliPayOrderInfo();
+                }
+
+
             }
 
         });
@@ -88,11 +99,12 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
 
     @Override
     protected void initData() {
-        pay = getIntent().getStringExtra("pay");
+        pays = getIntent().getStringExtra("pay");
         partyPaymentHisId = getIntent().getStringExtra("partyPaymentHisId");
-
-        tvPayDetail.setText(pay + "元");
-        tvPayTime.setText(DateUtils.timeStampToStr(System.currentTimeMillis(), "yyyy-MM-dd"));
+        tvPayDetail.setText(pays + "元");
+        tvPayTime.setText(DateUtils.timeStampToStr(System.currentTimeMillis(), "yyyy-MM"));
+        initPayView();
+        setEvent();
     }
 
     private void initPayView() {
@@ -109,10 +121,13 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
     private void getAliPayOrderInfo() {
         User user = MyApplication.getmUserInfo().getUser();
         Map<String, Object> map = new HashMap<>();
-        map.put("total_fee", pay);
-        map.put("body", user.getDisplayName() + "缴纳" + tvPayTime.getText().toString().trim() + "党费" + pay + "元");
-        map.put("memberid", user.getUserId());
+        map.put("total_fee", pays);
+        map.put("body", user.getDisplayName() + "缴纳" + tvPayTime.getText().toString().trim() + "党费" + pays + "元");
+        map.put("memberid", user.getLoginName());
         map.put("ifSubstitute", 1);
+        map.put("attach", "payPartyPayment@" + user.getLoginName() + "@1");
+        map.put("partyPaymentIds", partyPaymentHisId);
+
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
                 .alipayToApp(map, MyApplication.getLoginBean().getToken())
                 .subscribeOn(Schedulers.io())
@@ -139,8 +154,8 @@ public class Act_Party_Pay extends BaseActivity implements AliPayApi.AliPayCalba
     private void getWechatOrderInfo() {
         User user = MyApplication.getmUserInfo().getUser();
         Map<String, Object> map = new HashMap<>();
-        map.put("total_fee", pay);
-        map.put("body", user.getDisplayName() + "缴纳" + tvPayTime.getText().toString().trim() + "党费" + pay + "元");
+        map.put("total_fee", pays);
+        map.put("body", user.getDisplayName() + "缴纳" + tvPayTime.getText().toString().trim() + "党费" + pays + "元");
         map.put("memberid", user.getLoginName());
         map.put("ifSubstitute", 1);
         map.put("attach", "payPartyPayment@" + user.getLoginName() + "@1");

@@ -41,7 +41,6 @@ public class DevelopPartyActivity extends TabWithToolbarActivity {
     private DevelopConfirmFragment developConfirmFragment = new DevelopConfirmFragment();
     private PrepareReceiveFragment prepareReceiveFragment = new PrepareReceiveFragment();
     private PrepareMainFragment prepareMainFragment = new PrepareMainFragment();
-
     @Override
     public List<Fragment> getFragments() {
         initFragments();
@@ -73,6 +72,7 @@ public class DevelopPartyActivity extends TabWithToolbarActivity {
         getTvRight().setVisibility(View.VISIBLE);
         getTvRight().setOnClickListener(submit->{
             //TODO 提交
+
             submitParty();
         });
         getDevelopData();
@@ -96,7 +96,7 @@ public class DevelopPartyActivity extends TabWithToolbarActivity {
 
                     @Override
                     protected void onNext(Object response) {
-                        Log.e("onNext= ", response.toString());
+                        Log.e("onNext=已提交党员信息", response.toString());
                         if(response==null) return;
                         toast("已提交党员信息");
                         finish();
@@ -124,9 +124,10 @@ public class DevelopPartyActivity extends TabWithToolbarActivity {
                     protected void onNext(JoinPartyStage response) {
                         Log.e("onNext= ", response.toString());
                         if(response==null||response.getJoinPartyStage()==null) return;
+                        Log.i("yy-status",response.getJoinPartyStage().submitStatus+"");
                         if(response.getJoinPartyStage().submitStatus==1){
                             getTvRight().setVisibility(View.GONE);
-                        }else{
+                        } else {
                             getTvRight().setVisibility(View.VISIBLE);
                         }
                         applyPartyFragment.setPartyData(response.getJoinPartyStage());

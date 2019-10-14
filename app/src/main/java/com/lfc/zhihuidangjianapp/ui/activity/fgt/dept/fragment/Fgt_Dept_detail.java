@@ -33,6 +33,7 @@ import com.lfc.zhihuidangjianapp.net.http.HttpService;
 import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
 import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Dept_Detail;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.bean.QueryDepMemberBean;
 import com.lfc.zhihuidangjianapp.ui.activity.model.Dept;
 import com.lfc.zhihuidangjianapp.ui.activity.model.DeptDetail;
 import com.lfc.zhihuidangjianapp.ui.activity.model.DeptDetailUser;
@@ -231,7 +232,7 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
             tvDeptTitle.setText("党委介绍");
             tvDirectorTitle.setText("党委成员");
         } else if (position == 1) {
-            tvDeptTitle.setText("支部介绍");
+            tvDeptTitle.setText("总支介绍");
             tvDirectorTitle.setText("支委成员");
         } else if (position == 2) {
             tvDeptTitle.setText("支部介绍");
@@ -239,6 +240,7 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
         }
 
         Map<String, Object> map = new HashMap<>();
+
         map.put("deptNumber", deptNumber);
         RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
                 .queryDeptDetail(map, MyApplication.getLoginBean().getToken())
@@ -253,6 +255,55 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
                             return;
                         }
                         initDeptDetail(response);
+                    }
+
+                    @Override
+                    protected void onError(Throwable e) {
+                        super.onError(e);
+                        Log.e("Throwable= ", e.getMessage());
+                    }
+                }.actual());
+        //请求党委成员
+        Map<String, Object> map2 = new HashMap<>();
+        Log.i("yydeptNumber",deptNumber);
+        map2.put("deptNumber", deptNumber);
+        RetrofitFactory.getDefaultRetrofit().create(HttpService.class)
+                .queryDeptMember(map2, MyApplication.getLoginBean().getToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResponseObserver<QueryDepMemberBean>(getActivity()) {
+
+                    @Override
+                    protected void onNext(QueryDepMemberBean response) {
+                        if (response == null) {
+                            return;
+                        }
+                        List<QueryDepMemberBean.DeptMemberListBean> deptMemberList = response.getDeptMemberList();
+                        Log.i("yydeptMemberList",deptMemberList.size()+"");
+                        if (deptMemberList != null && !deptMemberList.isEmpty()) {
+                            // rvMember.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+                            rvMember.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            rvMember.setAdapter(new CommonAdapter<QueryDepMemberBean.DeptMemberListBean>(getActivity(), R.layout.item_director_member, deptMemberList) {
+                                @Override
+                                protected void convert(ViewHolder holder, QueryDepMemberBean.DeptMemberListBean data, int position) {
+                                    if(data.getTypeName().length()==4){
+                                        String substring = data.getTypeName().substring(0, 1);
+                                        String substring1 = data.getTypeName().substring(1, 2);
+                                        String substring2 = data.getTypeName().substring(2, 3);
+                                        String substring3 = data.getTypeName().substring(3, 4);
+                                        //　"\u3000" 加空格
+                                        holder.setText(R.id.tv_content, substring+" "+substring1+"  "+substring2+" "+substring3+":");
+                                    }else{
+                                        holder.setText(R.id.tv_content, data.getTypeName()+":");
+                                    }
+                                    holder.setText(R.id.tv_content2, data.getName());
+
+                                }
+
+                            });
+                        } else {
+                            mRootView.findViewById(R.id.tv_director_title).setVisibility(View.GONE);
+                        }
                     }
 
                     @Override
@@ -378,7 +429,7 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
                 viewMember5.setVisibility(View.GONE);
             }
         }
-        List<String> members = response.getDirectorNameList();
+       /* List<String> members = response.getDirectorNameList();
         if (members != null && !members.isEmpty()) {
             rvMember.setLayoutManager(new GridLayoutManager(getActivity(), 2));
             // rvMember.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -391,7 +442,7 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
             });
         } else {
             mRootView.findViewById(R.id.tv_director_title).setVisibility(View.GONE);
-        }
+        }*/
 
         //根据经纬度进行定位.draggable(true)
         aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(dept.getLatitude(), dept.getLongitude())));

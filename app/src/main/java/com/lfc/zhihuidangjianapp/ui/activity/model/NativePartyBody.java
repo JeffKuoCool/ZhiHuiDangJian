@@ -16,7 +16,7 @@ public class NativePartyBody {
     private List<List<PartBody>> partBodys;
 
 
-    private String[] titles = {"党建平台", "党建资讯",
+    private String[] titles = {"党建平台", "党务资讯",
 //            "示范引领",
             "学习强局", "林区风采", "通讯平台"};
 

@@ -296,7 +296,7 @@ public class DevelopParty implements Serializable {
     /**
      * 状态(0:保存1:提交)
      */
-    public int submitStatus;
+    public int submitStatus=1;
     
     
 }

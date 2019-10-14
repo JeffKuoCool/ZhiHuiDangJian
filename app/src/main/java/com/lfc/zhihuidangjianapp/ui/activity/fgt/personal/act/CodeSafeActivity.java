@@ -40,6 +40,7 @@ public class CodeSafeActivity extends BaseActivity {
         findViewById(R.id.viewPwssword).setOnClickListener(updatePwd->{
             // 修改密码
             startActivity(new Intent(this, UpdatePasswordActivity.class));
+
         });
     }
 

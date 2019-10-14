@@ -955,7 +955,7 @@ public class UserDataBean {
             private String posts;
 
             public String getArea() {
-                return area;
+                return area==null?"暂无":area;
             }
 
             public void setArea(String area) {
@@ -963,7 +963,7 @@ public class UserDataBean {
             }
 
             public String getPosts() {
-                return posts;
+                return posts==null?"暂无":posts;
             }
 
             public void setPosts(String posts) {

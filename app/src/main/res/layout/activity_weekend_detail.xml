@@ -103,6 +103,7 @@
                android:layout_height="wrap_content"
                android:text=""/>
            <TextView
+               android:visibility="gone"
                android:layout_width="match_parent"
                android:layout_height="@dimen/adaptive_46dp"
                style="@style/btn_click_red"
@@ -110,6 +111,7 @@
                android:layout_marginBottom="@dimen/dp_10"
                android:text="学习教育情况"/>
            <TextView
+               android:visibility="gone"
                android:layout_marginLeft="@dimen/dip_20"
                android:layout_marginRight="@dimen/dip_20"
                android:id="@+id/tv_text5"
@@ -122,6 +124,7 @@
                android:text=""/>
 
            <TextView
+               android:visibility="gone"
                android:layout_width="match_parent"
                android:layout_height="@dimen/adaptive_46dp"
                style="@style/btn_click_red"
@@ -129,6 +132,7 @@
                android:layout_marginBottom="@dimen/dp_10"
                android:text="承诺践诺完成情况"/>
            <TextView
+               android:visibility="gone"
                android:layout_marginLeft="@dimen/dip_20"
                android:layout_marginRight="@dimen/dip_20"
                android:id="@+id/tv_text6"

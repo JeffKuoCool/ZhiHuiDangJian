@@ -33,6 +33,7 @@ import com.lfc.zhihuidangjianapp.net.http.HttpService;
 import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
 import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
 import com.lfc.zhihuidangjianapp.ui.activity.adapter.DividerItemDecoration;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_vido_Experience;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.model.Dynamic;
 import com.lfc.zhihuidangjianapp.ui.activity.model.ResponsePartyDynamicList;
@@ -199,6 +200,13 @@ public class Fgt_study_forestry extends BaseFragment {
                     intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId()+"");
                     intent.putExtra("appTitle", "林草大讲堂");
                     startActivity(intent);
+
+                   //视频播放界面
+
+                   /* Intent intent = new Intent(getActivity(), Act_vido_Experience.class);
+                    intent.putExtra("url", "http://192.168.1.19:8081/PathAtt/20190929/2d2aade0-8713-4ea7-b3f9-da499c97dfbd.mp4");
+                    intent.putExtra("appTitle", "林草大讲堂");
+                    startActivity(intent);*/
                 });
             }
 

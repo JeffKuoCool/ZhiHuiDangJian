@@ -5,12 +5,16 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
 
+import com.hyphenate.chat.EMClient;
 import com.lfc.zhihuidangjianapp.R;
 import com.lfc.zhihuidangjianapp.app.MyApplication;
+import com.lfc.zhihuidangjianapp.app.UserConstants;
 import com.lfc.zhihuidangjianapp.base.BaseActivity;
 import com.lfc.zhihuidangjianapp.net.http.HttpService;
 import com.lfc.zhihuidangjianapp.net.http.ResponseObserver;
 import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
+import com.lfc.zhihuidangjianapp.ui.activity.Act_Login;
+import com.lfc.zhihuidangjianapp.utlis.SPUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -89,7 +93,11 @@ public class UpdatePasswordActivity extends BaseActivity {
                             Log.e("onNext= ", response.toString());
                             if (response == null) return;
                             toast("修改成功");
-                            finish();
+                            SPUtil.remove(getActivity(), UserConstants.AUTHORIZATION);
+                            EMClient.getInstance().logout(true, null);
+                            startActivity(new Intent(getActivity(), Act_Login.class));
+                            getActivity().finish();
+
                         }
 
                         @Override

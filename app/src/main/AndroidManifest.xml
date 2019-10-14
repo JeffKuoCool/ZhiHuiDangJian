@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--读取SDCard数据权限-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
@@ -33,7 +35,8 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/img_iconlogo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+       >
         <meta-data
             android:name="android.notch_support"
             android:value="true" /> <!-- 适配小米（xiaomi）刘海屏 -->
@@ -114,6 +117,7 @@
         <activity
             android:name=".ui.activity.fgt.home.act.Act_Emulate"
             android:label="@string/Emulate_name" />
+
         <activity
             android:name=".ui.activity.fgt.dept.act.Act_Study_ju"
             android:label="学习强局更多" />
@@ -144,6 +148,9 @@
         <activity
             android:name=".ui.activity.Act_YinSiActivity"
             android:label="隐私声明" />
+        <activity
+            android:name=".ui.activity.fgt.dept.act.Act_vido_Experience"
+            android:label="视频详情" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Dept_Detail" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Dept_dynamic" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Dept_Dynamic_Detail" />

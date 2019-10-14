@@ -109,7 +109,7 @@ public class Fgt_PartyAffairs extends BaseFragment {
             case 0://党建平台
                 partPlatform(position);
                 break;
-            case 1://党建资讯
+            case 1://党务资讯
                 partInformation(position);
                 break;
 //            case 2://示范引领
@@ -155,7 +155,7 @@ public class Fgt_PartyAffairs extends BaseFragment {
     }
 
     /**
-     * 党建资讯
+     * 党务资讯
      * @param position
      */
     private void partInformation(int position){

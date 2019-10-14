@@ -11,6 +11,7 @@ import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.bean.AnnouncementBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.home.act.bean.ZtBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.bean.MyInteagalBeabMingXI;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.bean.MyIntegalBean;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.personal.act.bean.QueryDepMemberBean;
 import com.lfc.zhihuidangjianapp.ui.activity.model.AliPay;
 import com.lfc.zhihuidangjianapp.ui.activity.model.AppConfigLists;
 import com.lfc.zhihuidangjianapp.ui.activity.model.BaseResponse;
@@ -102,6 +103,15 @@ public interface HttpService {
      */
     @POST(ApiConstant.API + "/queryDeptDetail")
     Observable<BaseResponse<DeptDetail>> queryDeptDetail(@QueryMap Map<String, Object> map, @Header("token") String token);
+    /**
+     * 党支部详情--党委成员
+     *
+     * @param map
+     * @param token
+     * @return
+     */
+    @POST("/sysDept/queryDeptMember")
+    Observable<BaseResponse<QueryDepMemberBean>> queryDeptMember(@QueryMap Map<String, Object> map, @Header("token") String token);
 
     /**
      * 分页查询党建动态信息
@@ -429,7 +439,7 @@ public interface HttpService {
     Observable<BaseResponse<Object>> createChatroom(@QueryMap Map<String, Object> map, @Header("token") String token);
 
     /**
-     *  首页-头条-党建资讯
+     *  首页-头条-党务资讯
      * @param token
      * @return
      */

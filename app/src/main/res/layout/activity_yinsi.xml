@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/grey_color1"
-                android:text="本软件收集的有关您的信息和资料将保存在本软件及（或）其关联公司的服务器上， 这些信息和资料可能传送至您所在国家、地区或本软件收集信息和资料所在地的境外并在境外被访问、存储和展示。"
+                android:text="本软件收集的有关您的信息和资料将保存在本软件及（或）其关联公司的服务器上， 这些信息和资料可能传送至您所在国家、地区或本软件收集信息和资料被访问、存储和展示。"
                 android:textSize="14sp" />
             <TextView
                 android:layout_width="match_parent"
