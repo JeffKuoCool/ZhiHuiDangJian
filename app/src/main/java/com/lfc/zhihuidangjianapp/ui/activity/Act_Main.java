@@ -142,6 +142,7 @@ public class Act_Main extends EazyChatListenerActivity implements ViewPager.OnPa
     public static void requstPermissions(Activity activity) {
         int permission = ActivityCompat.checkSelfPermission(activity,
                 Manifest.permission.RECORD_AUDIO);
+
         if (permission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity, PERMISSION_AUDIO,
                     GET_RECODE_AUDIO);
