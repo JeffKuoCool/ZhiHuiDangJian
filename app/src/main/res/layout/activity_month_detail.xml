@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="36dp"
-                android:text="周报详情"
+                android:text="党建工作月报详情"
                 android:textColor="@color/white"
                 android:textSize="19dp"
                 android:textStyle="bold" />
@@ -90,7 +90,7 @@
                style="@style/btn_click_red"
                android:layout_marginTop="@dimen/dp_10"
                android:layout_marginBottom="@dimen/dp_10"
-               android:text="组织生活情况"/>
+               android:text="支部委员会召开情况"/>
            <WebView
                android:layout_marginLeft="@dimen/dip_20"
                android:layout_marginRight="@dimen/dip_20"
@@ -103,15 +103,15 @@
                android:layout_height="wrap_content"
                android:text=""/>
            <TextView
-               android:visibility="gone"
+
                android:layout_width="match_parent"
                android:layout_height="@dimen/adaptive_46dp"
                style="@style/btn_click_red"
                android:layout_marginTop="@dimen/dp_10"
                android:layout_marginBottom="@dimen/dp_10"
-               android:text="学习教育情况"/>
-           <TextView
-               android:visibility="gone"
+               android:text="支部党员会召开情况"/>
+           <WebView
+
                android:layout_marginLeft="@dimen/dip_20"
                android:layout_marginRight="@dimen/dip_20"
                android:id="@+id/tv_text5"
@@ -124,15 +124,15 @@
                android:text=""/>
 
            <TextView
-               android:visibility="gone"
+
                android:layout_width="match_parent"
                android:layout_height="@dimen/adaptive_46dp"
                style="@style/btn_click_red"
                android:layout_marginTop="@dimen/dp_10"
                android:layout_marginBottom="@dimen/dp_10"
-               android:text="承诺践诺完成情况"/>
-           <TextView
-               android:visibility="gone"
+               android:text="支部集体学习开展情况"/>
+           <WebView
+
                android:layout_marginLeft="@dimen/dip_20"
                android:layout_marginRight="@dimen/dip_20"
                android:id="@+id/tv_text6"
@@ -150,11 +150,50 @@
                style="@style/btn_click_red"
                android:layout_marginTop="@dimen/dp_10"
                android:layout_marginBottom="@dimen/dp_10"
-               android:text="其他需报告党组织事宜"/>
+               android:text="支部主题当日开展情况"/>
            <WebView
                android:layout_marginLeft="@dimen/dip_20"
                android:layout_marginRight="@dimen/dip_20"
                android:id="@+id/tv_text7"
+               android:layout_marginTop="5dp"
+               android:textColor="@color/bar_grey"
+               android:textSize="16sp"
+               android:layout_gravity="center"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text=""/>
+           <TextView
+
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/adaptive_46dp"
+               style="@style/btn_click_red"
+               android:layout_marginTop="@dimen/dp_10"
+               android:layout_marginBottom="@dimen/dp_10"
+               android:text="支部其他组织生活开展情况"/>
+           <WebView
+
+               android:layout_marginLeft="@dimen/dip_20"
+               android:layout_marginRight="@dimen/dip_20"
+               android:id="@+id/tv_text8"
+               android:layout_marginTop="5dp"
+               android:textColor="@color/bar_grey"
+               android:textSize="16sp"
+               android:layout_gravity="center"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text=""/>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/adaptive_46dp"
+               style="@style/btn_click_red"
+               android:layout_marginTop="@dimen/dp_10"
+               android:layout_marginBottom="@dimen/dp_10"
+               android:text="其他需报告事项"/>
+           <WebView
+               android:layout_marginLeft="@dimen/dip_20"
+               android:layout_marginRight="@dimen/dip_20"
+               android:id="@+id/tv_text9"
                android:layout_marginTop="5dp"
                android:textColor="@color/bar_grey"
                android:textSize="16sp"

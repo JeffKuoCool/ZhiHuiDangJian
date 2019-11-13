@@ -32,14 +32,12 @@
         <TextView
             android:id="@+id/tv_dec"
             android:layout_width="0dp"
-            android:singleLine="true"
             android:layout_height="wrap_content"
-            app:layout_constraintRight_toLeftOf="@+id/tv_message_count"
-            app:layout_constraintLeft_toLeftOf="@+id/tv_username"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_head"
+            android:singleLine="true"
             android:textColor="#ffa3a3a3"
             android:textSize="12sp"
-            />
+            app:layout_constraintBottom_toBottomOf="@+id/iv_head"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_username" />
 
         <TextView
             android:id="@+id/tv_time"

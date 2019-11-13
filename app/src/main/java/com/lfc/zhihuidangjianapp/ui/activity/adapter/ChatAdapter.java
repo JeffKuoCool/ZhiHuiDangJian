@@ -69,6 +69,7 @@ public class ChatAdapter extends BaseRecyclerViewAdapter {
             return new ChatItemView().setContext(mContext).onCreateViewHolder(this, null, parent);
         }
         return new ChatItemView().setContext(mContext).onCreateViewHolder(this, null, parent);
+
     }
 
     @Override

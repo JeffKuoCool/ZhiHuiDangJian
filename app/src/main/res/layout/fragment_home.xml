@@ -24,6 +24,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/dip_15">
 
@@ -34,27 +35,53 @@
                 android:layout_height="@dimen/dp_10"
                 android:background="@color/background" />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="党建头条"
+                    android:textColor="@color/red1"
+                    android:textSize="19dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/img_start"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
             <FrameLayout
                 android:id="@+id/homeHead"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:paddingBottom="@dimen/dip_15">
 
             </FrameLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_10"
+                android:background="@color/background" />
 
             <RelativeLayout
                 android:id="@+id/relativeAnnoun"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="公告公示"
-                    android:textColor="@color/black3"
+                    android:textColor="@color/red1"
                     android:textSize="19dp" />
 
                 <ImageView

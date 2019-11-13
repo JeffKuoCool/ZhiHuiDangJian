@@ -29,7 +29,6 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
-import com.hyphenate.chat.EMTextMessageBody;
 import com.hyphenate.chat.EMVoiceMessageBody;
 import com.lfc.zhihuidangjianapp.R;
 import com.lfc.zhihuidangjianapp.app.Constants;
@@ -46,7 +45,6 @@ import com.lfc.zhihuidangjianapp.net.http.RetrofitFactory;
 import com.lfc.zhihuidangjianapp.service.RecordVoiceService;
 import com.lfc.zhihuidangjianapp.ui.activity.adapter.ChatAdapter;
 import com.lfc.zhihuidangjianapp.ui.activity.model.Chat;
-import com.lfc.zhihuidangjianapp.ui.activity.model.User;
 import com.lfc.zhihuidangjianapp.ui.activity.model.UserInfo;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -61,15 +59,12 @@ import com.tb.emoji.FaceFragment;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import cn.nekocode.items.data.ItemData;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -95,9 +90,6 @@ public class ChatActivity extends BaseActivity implements FaceFragment.OnEmojiCl
     private String username;
 
     private String imgUrl;
-
-    private long lastTime;
-
     private int pageSize = 15;
 
     //设置每2分钟

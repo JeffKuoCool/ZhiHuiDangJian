@@ -90,7 +90,8 @@ public class AppConferenceActivity extends BaseConferenceActivity {
     private ImageButton speakerSwitch;
     // 挂断按钮
     private ImageButton hangupBtn;
-
+    // 前后摄像头切换
+    private ImageButton changeCameraSwitch;
     //data
     protected List<EMConferenceStream> streamList = new ArrayList<>();
     protected String confId = "";
@@ -136,6 +137,7 @@ public class AppConferenceActivity extends BaseConferenceActivity {
             //预约会议
             confId = meeting.getConfrId();
             password = meeting.getPassword();
+            Log.i("yy",meeting.getCreateCode()+"=="+MyApplication.getmUserInfo().getUser().getLoginName() +"=="+enterType+confId+password);
             //如果是创建者需要创建会议室
             if (meeting.getCreateCode().equals(MyApplication.getmUserInfo().getUser().getLoginName())) {
                 //创建
@@ -169,7 +171,7 @@ public class AppConferenceActivity extends BaseConferenceActivity {
         cameraSwitch = (ImageButton) findViewById(R.id.btn_camera_switch);
         speakerSwitch = (ImageButton) findViewById(R.id.btn_speaker_switch);
         hangupBtn = (ImageButton) findViewById(R.id.btn_hangup);
-
+        changeCameraSwitch = (ImageButton) findViewById(R.id.btn_change_camera_switch);
         normalParam = new EMStreamParam();
         normalParam.setStreamType(EMConferenceStream.StreamType.NORMAL);
         normalParam.setVideoOff(true);
@@ -180,7 +182,7 @@ public class AppConferenceActivity extends BaseConferenceActivity {
         cameraSwitch.setOnClickListener(listener);
         speakerSwitch.setOnClickListener(listener);
         hangupBtn.setOnClickListener(listener);
-
+        changeCameraSwitch.setOnClickListener(listener);
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         micSwitch.setActivated(normalParam.isAudioOff());
@@ -198,7 +200,6 @@ public class AppConferenceActivity extends BaseConferenceActivity {
         localView.setAudioOff(normalParam.isAudioOff());
         localView.setUsername(EMClient.getInstance().getCurrentUser());
         EMClient.getInstance().conferenceManager().setLocalSurfaceView(localView.getSurfaceView());
-
         callConferenceViewGroup.addView(localView);
     }
 
@@ -583,13 +584,21 @@ public class AppConferenceActivity extends BaseConferenceActivity {
                         openSpeaker();
                     }
                     break;
+                case R.id.btn_change_camera_switch:
+                    changeCamera();
+                    break;
                 case R.id.btn_hangup://挂断
                     exitConference();
                     break;
             }
         }
     };
-
+    /**
+     * 切换摄像头
+     */
+    private void changeCamera() {
+        EMClient.getInstance().conferenceManager().switchCamera();
+    }
     class ConferenceListener implements EMConferenceListener {
         @Override
         public void onMemberJoined(EMConferenceMember emConferenceMember) {

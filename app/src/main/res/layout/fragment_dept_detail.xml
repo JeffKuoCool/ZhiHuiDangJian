@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
                     android:padding="10dp"
-                    android:text="组织生活开展数" />
+                    android:text="组织生活数据统计" />
 
                 <com.lfc.zhihuidangjianapp.widget.BezierView
                     android:id="@+id/bezierOrganize"

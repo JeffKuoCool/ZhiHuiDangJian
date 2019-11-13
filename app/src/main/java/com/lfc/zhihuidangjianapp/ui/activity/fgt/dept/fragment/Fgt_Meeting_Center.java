@@ -132,12 +132,14 @@ public class Fgt_Meeting_Center extends BaseFragment {
                     }
                     //进入会议
                     Log.e("join_meeting", "");
-                    if(!data.getCreateCode().equals(MyApplication.getmUserInfo().getUser().getLoginName())&&
+                   /* if(!data.getCreateCode().equals(MyApplication.getmUserInfo().getUser().getLoginName())&&
                             !data.getUsers().contains(MyApplication.getmUserInfo().getUser().getLoginName())){
                         verify(data);
                     }else{
                         enter(data);
-                    }
+                    }*/
+                   //需求变更所有人进入会议都需要输入密码
+                    verify(data);
                 });
                 holder.getConvertView().findViewById(R.id.tv_meeting_detail).setOnClickListener(confe->{
                     //会议详情

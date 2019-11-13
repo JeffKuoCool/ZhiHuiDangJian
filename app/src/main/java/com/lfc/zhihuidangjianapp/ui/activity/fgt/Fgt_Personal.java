@@ -195,7 +195,26 @@ public class Fgt_Personal extends BaseFragment {
                         minSex.setText("男");
                     }
                     minMinzu.setText(entity.getData().getUser().getNation());
-                    minXueli.setText(entity.getData().getUser().getEducation() + "");
+                    //硕士研究生、大学本科、大学专科、中等专科、普通高中、职业高中、初级中学。
+                    String education = entity.getData().getUser().getEducation();
+                    if(education.equals("0")){
+                        minXueli.setText("硕士研究生"+ "");
+                    }else if(education.equals("1")){
+                        minXueli.setText("大学本科" + "");
+                    }else if(education.equals("2")){
+                        minXueli.setText("大学专科" + "");
+                    }else if(education.equals("3")){
+                        minXueli.setText("中等专科" + "");
+                    }else if(education.equals("4")){
+                        minXueli.setText("普通高中" + "");
+                    }else if(education.equals("5")){
+                        minXueli.setText("职业高中"+ "");
+                    }else if(education.equals("6")){
+                        minXueli.setText("初级中学" + "");
+                    }else{
+                        minXueli.setText(education + "");
+                    }
+
                     minShenri.setText(stampToDate(entity.getData().getUser().getBirthday()));
                     minYuanxiao.setText(entity.getData().getUser().getGraduateSchool() + "");
                     minZhuanye.setText(entity.getData().getUser().getMajorStudied() + "");

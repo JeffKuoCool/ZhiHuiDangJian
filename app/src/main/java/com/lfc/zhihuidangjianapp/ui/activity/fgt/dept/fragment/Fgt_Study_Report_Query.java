@@ -346,7 +346,6 @@ public class Fgt_Study_Report_Query extends BaseFragment {
                 tv_name.setText(datas.get(position).getReleaseDate());
                 tv_content.setText(datas.get(position).getAuthor());
                 holder.getConvertView().setOnClickListener(detail->{
-                  toast(datas.get(position).getAuthor());
                     Intent intent = new Intent(getActivity(), com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Strong_Study_Experience.class);
                     intent.putExtra("studyStrongBureauId", data.getStudyStrongBureauId()+"");
                     intent.putExtra("appTitle","学习心得");

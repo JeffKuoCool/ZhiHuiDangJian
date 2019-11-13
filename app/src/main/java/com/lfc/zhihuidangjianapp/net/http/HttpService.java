@@ -3,6 +3,8 @@ package com.lfc.zhihuidangjianapp.net.http;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.ChaXunBean_new;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.ChangeBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.MianDeptBeanD;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.MonthBean;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.MonthDetailsBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.QueryPopRyBean;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.WeekendDetailsBean;
@@ -103,7 +105,7 @@ public interface HttpService {
      */
     @POST(ApiConstant.API + "/queryDeptDetail")
     Observable<BaseResponse<DeptDetail>> queryDeptDetail(@QueryMap Map<String, Object> map, @Header("token") String token);
-    /**
+       /**
      * 党支部详情--党委成员
      *
      * @param map
@@ -571,5 +573,18 @@ public interface HttpService {
      */
     @POST("appApi/queryNoticeAnnouncementPageList")
     Observable<BaseResponse<AnnouncementBean>> queryNoticeAnnouncementPageList_new(@QueryMap Map<String, String> map, @Header("token") String token);
-
+    /**
+     * 分页查询我的月报信息
+     * @param token
+     * @return
+     */
+    @POST(ApiConstant.API + "/queryMonthWorkReportPageList")
+    Observable<BaseResponse<MonthBean>> queryMonthWorkReportPageList( @Header("token") String token);
+    /**
+     * 查看月报详情信息
+     * @param token
+     * @return
+     */
+    @POST(ApiConstant.API + "/queryMonthWorkReportDetail")
+    Observable<BaseResponse<MonthDetailsBean>> queryMonthWorkReportDetail(@QueryMap Map<String, Object> map, @Header("token") String token);
 }

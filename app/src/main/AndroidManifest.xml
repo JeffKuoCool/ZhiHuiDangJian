@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!--读取SDCard数据权限-->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
@@ -35,8 +35,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/img_iconlogo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-       >
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="android.notch_support"
             android:value="true" /> <!-- 适配小米（xiaomi）刘海屏 -->
@@ -85,8 +84,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.Act_Login">
-        </activity>
+        <activity android:name=".ui.activity.Act_Login"></activity>
         <activity
             android:name=".ui.activity.Act_Main"
             android:label="@string/main_name" />
@@ -111,6 +109,12 @@
         <activity
             android:name=".ui.activity.fgt.dept.act.Fgt_Weekend_Details"
             android:label="周报详情" />
+        <activity
+            android:name=".ui.activity.fgt.dept.act.Act_Month_list"
+            android:label="月报列表" />
+        <activity
+            android:name=".ui.activity.fgt.dept.act.Fgt_Month_Details"
+            android:label="月报详情" />
         <activity
             android:name=".ui.activity.fgt.dept.act.Act_Meeting"
             android:label="@string/Meeting_name" />
@@ -156,8 +160,9 @@
         <activity android:name=".ui.activity.fgt.dept.act.Act_Dept_Dynamic_Detail" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Strong_Study_Experience" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Craftsman_Training" />
-        <activity android:name=".ui.activity.fgt.dept.act.Act_Party_Pay"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".ui.activity.fgt.dept.act.Act_Party_Pay"
+            android:launchMode="singleTask" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Party_Change" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Weekend_Report" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_United_Front" />
@@ -167,8 +172,9 @@
         <activity android:name=".ui.activity.fgt.dept.act.Act_Party_Member_Practice" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Forestry_Course" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Friend_list" />
-        <activity android:name=".ui.activity.fgt.dept.act.Act_Party_Membership"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".ui.activity.fgt.dept.act.Act_Party_Membership"
+            android:launchMode="singleTask" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Forest_List" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Organizational_Life" />
         <activity android:name=".ui.activity.fgt.dept.act.Act_Organizational_Life_Detail" />
@@ -208,6 +214,7 @@
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.fileProvider"
@@ -215,7 +222,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
 
     </application>

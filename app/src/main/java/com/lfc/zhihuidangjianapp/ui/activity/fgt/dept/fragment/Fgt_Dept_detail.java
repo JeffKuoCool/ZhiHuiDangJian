@@ -330,7 +330,6 @@ public class Fgt_Dept_detail extends BaseFragment implements LocationSource {
 
         if (response.getUserlist() != null && !response.getUserlist().isEmpty()) {
             List<DeptDetailUser> userlist1 = new ArrayList<>();
-
             List<DeptDetailUser> userlist2 = new ArrayList<>();
 
             List<DeptDetailUser> userlist3 = new ArrayList<>();

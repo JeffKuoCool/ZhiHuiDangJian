@@ -2,6 +2,7 @@ package com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act;
 
 import android.text.Html;
 import android.util.Log;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.bean.WeekendDetailsBean;
 import com.lfc.zhihuidangjianapp.ui.activity.model.Forest;
 import com.lfc.zhihuidangjianapp.ui.activity.model.ForestDetail;
 import com.lfc.zhihuidangjianapp.ui.activity.model.ResponseForestDetail;
+import com.lfc.zhihuidangjianapp.utlis.WebViewUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,8 +31,9 @@ import io.reactivex.schedulers.Schedulers;
  * @description: 周报详情
  */
 public class Fgt_Weekend_Details extends BaseActivity {
-    private TextView tv_text1, tv_text2,tv_text3,tv_text4,tv_text5,tv_text6,tv_text7;
+    private TextView tv_text1, tv_text2,tv_text3,tv_text5,tv_text6;
 
+    private WebView tv_text4,tv_text7;
 
     @Override
     protected int getLayoutId() {
@@ -75,11 +78,12 @@ public class Fgt_Weekend_Details extends BaseActivity {
                          tv_text1.setText(detail.getAuthor());
                         tv_text2.setText(detail.getUserName());
                         tv_text3.setText(detail.getReleaseDate());
-                        tv_text4.setText(detail.getComment1());
+                       // tv_text4.setText(detail.getComment1());
                         tv_text5.setText(detail.getComment2());
                         tv_text6.setText(detail.getComment3());
-                        tv_text7.setText(detail.getComment4());
-
+                      //  tv_text7.setText(detail.getComment4());
+                        WebViewUtils.setWebView(detail.getComment1(),tv_text4);
+                        WebViewUtils.setWebView(detail.getComment4(),tv_text7);
 
                     }
 

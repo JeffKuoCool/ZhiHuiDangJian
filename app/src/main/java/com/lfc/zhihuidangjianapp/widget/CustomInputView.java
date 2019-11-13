@@ -287,7 +287,6 @@ public class CustomInputView extends LinearLayout implements View.OnClickListene
         this.baseActivity = baseActivity;
         FaceFragment faceFragment = FaceFragment.Instance();
         baseActivity.getSupportFragmentManager().beginTransaction().add(R.id.view_emoji, faceFragment).commit();
-
         baseActivity.getSupportFragmentManager().beginTransaction().add(R.id.view_input_function, new InputFunctionFragment()).commit();
     }
 

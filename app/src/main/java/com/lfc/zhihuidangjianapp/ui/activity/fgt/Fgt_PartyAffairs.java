@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.lfc.zhihuidangjianapp.R;
+import com.lfc.zhihuidangjianapp.app.MyApplication;
 import com.lfc.zhihuidangjianapp.base.BaseFragment;
 import com.lfc.zhihuidangjianapp.ui.activity.adapter.DividerItemDecoration;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Branch_lead;
@@ -23,6 +25,7 @@ import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Forestry_Course;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Friend_list;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Mail_list;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Meeting;
+import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Month_list;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Organizational_Life;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Party_Change;
 import com.lfc.zhihuidangjianapp.ui.activity.fgt.dept.act.Act_Party_Example;
@@ -148,8 +151,22 @@ public class Fgt_PartyAffairs extends BaseFragment {
             case 4://工作周报
                 startActivity(new Intent(getActivity(), Act_Weekend_Report.class));
                 break;
-            case 5://发展党员
+           /* case 5://发展党员
                 startActivity(new Intent(getActivity(), DevelopPartyActivity.class));
+                break;*/
+            case 5://党建工作月报
+                String roeId = MyApplication.getLoginBean().getRoeId();
+                if(TextUtils.isEmpty(roeId)){
+                   toast("暂无权限");
+                }else{
+                    if(roeId.equals("12827f95d3e141e6a593c8a9167b81a9")){
+                        startActivity(new Intent(getActivity(), Act_Month_list.class));
+                    }else{
+                        toast("暂无权限");
+                    }
+                }
+
+
                 break;
         }
     }

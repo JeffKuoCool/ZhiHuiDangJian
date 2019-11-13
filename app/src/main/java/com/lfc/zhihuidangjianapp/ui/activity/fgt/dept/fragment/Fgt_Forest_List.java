@@ -213,7 +213,28 @@ public class Fgt_Forest_List extends BaseBindViewFragment {
                     holder.setText(R.id.tvName, "姓名："+data.getAuthor());
                     holder.setText(R.id.tvBirthday, "出生日期："+data.getBirthday());
                     holder.setText(R.id.tvFunction, "职务："+data.getPartyPosts());
-                    holder.setText(R.id.tvEducation, "学历："+data.getEducation());
+                    //holder.setText(R.id.tvEducation, "学历："+data.getEducation());
+
+                    //硕士研究生、大学本科、大学专科、中等专科、普通高中、职业高中、初级中学。
+                    TextView minXueli = holder.getConvertView().findViewById(R.id.tvEducation);
+                    String education = data.getEducation();
+                    if(education.equals("0")){
+                        minXueli.setText("学历："+"硕士研究生"+ "");
+                    }else if(education.equals("1")){
+                        minXueli.setText("学历："+"大学本科" + "");
+                    }else if(education.equals("2")){
+                        minXueli.setText("学历："+"大学专科" + "");
+                    }else if(education.equals("3")){
+                        minXueli.setText("学历："+"中等专科" + "");
+                    }else if(education.equals("4")){
+                        minXueli.setText("学历："+"普通高中" + "");
+                    }else if(education.equals("5")){
+                        minXueli.setText("学历："+"职业高中"+ "");
+                    }else if(education.equals("6")){
+                        minXueli.setText("学历："+"初级中学" + "");
+                    }else{
+                        minXueli.setText("学历："+education + "");
+                    }
                     holder.setText(R.id.tvParty, "所属支部："+data.getDeptName());
                     holder.getConvertView().setOnClickListener(detail->{
                         Intent intent = new Intent(holder.getConvertView().getContext(), ForestDetailActivity.class);
